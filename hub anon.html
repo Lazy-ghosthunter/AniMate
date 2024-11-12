@@ -10,6 +10,15 @@
             background-image: url(GIF\ -\ Background/harpy.gif);
             background-size: cover;
             background-repeat: no-repeat;
+            
+        }
+        @media (max-width: 768px) {
+            body {
+                background-size:cover;
+                min-height:100vh;
+                background-position: center;
+                overflow:hidden;
+            }
         }
         .pfpAnon{
             width: 100%;
@@ -17,11 +26,25 @@
             max-width: 100%;
             overflow: hidden;
             height: 135px;
-            
+            margin-top:12%;
+        }
+        @media (max-width: 480px) {
+        .pfpAnon {
+            height: 150px;
+            margin-top: 40%;
+            }
+        .logotop{
+            margin-top:5%;
+        }
+        }
+        .logotop{
+            width:70px;
+            height:auto;
         }
     </style>
 </head>
 <body>
+    <img class="logotop" src="imgs/Logo.svg">
     <img class="pfpAnon" src="imgs/pfp anon.svg">
 </body>
 </html>
