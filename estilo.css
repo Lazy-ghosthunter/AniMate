@@ -1,0 +1,31 @@
+@font-face {
+    font-family: Inter;
+    src: local(Inter), url(/fonte/Inter/Inter-VariableFont_opsz\,wght.ttf);
+}
+
+h1 {
+    font-family: Inter;
+}
+
+.primeirobtn:hover {
+    height: 6vh;
+    width: 90%;
+    color: #fff;
+    gap: 24px;
+}
+
+.segundobtn:hover {
+    height: 6vh;
+    width: 90%;
+    color: #fff;
+    gap: 24px;
+}
+
+.terceirobtn:hover {
+    height: 6vh;
+    width: 90%;
+    color: #fff;
+    gap: 24px;
+}
+
+  
