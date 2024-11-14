@@ -7,7 +7,23 @@ h1 {
     font-family: Inter;
 }
 
+@font-face {
+    font-family: Miltonian_Tattoo;
+    src: local(Miltonian_Tattoo), url(/fonte/Miltonian_Tattoo/MiltonianTattoo-Regular.ttf);
+}
+
+
+.titulo {
+    font-family: Miltonian_Tattoo;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.9px;
+}
+
 .primeirobtn:hover {
+    background: linear-gradient(270deg, #F99129 0.16%, #FB38B0 103.06%);
     height: 6vh;
     width: 90%;
     color: #fff;
@@ -15,6 +31,7 @@ h1 {
 }
 
 .segundobtn:hover {
+    background: linear-gradient(270deg, #08C3CD 0.16%, #D63EF8 103.06%);
     height: 6vh;
     width: 90%;
     color: #fff;
@@ -22,6 +39,7 @@ h1 {
 }
 
 .terceirobtn:hover {
+    background: linear-gradient(90deg, #2C79BD 0%, #B4F5FF 100%);
     height: 6vh;
     width: 90%;
     color: #fff;
