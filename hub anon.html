@@ -12,6 +12,7 @@
         }
         *{
             font-family: Inter;
+            
         }
 
         body{
@@ -19,6 +20,7 @@
             background-size: cover;
             background-repeat: no-repeat;
             height:100vh;
+            overflow:hidden;
             
         }
         @media (orientation:portrait) {
@@ -87,8 +89,11 @@
             display:flex;
             justify-content: center;
             position:relative;
-            left: 50%; /* Centraliza na horizontal */
+            left: 50%;
             transform: translateX(-50%);
+            padding: 0; /* Reset padding */
+            line-height: 1;
+            
             
 
         }
@@ -96,9 +101,32 @@
             background-color: rgb(250, 255, 255);
             width:400px;
             position:relative;
-            left: 50%; /* Centraliza na horizontal */
+            left: 50%;
             transform: translateX(-50%);
-            
+            border-radius: 5px;
+            top:2.5%;
+            box-shadow: 0px 4px 4px 0px rgba(140, 74, 255, 0.25);
+            padding-bottom:20px;
+
+        }
+        .btnsala{
+            border-radius: 5px;
+            background: linear-gradient(90deg, #ffd1b8, #ff7ab6);
+            border: 0.5px solid #d00161;
+            box-sizing: border-box;
+            font-size: 23px;
+            font-weight:bold;
+            color:#b4004f;
+            width:270px;
+            display:flex;
+            justify-content: center;
+            text-align:center;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top:7%;
+            position:relative;
+            height:50px;
+            align-items:center;
 
         }
         
@@ -135,11 +163,15 @@
                 height: auto;
             }
             .login{
-                right:5%;
+                right:4%;
                 font-size: 12px;
                 width: 90px;
                 height: auto;
+                margin-left: 5%;
             }
+           .fundobranco{
+            width:310px;
+           }
         }
         
     </style>
@@ -158,6 +190,9 @@
     <div class="fundobranco">
         <div class="nomeuser">
             <p>@UsuárioAnonimo</p>
+        </div>
+        <div class="btnsala">
+            <p>Sala temporária</p>
         </div>
     </div>
 </body>
