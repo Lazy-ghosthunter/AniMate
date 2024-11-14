@@ -110,13 +110,17 @@
 
         }
         .btnsala{
-            border-radius: 5px;
             background: linear-gradient(90deg, #ffd1b8, #ff7ab6);
             border: 0.5px solid #d00161;
+            color:#b4004f;
+            
+
+        }
+        .btn{
+            border-radius: 5px;
             box-sizing: border-box;
             font-size: 23px;
             font-weight:bold;
-            color:#b4004f;
             width:270px;
             display:flex;
             justify-content: center;
@@ -129,6 +133,29 @@
             align-items:center;
 
         }
+        .codsala input {
+            text-align: center; 
+            width: 270px;
+            height: 50px;       
+            border: none;              
+            font-size: 23px;     
+            font-weight: bold;
+            color:#950396; 
+            background: linear-gradient(90deg, #ba7aff, #ff88a2);
+            border: 0.5px solid #46003f;
+            border-radius: 5px;
+            text-transform: uppercase;
+            margin-top: 5%;
+
+        }
+        .codsala input::placeholder{
+            color:#791079;
+            text-transform: none;
+        }
+        .codsala input:focus{
+            outline: none;
+        }
+
         
         @media (min-width:560px) and (max-width:1100px) and (min-height:600px){
             .pfpAnon {
@@ -142,6 +169,9 @@
             .logotop{
                 width:105px;
                 height:auto;
+            }
+            .cadastro{
+                right:22%;
             }
         }
         @media (max-width:560px){
@@ -191,8 +221,11 @@
         <div class="nomeuser">
             <p>@UsuárioAnonimo</p>
         </div>
-        <div class="btnsala">
+        <div class="btnsala btn">
             <p>Sala temporária</p>
+        </div>
+        <div class="codsala btn">
+            <input type="text" placeholder="Código de sala:" maxlength="5" > 
         </div>
     </div>
 </body>
