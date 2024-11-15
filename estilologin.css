@@ -1,0 +1,226 @@
+
+@font-face {
+    font-family: Miltonian_Tattoo;
+    src: local(Miltonian_Tattoo), url(/fonte/Miltonian_Tattoo/MiltonianTattoo-Regular.ttf);
+}
+
+.titulo {
+    font-family: Miltonian_Tattoo;
+    color: #67058D;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.9px;
+}
+
+@font-face {
+    font-family: Pattaya;
+    src: local(Pattaya), url(/fonte/Pattaya/Pattaya-Regular.ttf);
+}
+
+
+@font-face {
+    font-family: Love_Ya_Like_A_Sister;
+    src: local(Love_Ya_Like_A_Sister), url(/fonte/Love_Ya_Like_A_Sister/LoveYaLikeASister-Regular.ttf);
+}
+
+body {
+    background-image: url(GIF\ -\ Background/BALL.gif);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.container4 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 10px; 
+    left: 0;
+    padding: 10px 10px;
+}
+
+.botao3 {
+    position: absolute; 
+    top: 10px; 
+    right: 0;
+    padding: 10px 10px;;
+    height: 3%;
+    width: 3%;
+}
+
+.container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.jumbotron2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2px;
+    width: 400px;
+    height: 380px;
+    border-radius: 20px;
+    background: #FEFEFF;
+    box-shadow: 0px 4px 8px 5px rgba(71, 157, 228, 0.25);        
+}
+
+#email {
+    border-radius: 8px;
+    border: 2px solid var(--Color, #9211BC);
+    background-color: #F6FCFF;
+    width: 290px;
+    height: 27px;
+}
+
+#password {
+    border-radius: 8px;
+    border: 2px solid var(--Color, #9211BC);
+    background-color: #FFF3F3;
+    width: 290px;
+    height: 27px;
+    color: #67058D;
+}
+
+.email {
+    color: #67058D;
+    font-family: Pattaya;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.senha {
+    color: #67058D;
+    font-family: Love_Ya_Like_A_Sister;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.lembrete {
+    display: flex;
+    flex-direction:row;
+    letter-spacing: 0.6px;
+    color: #67058D;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.4px;
+}
+
+.botao {
+    margin-left: 90px;
+    background: none;
+    border: none;
+    padding: 0 20px;
+}
+
+.botao :hover {
+    height: 90px;
+    width: 100px;
+}
+
+input .email, .senha :valid {
+    box-shadow: 0 0 5px 1px rgb(0, 255, 21);
+}
+
+@media (max-width: 768px) {
+    body {
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+    }
+
+    .jumbotron2 {
+        height: 350px;
+        width: 350px;
+    }
+
+    .email {
+        font-size: 17px;
+        padding: 9px;
+    }
+
+    #email {
+        width: 300px;
+        padding: 2px 2px;
+    }
+
+    .senha {
+        font-size: 17px;
+        padding: 9px;
+    }
+
+    #password {
+        width: 300px;
+        padding: 2px 2px;
+    }
+
+    .lembrete {
+        font-size: 15px;
+        text-indent: 0.7px;
+    }
+
+    .botao3 {
+        padding: 0 50px;
+    }
+
+    .titulo {
+        font-size: 30px;
+    }
+
+    .botao {
+        padding: 10px 35px;
+    }
+
+    .botao :hover {
+        height: 35px;
+        width: 70px;
+    }
+}
+
+@media (min-width:560px) and (max-width:1100px) and (min-height:600px) {
+    body {
+        height: 100vh;
+    }
+
+    .botao3 {
+        padding: 0 50px;
+    }
+
+}
+
+@media (min-width: 1101px) and (max-width: 1900px){
+    body {
+        height: 100vh;
+    }
+
+    .botao3 {
+        padding: 0 50px;
+    }
+    
+}
