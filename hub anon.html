@@ -202,6 +202,53 @@
             color: #fff;
             gap: 24px;
         }
+        .overlay{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            justify-items:left;
+            text-align: left;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            width:450px;
+            height: 225px;
+            top:40%;
+            box-shadow: 0px 4px 4px 0px rgba(140, 74, 255, 0.25);
+            overflow: hidden;
+            border-radius: 10px;
+
+        }
+        .vermelho {
+            width: 450px;
+            position: relative;
+            border-radius: 5px 5px 0px 0px;
+            background-color: #ff8686;
+            height: 50px;
+            padding: 5px;
+            display: flex;           /* Alinha os itens em linha */
+            align-items: center;     /* Centraliza verticalmente */
+        }
+
+        .triangle {
+            width: 35px;
+            margin-right: 10px;
+            margin-left: 10px;      /* Espaço entre a imagem e o texto */
+        }
+
+        .aviso {
+            margin: 0;               /* Remove a margem padrão */
+            font-size: 24px;         /* Tamanho de fonte para o título */
+            color: #000000;          /* Cor do texto */
+        }
+        .msg{
+            margin: 15px;
+            text-align: justify;
+            font-weight: bold;
+
+        }
+
         
         @media (min-width:560px) and (max-width:1100px) and (min-height:600px){
             .pfpAnon {
@@ -277,5 +324,17 @@
             <input type="text" placeholder="Código de sala:" maxlength="5" > 
         </div>
     </div>
+
+    <div id="avisotemp" class="overlay">
+        <div class="vermelho">
+            <img src="imgs/Warning Triangle.svg" class="triangle">
+            <h1 class="aviso">Aviso!</h1>
+        </div>
+        <div class="msg">
+            <p>esta sala fechará automaticamente após 5 horas, quando o limite de tempo for atingido você terá uma chance para baixar o arquivo antes dele ser deletado.</p>
+        </div>
+        <div id="ok">Ok</div><div id="voltar">voltar</div>
+    </div>
+
 </body>
 </html>
