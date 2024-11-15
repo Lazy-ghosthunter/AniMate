@@ -1,0 +1,179 @@
+@font-face {
+    font-family: Inter;
+    src: local(Inter), url(/fonte/Inter/Inter-VariableFont_opsz\,wght.ttf);
+}
+
+h1 {
+    font-family: Inter;
+}
+
+body {
+    background-image: url(GIF\ -\ Background/ana.gif);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0 auto;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    position: relative;
+}
+
+.topo img {
+    height: 130px;
+    width: 130px;
+    object-fit: contain;
+    margin-top: 4vh;
+}
+
+h1 {
+    color: #B08DF4;
+    font-size: 40px;
+}
+
+.jumbotron {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 210px;
+    height: 320px;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(140, 74, 255, 0.25);
+    padding: 2%  2%; 
+}
+
+.primeirobtn, .segundobtn, .terceirobtn {
+    width: 100%;
+    height: 4vh;
+    font-family: Inter; 
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px 0;
+    text-decoration: none;
+}
+
+.primeirobtn {
+    background: linear-gradient(270deg, #FFE44E 0.16%, #FF8AD2 103.06%);
+    border: 0.5px solid #B80019;
+    color: #D20532;
+}
+
+.segundobtn {
+    background: linear-gradient(270deg, #90F9FF 0.16%, #EB92FF 103.06%);
+    border: 0.5px solid #3982EF;
+    color: #450F8C;
+}
+
+.terceirobtn {
+    background: #90C0FF;
+    border: 0.5px solid #3982EF;
+    color: #25126A;
+
+}
+
+
+
+
+@media (max-width: 768px) {
+    body {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 100vh;
+    }
+
+    .jumbotron {
+    margin-top: 7%;
+    height: 50vh;
+    width: 70%;
+    gap: 20px;
+    padding: 2% 2%;
+    }
+
+    .primeirobtn, .segundobtn, .terceirobtn {
+        height: 10%;
+        width: 80%;
+    }
+}
+
+@media (min-width:560px) and (max-width:1100px) and (min-height:600px) {
+    body {
+        height: 100vh;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    
+    .jumbotron {
+        height: auto;
+        width: 30%;
+        margin-top: 4%;
+    }
+
+    .primeirobtn, .segundobtn, .terceirobtn {
+        height: 5vh;
+        width: 100%;
+        font-size: 17px;
+    }
+    
+    .loguinho {
+        margin-top: 50px;
+    }
+
+}
+
+
+
+@media (min-width: 1101px) and (max-width: 2000px){
+    body {
+        height: 100vh;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    
+    .jumbotron {
+        height: auto;
+        width: 30%;
+        margin-top: 4%;
+    }
+
+    .primeirobtn, .segundobtn, .terceirobtn {
+        height: 5vh;
+        width: 100%;
+        font-size: 17px;
+    }
+}
+
+.primeirobtn:hover {
+    background: linear-gradient(270deg, #F99129 0.16%, #FB38B0 103.06%);
+    height: 6vh;
+    width: 90%;
+    color: #fff;
+    gap: 24px;
+}
+
+.segundobtn:hover {
+    background: linear-gradient(270deg, #08C3CD 0.16%, #D63EF8 103.06%);
+    height: 6vh;
+    width: 90%;
+    color: #fff;
+    gap: 24px;
+}
+
+.terceirobtn:hover {
+    background: linear-gradient(90deg, #2C79BD 0%, #B4F5FF 100%);
+    height: 6vh;
+    width: 90%;
+    color: #fff;
+    gap: 24px;
+}

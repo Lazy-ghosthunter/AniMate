@@ -4,141 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AniMate</title>
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="estilologin.css">
     <link rel="icon" href="imgs/Logo.svg">
-
-    <style>
-       body {
-            background-image: url(GIF\ -\ Background/BALL.gif);
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            height: 90vh;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .container3 {
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            height: 3%;
-            width: 3%;
-            margin-top: auto 0;
-            margin-left: 97%;
-        }
-
-        .container4 {
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            height: 3%;
-            width: 3%;
-            margin-top: auto 0;
-            margin-left: 1%;
-        }
-
-        .container2 {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            margin-top: 5%;
-        }
-
-        .jumbotron2 {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            width: 330px;
-            height: 350px;
-            border-radius: 20px;
-            background: #FEFEFF;
-            box-shadow: 0px 4px 8px 5px rgba(71, 157, 228, 0.25);        
-        }
-
-        #email {
-            border-radius: 8px;
-            border: 2px solid var(--Color, #9211BC);
-            background-color: #F6FCFF;
-            width: 258px;
-            height: 27px;
-        }
-
-        #password {
-            border-radius: 8px;
-            border: 2px solid var(--Color, #9211BC);
-            background-color: #FFF3F3;
-            width: 258px;
-            height: 27px;
-            color: #67058D;
-        }
-
-        .email {
-            color: #67058D;
-            font-size: 18px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-            letter-spacing: 0.4px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .senha {
-            color: #67058D;
-            font-size: 18px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-            letter-spacing: 0.4px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .lembrete {
-            display: flex;
-            flex-direction:row;
-            letter-spacing: 0.6px;
-            color: #67058D;
-            font-size: 15px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-            letter-spacing: 0.4px;
-        }
-
-    </style>
 
 </head>
 
 <body>
-    <div class="container3">
-        <img src="/imgs/Arrow Down Square Contained.png">
-    </div>
 
     <div class="container4">
+        <a href="/animateinicial.html" class="botao3" role="button">
+            <img src="/imgs/Arrow Down Square Contained.svg">
+        </a>
         <img src="/imgs/Logo.svg">
     </div>    
 
     <div class ="container2">
-        <h1 class="titulo">Log in</h1>
+        <h1 class="titulo">Login</h1>
         <div class="jumbotron2">
             <form id="loginform">
 
                 <div class="email">
                     <label for="email">E-mail / Username:</label>
                     <br>
-                    <input type="text" id="email" required/>
+                    <input type="text"
+                    id="email"
+                    pattern="" 
+                    required />
                     <br>
                 </div>
 
                 <div class="senha">
                     <label for="password">Senha:</label>
                     <br>
-                    <input type="password" id="password" required/>
+                    <input 
+                    type="password" 
+                    id="password" 
+                    minlength="8"
+                    maxlength="15"
+                    required />
                     <br>
                 </div>
 
@@ -146,12 +49,15 @@
                     <input type="checkbox"/>
                     <p>Lembre-se de mim:</p>  
                 </div>
+
                 
-                <button id="botao">Entrar</button>
+                <button href="" class="botao" role="button">
+                    <img src="/imgs/Star 2.svg" alt="Entrar">
+                </button>   
 
             </form>
-        </div>
-    </div>    
+        </div>    
+    </div>
     
 </body>
 
