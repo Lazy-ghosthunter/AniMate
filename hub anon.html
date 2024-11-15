@@ -5,301 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AniMate</title>
     <link rel="icon" href="imgs/Logo.svg">
-    <style>
-        @font-face {
-            font-family: Inter;
-            src: local(Inter), url(/fonte/Inter/Inter-VariableFont_opsz\,wght.ttf);
-        }
-        *{
-            font-family: Inter;
-            
-        }
-
-        body{
-            background-image: url(GIF\ -\ Background/harpy.gif);
-            background-size: cover;
-            background-repeat: no-repeat;
-            height:100vh;
-            overflow:hidden;
-            
-        }
-        @media (orientation:portrait) {
-            body {
-                background-size:cover;
-                height:100vh;
-                background-position: center;
-                overflow:hidden;
-            }
-        }
-        .pfpAnon{
-            width: 100%;
-            position: relative;
-            max-width: 100%;
-            overflow: hidden;
-            height: 135px;
-            margin-top:5%;
-        }
-
-        .cadastro{
-            background: rgb(255,228,78);
-            background: linear-gradient(90deg, rgba(255,228,78,1) 0%, rgba(255,138,210,1) 100%);
-            border-radius: 5px;
-            width:130px;
-            height:40px;
-            text-align: center;
-            display: flex;      
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color:#D20532;
-            right: 13%;
-            position:absolute;
-            top:3%;
-            border: 0.5px solid #b80019;
-            box-sizing: border-box;
-            
-        }
-        .login{
-            background: linear-gradient(269.85deg, #90f9ff, #eb92ff);
-            border-radius: 5px;
-            width:130px;
-            height:40px;
-            text-align: center;
-            display: flex;      
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #450f8c;
-            right: 3%;
-            position:absolute;
-            top:3%;
-            border: 0.5px solid #3982ef;
-            box-sizing: border-box;
-
-        }
-        .logotop{
-            height:75px;
-        }
-        .nomeuser{
-            font-weight:bold;
-            font-size:23px;
-            border-bottom: 5px solid #28054d;
-            color: #28054d;
-            width:250px;
-            display:flex;
-            justify-content: center;
-            position:relative;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 0; /* Reset padding */
-            line-height: 1;
-            
-            
-
-        }
-        .fundobranco{
-            background-color: rgb(250, 255, 255);
-            width:400px;
-            position:relative;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 10px;
-            top:2.5%;
-            box-shadow: 0px 4px 4px 0px rgba(140, 74, 255, 0.25);
-            padding-bottom:20px;
-
-        }
-        .btnsala{
-            background: linear-gradient(90deg, #ffd1b8, #ff7ab6);
-            border: 0.5px solid #d00161;
-            color:#b4004f;
-            
-
-        }
-        .btn{
-            border-radius: 10px;
-            box-sizing: border-box;
-            font-size: 23px;
-            font-weight:bold;
-            width:270px;
-            display:flex;
-            justify-content: center;
-            text-align:center;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-top:7%;
-            position:relative;
-            height:50px;
-            align-items:center;
-            transition: all 0.3s ease;
-
-        }
-        .codsala input {
-            text-align: center; 
-            width: 270px;
-            height: 50px;       
-            border: none;              
-            font-size: 23px;     
-            font-weight: bold;
-            color:#950396; 
-            background: linear-gradient(90deg, #ba7aff, #ff88a2);
-            border: 0.5px solid #46003f;
-            border-radius: 10px;
-            text-transform: uppercase;
-            margin-top: 5%;
-            box-sizing: border-box;
-
-        }
-        .codsala input::placeholder{
-            color:#791079;
-            text-transform: none;
-        }
-        .codsala input:focus{
-            outline: none;
-        }
-        .btnsala:hover {
-            color: white; /* Cor do texto ao passar o mouse */
-            width:280px;
-            height:55px;
-            align-items:center;
-            display:flex;
-            justify-content: center;
-            text-align:center;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(90deg, #ffb68f, #ff59a4);
-
-        }
-        .codsala input:hover{
-            color: white;
-            background: linear-gradient(90deg, #9a65d3, #ff4f75);
-            width: 280px;
-            height: 55px; 
-            
-        }
-
-        .codsala input:hover::placeholder {
-            color: white;
-        }
-        
-        .codsala input:hover::placeholder{
-            color:white;
-            font-size: 23px;
-            
-        }
-        .cadastro:hover {
-            background: linear-gradient(270deg, #F99129 0.16%, #FB38B0 103.06%);
-            height: 45px;
-            width: 135px;
-            color: #fff;
-            gap: 24px;
-        }
-
-        .login:hover {
-            background: linear-gradient(270deg, #08C3CD 0.16%, #D63EF8 103.06%);
-            height: 45px;
-            width: 135px;
-            color: #fff;
-            gap: 24px;
-        }
-        .overlay{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: absolute;
-            justify-items:left;
-            text-align: left;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: white;
-            width:450px;
-            height: 225px;
-            top:40%;
-            box-shadow: 0px 4px 4px 0px rgba(140, 74, 255, 0.25);
-            overflow: hidden;
-            border-radius: 10px;
-
-        }
-        .vermelho {
-            width: 450px;
-            position: relative;
-            border-radius: 5px 5px 0px 0px;
-            background-color: #ff8686;
-            height: 50px;
-            padding: 5px;
-            display: flex;           /* Alinha os itens em linha */
-            align-items: center;     /* Centraliza verticalmente */
-        }
-
-        .triangle {
-            width: 35px;
-            margin-right: 10px;
-            margin-left: 10px;      /* Espaço entre a imagem e o texto */
-        }
-
-        .aviso {
-            margin: 0;               /* Remove a margem padrão */
-            font-size: 24px;         /* Tamanho de fonte para o título */
-            color: #000000;          /* Cor do texto */
-        }
-        .msg{
-            margin: 15px;
-            text-align: justify;
-            font-weight: bold;
-
-        }
-
-        
-        @media (min-width:560px) and (max-width:1100px) and (min-height:600px){
-            .pfpAnon {
-                height: 235px;
-                margin-top: 25%;
-                }
-            .logotop{
-                margin-top:3%;
-            }
-            
-            .logotop{
-                width:105px;
-                height:auto;
-            }
-            .cadastro{
-                right:22%;
-            }
-        }
-        @media (max-width:560px){
-            .pfpAnon {
-                height: 150px;
-                margin-top: 40%;
-                }
-            .logotop{
-                margin-top:5%;
-            }
-            .logotop{
-                width:70px;
-                height:auto;
-            }
-            .cadastro{
-                right: 30%;
-                font-size: 12px;
-                width: 90px;
-                height: auto;
-            }
-            .login{
-                right:4%;
-                font-size: 12px;
-                width: 90px;
-                height: auto;
-                margin-left: 5%;
-            }
-           .fundobranco{
-            width:310px;
-           }
-        }
-        
-    </style>
+    <link rel="stylesheet" href="estiloAnon.css">
+    <script src="script.js" defer></script>
+    
 </head>
 <body>
+    
     <img class="logotop" src="imgs/Logo.svg">
     <img class="pfpAnon" src="imgs/pfp anon.svg">
     
@@ -318,24 +29,27 @@
         <div class="nomeuser">
             <p>@UsuárioAnonimo</p>
         </div>
-        <div class="btnsala btn">
+        <div id="btnsala" class="btnsala btn">
             <p>Sala temporária</p>
         </div>
         <div class="codsala btn">
             <input type="text" placeholder="Código de sala:" maxlength="5" > 
         </div>
     </div>
-
-    <div id="avisotemp" class="overlay">
-        <div class="vermelho">
-            <img src="imgs/Warning Triangle.svg" class="triangle">
-            <h1 class="aviso">Aviso!</h1>
+    <div id="popupAviso">
+        <div id="avisotemp" class="overlay">
+            <div class="vermelho">
+                <img src="imgs/Warning Triangle.svg" class="triangle">
+                <h1 class="aviso">Aviso!</h1>
+            </div>
+            <div class="msg">
+                <p>esta sala fechará automaticamente após 5 horas, quando o limite de tempo for atingido você terá uma chance para baixar o arquivo antes dele ser deletado.</p>
+            </div>
+            <div id="botoes"><div id="voltar">voltar</div><div id="ok">Ok</div></div>
         </div>
-        <div class="msg">
-            <p>esta sala fechará automaticamente após 5 horas, quando o limite de tempo for atingido você terá uma chance para baixar o arquivo antes dele ser deletado.</p>
-        </div>
-        <div id="ok">Ok</div><div id="voltar">voltar</div>
     </div>
-
+    <div id="configTela">
+        ahhh
+    </div>
 </body>
 </html>
