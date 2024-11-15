@@ -4,104 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AniMate</title>
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="estilocadastro.css">
     <link rel="icon" href="imgs/Logo.svg">
-    <style>
-        
-        @font-face {
-    font-family: 'MinhaFonte';
-    src: url(fonte/Inter/Inter-VariableFont_opsz\,wght.ttf) format('woff');
-}
-
-
-body {
-    background-color: #f0f0f0;
-    text-align: center;
-    background-image: url(GIF\ -\ Background/BALL.gif);
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 95vh;
-    margin: 1%;
-    font-family: 'MinhaFonte', sans-serif;
-
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 70px;
-    position: relative;
-    padding: 5%;
-    height: auto;
-    
-}
-
-
-label {
-    display: block;
-    margin-bottom: 10px;
-    border-radius: 30px;
-    text-align: left;
-    color: #894acc;
-    font-family: Inter;
-    src: local(Inter), url(/fonte/Inter/Inter-VariableFont_opsz\,wght.ttf);
-    height: 10%;
-    
-}
-
-input {
-    width: 100%;
-    padding: 6%;
-    margin-bottom: 15px;
-    border: 1px solid purple;
-    border-radius: 8px;
-    text-align: center;
-}
-
-button {
-    width: 100%;
-    height: 6vh;
-    font-family: Inter; 
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    padding: 6%;
-    text-decoration: none;
-    }
-
-button {
-    background: linear-gradient(270deg, #FFE44E 0.16%, #FF8AD2 103.06%);
-     border: 0.5px solid #B80019;
-    color: #D20532;
-}
-   
-   
-   </style>
 <body>
-    <div class="container">
-        <img src="imgs/Logo.svg">
-        <h1>Criar Conta</h1>
-        <form>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email">
-
-            <label for="password">Senha:</label>
-            <input type="password" id="password" name="password">
-
-            <label for="confirm-password">Repetir Senha:</label>
-            <input type="password" id="confirm-password" name="confirm-password">
-
-            <button type="submit">Criar Conta</button>
-        </form>
-    </div>
+    <div class="container4">
+        <a href="/animateinicial.html" class="botao3" role="button">
+            <img src="/imgs/Arrow Down Square Contained.svg">
+        </a>
+        <img src="/imgs/Logo.svg">
+        </div>    
+        
+        <div class ="container2">
+        <h1 class="titulo">Criar conta</h1>
+        <div class="jumbotron2">
+            <form id="loginform">
+        
+                <div class="email">
+                    <label for="email">E-mail:</label>
+                    <input type="text"
+                    id="email" 
+                    required />
+                    <br>
+                </div>
+        
+                <div class="username">
+                <label for="username">Username:</label>
+                <br>
+                <input type="text"
+                id="email"
+                required />
+                <br>
+            </div>
+        
+                <div class="senha">
+                    <label for="password">Senha:</label>
+                    <input 
+                    type="password" 
+                    id="password" 
+                    minlength="8"
+                    maxlength="15"
+                    required />
+                    <br>
+    
+                    <div class="senha">
+                        <label for="confirm-password">Confirmar Senha:</label>
+                        <input 
+                        type="password" 
+                        id="password" 
+                        minlength="8"
+                        maxlength="15"
+                        required />
+                        <br>
+                        <br>
+                </div>
+        
+                
+                <button href="" class="botao" role="button">cadastrar
+                </button>   
+        
+            </form>
+        </div>    
+        </div>
 </body>
 
     
