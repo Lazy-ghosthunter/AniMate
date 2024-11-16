@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interface de Usuário</title>
+  <link rel="stylesheet" href="estiloperfil.css">
+  <link rel="icon" href="imgs/Logo.svg">
+  
+</head>
+<body>
+    <div class="topo">
+        <img src="imgs/Logo.svg">
+    </div>
+  <div class="container">
+    <div class="user-info">
+      <div class="avatar"></div>
+      <p class="arroba">@usuario_01</p>
+      <div class="textarea">
+      <textarea placeholder="Escreva sua bio aqui"></textarea>
+      </div>
+    </div>
+    <div class="lista">
+      <div id='ok' class="botao" role="button"> 
+        <br>
+        <br>
+        <br>
+        <br>Criar novo</div>
+      <br>
+      <div class="itens">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>Nome do arquivo</div>
+      <br>
+      <div class="itens">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>Nome do arquivo
+       </div>
+        <div class="itens">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>Nome do arquivo
+        </div>
+            <br>
+            
+    </div>
+      
+      
+  </div>
+  <div id="configTela">
+    <div id="configs">
+        <div id="canvas">
+            <div id="tamanho">
+                <p id="canvasconfig">Configurações da canvas</p>
+                <p>Tamanho</p>
+                <div id="largura1">
+                    <label for="largura">Largura</label>
+                    <input type="number" id="largura" name="largura" min="100" max="4000" value="1080">Px
+                </div>
+                    <br>
+                <div id="altura1">
+                    <label for="altura" id="labelaltura">Altura</label>
+                    <input type="number" id="altura" name="altura" min="100" max="4000" value="1980">Px
+                </div>
+            </div>
+            <div id="fpsecor">
+                <div id="fps">
+                    <label for="fpsinput">FPS</label>
+                    <input type="number" id="fpsinput" name="fpsinput" min="1" max="24" value="12">
+                </div>
+            <div id="cores">
+                <label for="cor">Cor de Fundo</label>
+                <br>
+                <input type="color" id="cor" name="cor" value="#D1D1D1"> 
+            </div>
+            </div>
+        </div>
+        
+        <div id="editmembros">
+            <p id="compartilhameno">Compartilhamento</p>
+            <label for="membros">Max membros:</label>
+            <input type="number" id="membros" name="membros" max="10" value="4">
+            <p id="permissoes">Permissões padrão para membros</p>
+            <div id="opçoes">
+                <input type="checkbox" value="desenhar">Desenhar<br>
+                <input type="checkbox" value="interferencia">Interferência<br>
+                <input type="checkbox" value="comentarios">Comentários<br>
+                <input type="checkbox" value="editarcanvas">Editar canvas<br>
+                <input type="checkbox" value="editarmembros">Editar membros<br>
+            </div>
+            <a href="canvasAdm.html"><div id="criar">Criar</div></a>
+        </div>
+        
+    </div>
+    
+</div>
+<script>
+    const ok = document.getElementById('ok');
+    const configTela = document.getElementById('configTela'); 
+    
+    //* abrir o Popup de  configurações da tela
+    ok.addEventListener('click', function(){
+        popupAviso.style.display = 'none';
+        configTela.style.display = 'flex';
+    });
+    
+    window.addEventListener("click", function (event) {
+        if (event.target === popupAviso) {
+            popupAviso.style.display = "none";
+        }
+    });
+    
+    //* funcionamento canvas
+    //pegar os valores de tamanho
+    const altura = document.getElementById('altura');
+    const largura = document.getElementById('largura');
+    const fundo = document.getElementById('cor')
+    const salvar = document.getElementById('criar');
+    
+    salvar.addEventListener('click', () =>{
+        localStorage.setItem('larguracanvas', largura.value);
+        localStorage.setItem('alturacanvas', altura.value);
+        localStorage.setItem('corCanvas', fundo.value);
+        alert('configurações salvas');
+    
+        updateCanvas(); 
+    });
+    
+    //configurando a canvas
+    
+    function updateCanvas() {
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+    
+        // Carregar as configurações salvas
+        const larguraC = localStorage.getItem('larguracanvas');
+        const alturaC = localStorage.getItem('alturacanvas');
+        const cor = localStorage.getItem('corCanvas');
+    
+        // Garantir que a canvas tenha a largura e altura corretamente definidas
+        canvas.width = parseInt(larguraC, 10);
+        canvas.height = parseInt(alturaC, 10);
+        
+        // Alterar a cor de fundo conforme a escolha do usuário
+        ctx.fillStyle = cor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    
+    // Configurar a canvas ao carregar a página
+    window.onload = () => {
+        // Chama a função que atualiza a canvas com as configurações do localStorage
+        updateCanvas();  
+    }; 
+    </script>
+</body>
+</html>
