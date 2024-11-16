@@ -14,9 +14,10 @@ voltar.addEventListener('click', function(){
     configTela.style.display = 'none';
 });
 
+//* abrir o Popup de  configurações da tela
 ok.addEventListener('click', function(){
     popupAviso.style.display = 'none';
-    configTela.style.display = 'block';
+    configTela.style.display = 'flex';
 });
 
 window.addEventListener("click", function (event) {

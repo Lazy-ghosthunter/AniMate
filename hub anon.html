@@ -49,7 +49,51 @@
         </div>
     </div>
     <div id="configTela">
-        ahhh
+        <div id="configs">
+            <div id="canvas">
+                <div id="tamanho">
+                    <p id="canvasconfig">Configurações da canvas</p>
+                    <p>Tamanho</p>
+                    <div id="largura1">
+                        <label for="largura">Largura</label>
+                        <input type="number" id="largura" name="largura" min="100" max="4000" value="1080">Px
+                    </div>
+                        <br>
+                    <div id="altura1">
+                        <label for="altura" id="labelaltura">Altura</label>
+                        <input type="number" id="altura" name="altura" min="100" max="4000" value="1980">Px
+                    </div>
+                </div>
+                <div id="fpsecor">
+                    <div id="fps">
+                        <label for="fpsinput">FPS</label>
+                        <input type="number" id="fpsinput" name="fpsinput" min="1" max="24" value="12">
+                    </div>
+                <div id="cores">
+                    <label for="cor">Cor de Fundo</label>
+                    <br>
+                    <input type="color" id="cor" name="cor" value="#D1D1D1"> 
+                </div>
+                </div>
+            </div>
+            
+            <div id="editmembros">
+                <p id="compartilhameno">Compartilhamento</p>
+                <label for="membros">Max membros:</label>
+                <input type="number" id="membros" name="membros" max="10" value="4">
+                <p id="permissoes">Permissões padrão para membros</p>
+                <div id="opçoes">
+                    <input type="checkbox" value="desenhar">Desenhar<br>
+                    <input type="checkbox" value="interferencia">Interferência<br>
+                    <input type="checkbox" value="comentarios">Comentários<br>
+                    <input type="checkbox" value="editarcanvas">Editar canvas<br>
+                    <input type="checkbox" value="editarmembros">Editar membros<br>
+                </div>
+                <a href="canvasAdm.html"><div id="criar">Criar</div></a>
+            </div>
+            
+        </div>
+        
     </div>
 </body>
 </html>

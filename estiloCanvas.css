@@ -1,0 +1,12 @@
+canvas{
+    width:600px;
+    height:800px;
+    background-color: rgb(11, 45, 74);
+    cursor:crosshair;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin: 0;
+    left: 50%;
+    
+}
