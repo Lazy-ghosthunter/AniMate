@@ -37,7 +37,6 @@ salvar.addEventListener('click', () =>{
     localStorage.setItem('larguracanvas', largura.value);
     localStorage.setItem('alturacanvas', altura.value);
     localStorage.setItem('corCanvas', fundo.value);
-    alert('configurações salvas');
 
     updateCanvas(); 
 });

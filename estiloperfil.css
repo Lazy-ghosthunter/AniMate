@@ -1,3 +1,6 @@
+a{
+  text-decoration: none;
+}
 .container {
     display: flex;
     justify-content: space-between;
@@ -77,14 +80,14 @@
     height: 63px;
     flex-shrink: 0;
     border-radius: 6px;
-border: 1px solid #7A44D7;
-background: #F1F2FF;
-background-image: url(imgs/+.svg);
-background-repeat: no-repeat;
-background-position: center;
-margin-right: 55px ;
-text-decoration: none;
-color: black;
+    border: 1px solid #7A44D7;
+    background: #F1F2FF;
+    background-image: url(imgs/+.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 55px ;
+    text-decoration: none;
+    color: black;
 
   }
 
