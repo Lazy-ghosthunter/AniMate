@@ -1,12 +1,11 @@
-canvas{
-    width:600px;
-    height:800px;
-    background-color: rgb(11, 45, 74);
-    cursor:crosshair;
+#divcanvas{
     display: flex;
-    justify-items: center;
+    justify-content: center;
     align-items: center;
+    height: 100vh;
     margin: 0;
-    left: 50%;
-    
+    background-color: #f0f0f0;
+}
+canvas{
+    cursor: crosshair;
 }

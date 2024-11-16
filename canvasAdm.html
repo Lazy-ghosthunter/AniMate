@@ -8,6 +8,33 @@
     <link rel="stylesheet" href="estiloCanvas.css">
 </head>
 <body>
+    <div id="divcanvas">
     <canvas id="canvas"></canvas>
+    <script>
+        function updateCanvas() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Carregar as configurações salvas
+            const larguraC = localStorage.getItem('larguracanvas');
+            const alturaC = localStorage.getItem('alturacanvas');
+            const cor = localStorage.getItem('corCanvas');
+
+            // Garantir que a canvas tenha a largura e altura corretamente definidas
+            canvas.width = parseInt(larguraC, 10);
+            canvas.height = parseInt(alturaC, 10);
+            
+            // Alterar a cor de fundo conforme a escolha do usuário
+            ctx.fillStyle = cor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Configurar a canvas ao carregar a página
+        window.onload = () => {
+            // Chama a função que atualiza a canvas com as configurações do localStorage
+            updateCanvas();  
+        };
+    </script>
+    </div>
 </body>
 </html>
