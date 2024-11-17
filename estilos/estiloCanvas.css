@@ -1,5 +1,10 @@
 body{
     margin: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Empilha os elementos verticalmente */
+    align-items: center; /* Centraliza os elementos horizontalmente */
+    justify-content: space-between; /* Espaço entre os elementos */
 }
 #divcanvas{
     display: flex;
@@ -7,18 +12,37 @@ body{
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #fefefe;
+    padding-bottom: 20vh;
     z-index: 1;
 }
 canvas{
     cursor: crosshair;
+    
 }
 #timelineFull{
     position: absolute;
-    background-color: #b54710;
+    background-color: #DAD2FF;
     width: 100%;
     height:20vh;
-    display: flex;
-    margin-bottom:20%;
     z-index: 100;
+    bottom:0;
+}
+#topo{
+    position: absolute;
+    background-color: #DAD2FF;
+    top:0;
+    height:6vh;
+    width: 100vw;
+    z-index: 10;
+}
+#ferramentas{
+    right:0.5%;
+    position: absolute;
+    height: 40vh;
+    width: 3vw;
+    border-radius: 8px;
+    background-color: #DAD2FF;
+    top:25%;
+    z-index: 10;
+
 }

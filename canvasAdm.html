@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="estilos/estiloCanvas.css">
 </head>
 <body>
+    <div id="topo">
+        <img src="imgs/circulo.svg" id="avatar" id="avatar">
+        <img src="imgs/chat-bubble-icon 1.svg" id="chat">
+        <img src="imgs/3 pontos.svg" id="configuracoes">
+    </div>
     <div id="divcanvas">
     <canvas id="canvas"></canvas>
     <script>
@@ -61,14 +66,58 @@
 
             [lastX, lastY] = [e.offsetX, e.offsetY];
         });
+        // Para dispositivos móveis
+        canvas.addEventListener('touchstart', (e) => {
+            isDrawing = true;
+            e.preventDefault();  // Previne o comportamento padrão (como o zoom)
+            [lastX, lastY] = [e.touches[0].clientX, e.touches[0].clientY];
+        });
+
+        canvas.addEventListener('touchend', () => isDrawing = false);
+        canvas.addEventListener('touchmove', (e) => {
+            if (!isDrawing) return;
+            e.preventDefault();  // Previne o comportamento padrão
+            const touch = e.touches[0];
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(touch.clientX, touch.clientY);
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            ctx.closePath();
+
+            [lastX, lastY] = [touch.clientX, touch.clientY];
+        });
     </script>
     </div>
+    <div id="ferramentas">
+        <img src="imgs/Brush.svg" id="pincel">
+        <img src="imgs/Eraser 01.svg" id="eraser">
+        <img src="imgs/Arrow Down Square Contained.svg">
+    </div>
     <div id="timelineFull">
-        <div id="topoTimel"></div>
-        <div id="setcamandas"></div>
-        <div id="btns"></div>
-        <div id="camadas"></div>
-        <div id="frames"></div>
+        <div id="topoTimel">
+            <img src="imgs/Add Square 03.svg" id="addframe">
+            <img src="imgs/Pause 01.svg" id="pause">
+            <img src="imgs/Play 01.svg" id="play">
+            <img src="imgs/loop.svg" id="loop">
+            <img src="imgs/onionskin.svg" id="onionskin">
+        </div>
+        
+        <div id="setcamandas">
+            <img src="imgs/File Multiple.svg" id="duplicar">
+            <img src="imgs/Layers 02.svg" id="adicionarLayer">
+            <img src="imgs/Trash 01.svg" id="deletarLayer">
+        </div>
+        <div id="btns">
+
+        </div>
+        <div id="camadas">
+
+        </div>
+        <div id="frames">
+
+        </div>
     </div>
 </body>
 </html>

@@ -59,7 +59,10 @@ function updateCanvas() {
     // Alterar a cor de fundo conforme a escolha do usuário
     ctx.fillStyle = cor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-}
+};
+const divCanvas = document.getElementById('divcanvas');
+
+
 
 // Configurar a canvas ao carregar a página
 window.onload = () => {
