@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AniMate</title>
     <link rel="icon" href="imgs/Logo.svg">
-    <link rel="stylesheet" href="estiloCanvas.css">
+    <link rel="stylesheet" href="estilos/estiloCanvas.css">
 </head>
 <body>
     <div id="divcanvas">
@@ -55,7 +55,7 @@
             ctx.moveTo(lastX, lastY);
             ctx.lineTo(e.offsetX, e.offsetY);
             ctx.strokeStyle = 'black';
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 3;
             ctx.stroke();
             ctx.closePath();
 
@@ -64,7 +64,11 @@
     </script>
     </div>
     <div id="timelineFull">
-        
+        <div id="topoTimel"></div>
+        <div id="setcamandas"></div>
+        <div id="btns"></div>
+        <div id="camadas"></div>
+        <div id="frames"></div>
     </div>
 </body>
 </html>
