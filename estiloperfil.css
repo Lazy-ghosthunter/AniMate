@@ -16,89 +16,97 @@ a{
   
   .user-info {
     width: 250px;
-    margin-left: 40px;
+    margin-left: 190px;
+    display: block;
+    left:35%;
+    box-sizing: border-box;
   }
 
   .arroba{
-    margin-left: 81px;
+    margin-left: 100px;
+
   }
   
   .avatar {
-    width: 92px;
-    height: 97px;
+    width: 115px;
+    height: auto;
     flex-shrink: 0;
-    background-color: #d8a4ff; /* Cor roxa */
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(imgs/Foto\ usuario\ \(2\).png);
-    margin-left: 81px;
-    background-color: #FFF;
+    margin-left: 92px;
+    
+    
    
   }
   
-  .textarea {
-    width: 100%px;
-    height: 197px;
+  #bio, .textplace {
+    width: 200px;
+    height: 230px;
     flex-shrink: 0;
     border-radius: 7px;
-  border: 2px solid #67058D;
-  background: rgba(252, 248, 255, 0.80);
-  margin-left: 40px;
-  padding: 10px;
+    border: 2px solid #67058D;
+    background: rgba(252, 248, 255, 0.80);
+    margin-left: 40px;
+    padding: 10px;
+    align-items: top;
+  }
+  #bio::placeholder{
+    vertical-align: top;
   }
   
   .lista {
-    width: 700px;
+    width: 600px;
     height: 400px;
     flex-shrink: 0;
     border-radius: 7px;
-  border: 3px solid #67058D;
-  background: rgba(252, 248, 255, 0.80);
-  display: flex;
-  padding: 10px;
-  margin-right: 10px;
+    border: 3px solid #67058D;
+    background: rgba(252, 248, 255, 0.80);
+    display: flex;
+    padding: 10px;
+    margin-right: 190px;
+
   }
   
 .itens {
     border: 1px solid #ccc;
     text-align: center;
     width: 99px;
-  height: 63px;
-  flex-shrink: 0;
-  border-radius: 6px;
-  border: 1px solid #7A44D7;
-  background: #FFF;
-  margin-right: 55px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  }
-  
-  .botao {
-    width: 99px;
     height: 63px;
     flex-shrink: 0;
     border-radius: 6px;
     border: 1px solid #7A44D7;
-    background: #F1F2FF;
-    background-image: url(imgs/+.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-right: 55px ;
-    text-decoration: none;
-    color: black;
-
+    background: #FFF;
+    margin-right: 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
+  
+.botao {
+  width: 99px;
+  height: 63px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  border: 1px solid #7A44D7;
+  background: #F1F2FF;
+  background-image: url(imgs/+.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 55px ;
+  text-decoration: none;
+  color: black;
 
-  #configTela{
-    display:none;
-    z-index:1000;
-    justify-items:center;
-    align-items: center;
-    height: 100vh;
-    width: 100vh;
-    gap:20px;
+}
+
+#configTela{
+  display:none;
+  z-index:1000;
+  justify-items:center;
+  align-items: center;
+  height: 100vh;
+  width: 100vh;
+  gap:20px;
 }
 #configs{
     position: absolute; /* Ou 'fixed', se preferir fixar na tela */
