@@ -11,10 +11,12 @@
     <div id="divcanvas">
     <canvas id="canvas"></canvas>
     <script>
-        function updateCanvas() {
-            const canvas = document.getElementById('canvas');
-            const ctx = canvas.getContext('2d');
+        
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
 
+        function updateCanvas() {
+            
             // Carregar as configurações salvas
             const larguraC = localStorage.getItem('larguracanvas');
             const alturaC = localStorage.getItem('alturacanvas');
@@ -34,7 +36,35 @@
             // Chama a função que atualiza a canvas com as configurações do localStorage
             updateCanvas();  
         };
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        });
+
+        canvas.addEventListener('mouseup', () => isDrawing = false);
+        canvas.addEventListener('mouseout', () => isDrawing = false);
+
+        canvas.addEventListener('mousemove', (e) => {
+            if(!isDrawing) return;
+            
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.closePath();
+
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        });
     </script>
+    </div>
+    <div id="timelineFull">
+        
     </div>
 </body>
 </html>
