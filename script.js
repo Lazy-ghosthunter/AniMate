@@ -1,3 +1,5 @@
+
+
 //* popup aviso da tela temporaria
 const btnsala = document.getElementById("btnsala");
 const voltar = document.getElementById("voltar");

@@ -10,8 +10,9 @@
 <body>
     <div id="topo">
         <img src="imgs/pfp anon.svg" id="avatar" class="avatar">
+        <img src="imgs/pfp mem.svg" id="avatar" class="avatarmembro">
         <img src="imgs/chat-bubble-icon 1.svg" id="chat">
-        <img src="imgs/3 pontos.svg" id="configuracoes">
+        <img src="imgs/Save 02.svg" id="configuracoes">
     </div>
     <div id="divcanvas">
     <canvas id="canvas"></canvas>
@@ -63,7 +64,7 @@
                 <div id="frame5" class="frame"></div>
             </div>
             <div id="frameS2">
-                <div id="frame1-2" class="frame"></div>
+                <div id="frame1-2" class="frameAtiva2"></div>
             </div>
         </div>
     </div>
@@ -93,12 +94,25 @@
         chatIcon.addEventListener('mouseleave', function() {
             chatContainer.style.display = 'none';
         });
-        const canvas = document.getElementById('canvas');
+                const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
-        
+        // Carregar configurações salvas
+        const larguraC = localStorage.getItem('larguracanvas');
+        const alturaC = localStorage.getItem('alturacanvas');
+        const cor = localStorage.getItem('corCanvas');
+
+        // Configurações da Canvas
+        function updateCanvas() {
+            canvas.width = parseInt(larguraC, 10);
+            canvas.height = parseInt(alturaC, 10);
+            ctx.fillStyle = cor || '#ffffff'; // Cor padrão caso não esteja no localStorage
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Configuração inicial ao carregar a página
         window.onload = () => {
-            
+            updateCanvas();
             switchFrame('frame1'); // Define o frame inicial
         };
 
