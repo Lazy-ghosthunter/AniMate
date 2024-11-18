@@ -175,7 +175,6 @@ input .email, .senha :valid {
 
     .email {
         font-size: 17px;
-        padding: 9px;
     }
 
     #email {
@@ -185,7 +184,6 @@ input .email, .senha :valid {
 
     .senha {
         font-size: 17px;
-        padding: 9px;
     }
 
     #password {

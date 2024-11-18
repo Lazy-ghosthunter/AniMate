@@ -145,7 +145,7 @@ body {
     border: 0.5px solid #B80019;
     color: #D20532;
     width: 100%;
-    height: 5vh;
+    height: 4vh;
     font-family: Inter; 
     font-size: 20px;
     font-weight: 600;
@@ -159,7 +159,7 @@ body {
 
 .botao:hover {
     background: linear-gradient(270deg, #F99129 0.16%, #FB38B0 103.06%);
-    height: 6.5vh;
+    height: 5.5vh;
     width: 100%;
     color: #fff;
     gap: 20px;
