@@ -82,7 +82,7 @@
     </div>
     <script>
         const chatIcon = document.getElementById('chat');
-        const chatContainer = document.getElementById('chatcontainer');
+        const chatContainer = document.getElementById('chat-container');
 
         // Adiciona o evento de mouse enter para mostrar o chat-container
         chatIcon.addEventListener('mouseenter', function() {
@@ -93,12 +93,25 @@
         chatIcon.addEventListener('mouseleave', function() {
             chatContainer.style.display = 'none';
         });
-        const canvas = document.getElementById('canvas');
+                const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
-        
+        // Carregar configurações salvas
+        const larguraC = localStorage.getItem('larguracanvas');
+        const alturaC = localStorage.getItem('alturacanvas');
+        const cor = localStorage.getItem('corCanvas');
+
+        // Configurações da Canvas
+        function updateCanvas() {
+            canvas.width = parseInt(larguraC, 10);
+            canvas.height = parseInt(alturaC, 10);
+            ctx.fillStyle = cor || '#ffffff'; // Cor padrão caso não esteja no localStorage
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Configuração inicial ao carregar a página
         window.onload = () => {
-            
+            updateCanvas();
             switchFrame('frame1'); // Define o frame inicial
         };
 
