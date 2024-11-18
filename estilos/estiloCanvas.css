@@ -316,5 +316,8 @@ canvas{
         padding-left: 0;
         width: 35px;
     }
+    .frame{
+        width:30px;
+    }
 }
 
