@@ -445,7 +445,8 @@ label{
 }
 
 }
-@media (max-width:560px){
+@media (max-width:768px){
+
     .pfpAnon {
         height: 150px;
         margin-top: 40%;
@@ -489,10 +490,18 @@ label{
    }
 
    #configs {
-        width: 44vh;
+        width: 95vw;
+        max-width: 400px;
         padding: 3%;
-        font-size: 15px;   }
+        font-size: 15px;  
+        height: auto; 
+    }
 
+    #cor::-webkit-color-swatch {
+        border: none; 
+        border-radius: 20px; 
+        height: 60%;
+    }    
 
 }
 
