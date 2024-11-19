@@ -1,208 +1,150 @@
-a{
-  text-decoration: none;
-}
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding:70px;
-  }
-  body {
-    background-image: url(GIF\ -\ Background/BALL.gif);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  
-  .user-info {
-    width: 250px;
-    margin-left: 190px;
-    display: block;
-    left:35%;
-    box-sizing: border-box;
-  }
-
-  .arroba{
-    margin-left: 100px;
-
-  }
-  
-  .avatar {
-    width: 115px;
-    height: auto;
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 92px;
-    
-    
-   
-  }
-  
-  #bio, .textplace {
-    width: 200px;
-    height: 230px;
-    flex-shrink: 0;
-    border-radius: 7px;
-    border: 2px solid #67058D;
-    background: rgba(252, 248, 255, 0.80);
-    margin-left: 40px;
-    padding: 10px;
-    align-items: top;
-  }
-  #bio::placeholder{
-    vertical-align: top;
-  }
-  
-  .lista {
-    width: 600px;
-    height: 400px;
-    flex-shrink: 0;
-    border-radius: 7px;
-    border: 3px solid #67058D;
-    background: rgba(252, 248, 255, 0.80);
-    display: flex;
-    padding: 10px;
-    margin-right: 190px;
-
-  }
-  
-.itens {
-    border: 1px solid #ccc;
-    text-align: center;
-    width: 99px;
-    height: 63px;
-    flex-shrink: 0;
-    border-radius: 6px;
-    border: 1px solid #7A44D7;
-    background: #FFF;
-    margin-right: 55px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-.botao {
-  width: 99px;
-  height: 63px;
-  flex-shrink: 0;
-  border-radius: 6px;
-  border: 1px solid #7A44D7;
-  background: #F1F2FF;
-  background-image: url(imgs/+.svg);
+/* Layout geral */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('GIF - Background/BALL.gif');
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  margin-right: 55px ;
-  text-decoration: none;
-  color: black;
-
 }
 
-#configTela{
-  display:none;
-  z-index:1000;
-  justify-items:center;
+.topo img {
+  display: block;
+  margin: 20px auto;
+  width: 150px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 50px;
+  gap: 20px;
+}
+
+.user-info, .lista {
+  background: rgba(252, 248, 255, 0.80);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+  width: 250px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.user-info img {
+  width: 115px;
+  margin: 0 auto 10px;
+  display: block;
+}
+
+.arroba {
+  font-weight: bold;
+  color: #67058D;
+  margin-top: 10px;
+}
+
+#bio {
+  width: 100%;
+  height: 100px;
+  border-radius: 5px;
+  border: 2px solid #67058D;
+  padding: 5px;
+}
+
+.lista {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.itens, .botao {
+  flex: 1 1 120px;
+  max-width: 200px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #67058D;
+  background-color: #FFF;
+  cursor: pointer;
+}
+
+.botao {
+  background-image: url('imgs/+.svg');
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center 10px;
+}
+
+/* Popup de configurações */
+#configTela {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vh;
-  gap:20px;
-}
-#configs{
-    position: absolute; /* Ou 'fixed', se preferir fixar na tela */
-    background-color: white;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    z-index: 1010;
-    width:550px;
-    height:400px;
-    padding: 35px;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px 0px rgba(140, 74, 255, 0.25);
-    border-radius: 14px;
-    border: 1px solid #380C59;
-    font-weight: bold;
-}
-#canvas{
-    margin-right: 25px;
-    left: 20px;
-    width:250px;
-    height:340px;
-    align-items: justify;
-}
-#canvasconfig{
-    top:10%;
-}
-#tamanho{
-    margin-bottom: 50px;
-}
-#labelaltura{
-    margin-right: 17px;
-}
-#editmembros{
-    width:250px;
-    border-left: 0.5px solid #46003f;
-    padding-left: 20px;
-    height:340px;
-}
-#membros{
-    width: 50px;
-}
-#cor{
-    appearance: none;
-    width: 150px;
-    height: 100px;
-    border: none;
-    
-    background: none;
-}
-#cor::-webkit-color-swatch {
-    border: none; /* Remove bordas padrão */
-    border-radius: 20px; /* Aplica o border-radius no círculo interno */
-}
-label{
-    margin-right:3px;
-}
-#criar{
-    width:75px;
-    border-radius: 5px;
-    border: 0.5px solid #D00161;
-    background: linear-gradient(90deg, #FFD1B8 0%, #FF7AB6 100%);
-    box-sizing: border-box;
-    font-size: 16px;
-    font-weight:bold;
-    display:flex;
-    justify-content: center;
-    text-align:center;
-    left: 70%;
-    transform: translateX(-50%);
-    margin-top:27%;
-    position:relative;
-    height:30px;
-    align-items:center;
-    transition: all 0.3s ease;
-    color:#b4004f;
-
 }
 
-#criar:hover {
-    color: white; /* Cor do texto ao passar o mouse */
-    width:85px;
-    height:40px;
-    background: linear-gradient(90deg, #ffb68f, #ff59a4);
+#configs {
+  width: 90%;
+  max-width: 600px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#altura1{
-    margin-top: 10px;
+#canvas {
+  flex: 1;
+  min-width: 200px;
 }
-#altura, #largura, #fpsinput, #membros{
-    background-color: #ecdbff;
-    border-radius: 5px;
-    border:none;
-    margin-right: 3px;
+
+#editmembros {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .user-info {
+    margin-bottom: 20px;
+  }
+
+  .lista {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  #configs {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .topo img {
+    width: 100px;
+  }
+
+  .user-info {
+    width: auto;
+  }
+
+  #bio {
+    height: 80px;
+  }
 }
