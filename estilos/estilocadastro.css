@@ -223,6 +223,7 @@ input .senha:valid {
 
     .botao {
         padding: 10px 35px;
+        width: 245px;
     }
 
     .botao :hover {
