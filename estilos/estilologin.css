@@ -234,6 +234,10 @@ input .email, .senha :valid {
     body {
         height: 100vh;
     }
+
+    .botao3 {
+        margin-right: 20px;
+    }
 }
 
 @media (min-width: 1101px) and (max-width: 1900px){
