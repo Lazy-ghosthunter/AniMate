@@ -46,7 +46,7 @@ h1 {
     border-radius: 10px;
     background: #FFF;
     box-shadow: 0px 4px 4px 0px rgba(140, 74, 255, 0.25);
-    padding: 2%  2%; 
+    padding: 2%  2% 2% 2%; 
 }
 
 .primeirobtn, .segundobtn, .terceirobtn {
@@ -82,7 +82,9 @@ h1 {
 
 }
 
-
+.loguinho img {
+    height: 35px;
+}
 
 
 @media (max-width: 768px) {
@@ -109,6 +111,7 @@ h1 {
     .topo img {
         height: 75px;
     }
+
 }
 
 @media (min-width:560px) and (max-width:1100px) and (min-height:600px){
@@ -191,6 +194,9 @@ h1 {
 }
 
 @media (min-height:400px) and (max-height:950px) {
+    .jumbotron {
+        height: 470px;
+    }
     .primeirobtn, .segundobtn, .terceirobtn {
         height: 70px;
     }
@@ -266,7 +272,7 @@ h1 {
     }
 }
 
-@media (min-width:820px) and (min-height:1100px) {
+@media (min-width:800px) and (min-height:1300px) {
     .jumbotron {
         height: 1000px;
         width: 800px;
@@ -292,4 +298,36 @@ h1 {
     .loguinho img {
         height: 50px;
     }
+}
+
+@media (min-height:1310px) {
+    .jumbotron {
+        height: 800px;
+    }
+
+    .primeirobtn, .segundobtn, .terceirobtn {
+        height: 140px;
+    }
+
+    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
+        height: 160px;
+    }
+}
+
+@media (min-width: 1000px) and (max-width:1025px) {
+
+    .jumbotron {
+        height: 200px;
+        width: 70%;
+    }
+
+    .primeirobtn, .segundobtn, .terceirobtn {
+        height: 25px;
+        padding: 0;
+    }
+
+    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
+        height: 27px;
+    }
+
 }
