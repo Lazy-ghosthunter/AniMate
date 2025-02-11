@@ -242,3 +242,54 @@ h1 {
         height: 40px;
     }
 }
+
+@media (min-height:1000px) {
+    .jumbotron {
+        height: 590px;
+        width: 450px;
+    }
+
+    .topo img {
+        height: 70px;
+    }
+    
+    .nome h1 {
+        font-size: 40px;
+    }
+
+    .primeirobtn, .segundobtn, .terceirobtn {
+        height: 110px;
+    }
+
+    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
+        height: 130px;
+    }
+}
+
+@media (min-width:820px) and (min-height:1100px) {
+    .jumbotron {
+        height: 1000px;
+        width: 800px;
+    }
+
+    .nome h1 {
+        font-size: 80px;
+    }
+
+    .topo img {
+        height: 100px;
+    }
+
+    .primeirobtn, .segundobtn, .terceirobtn {
+        font-size: 40px;
+        height: 200px;
+    }
+
+    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
+        height: 250px;
+    }
+
+    .loguinho img {
+        height: 50px;
+    }
+}
