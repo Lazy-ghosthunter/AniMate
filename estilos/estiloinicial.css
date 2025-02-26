@@ -322,16 +322,17 @@ h1 {
 @media (min-width: 1000px) and (max-width:1023px) {
 
     .jumbotron {
-        height: 250px;
+        height: 270px;
         width: 50%;
     }
 
     .primeirobtn, .segundobtn, .terceirobtn {
-        height: 20px;
+        height: 27px;
+        margin: 0px;
     }
 
     .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
-        height: 23px;
+        height: 30px;
     }
 
 }
