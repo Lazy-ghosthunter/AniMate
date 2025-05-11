@@ -2,57 +2,58 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" >
     <title>AniMate</title>
     <link rel="icon" href="imgs/Logo.svg">
     <link rel="stylesheet" href="estilos/estiloCanvas.css">
 </head>
 <body>
     <div id="topo">
-        <img src="imgs/pfp anon.svg" id="avatar" class="avatar">
-        <img src="imgs/chat-bubble-icon 1.svg" id="chat">
-        <img src="imgs/3 pontos.svg" id="configuracoes">
+        <div class="userIcons">
+            <img src="imgs/pfp anon.svg" id="avatar" class="avatar">
+            <img src="imgs/chat-bubble-icon 1.svg" id="chat">
+        </div>
+        <div class="configs">
+            <img src="imgs/3 pontos.svg" id="configuracoes">
+        </div>
     </div>
     <div id="divcanvas">
     <canvas id="canvas"></canvas>
     </div>
     <div id="ferramentas">
-        <img src="imgs/Brush.svg" id="pincel" class="ferramenta">
-        <img src="imgs/Eraser 01.svg" id="eraser" class="ferramenta">
-        <img src="imgs/Paint Bucket 02.svg" id="baldetinta" class="ferramenta">
-        <img src="imgs/Lasso Tool.svg" id="lasso" class="ferramenta">
-        <img src="imgs/601138-200 1.svg" id="colors" class="ferramenta">
-        <input type="color" id="corr" class="ferramenta">
-        <img src="imgs/undo.svg" id="undo" class="acao">
-        <img src="imgs/Return.svg" id="redo" class="acao">
+        
+        <img src="imgs/Pincel.svg" id="pincel" class="tool">
+        <img src="imgs/borracha.svg" id="borracha" class="tool">
+        <input type="color" id="corr" class="tool">
+        <img src="imgs/undo.svg" id="undo" class="tool">
+        <img src="imgs/Return.svg" id="redo" class="tool">
+      
 
     </div>
+    
     <div id="timelineFull">
-        <div id="setcamadas">
-            <img src="imgs/File Multiple.svg" id="duplicar" class="iconecamada">
-            <img src="imgs/Layers 02.svg" id="adicionarLayer" class="iconecamada">
-            <img src="imgs/Trash 01.svg" id="deletarLayer" class="iconecamada">
+        <div id="timelineTools">
+            <img src="imgs/Pause 01.svg" id="pause" class="timeTool">
+            <img src="imgs/Play 01.svg" id="play" class="timeTool">
+            <img src="imgs/onionskin.svg" id="onionskin" class="timeTool">
         </div>
 
-        <div id="topoTimel">
-            <img src="imgs/Add Square 03.svg" id="addframe" class="icone">
-            <img src="imgs/Pause 01.svg" id="pause" class="icone">
-            <img src="imgs/Play 01.svg" id="play" class="icone">
-            <img src="imgs/loop.svg" id="loop" class="icone">
-            <img src="imgs/onionskin.svg" id="onionskin" class="icone">
+        <div id="frameTools">
+            <img src="imgs/Align Left 02.svg" id="addBefore"  class="frameTool">
+            <img src="imgs/Hourglass 02.svg" id="timing" class="frameTool">
+            <img src="imgs/File None.svg" id="deleteFrame" class="frameTool">
+            <img src="imgs/Align Right 02.svg" id="addAfter" class="frameTool">
         </div>
         
-        
-
         <div id="camadas">
-            <div id="camada1">
-                <img src="imgs/Eye Open.svg" id="visivel">
+            
+                
+                <div id="camada1">
                 <p id="layer1">Layer 1</p>
-            </div>
-            <div id="camada2">
-                <img src="imgs/Eye Closed.svg" id="oculto">
-                <p id="layer1">fundo</p>
-            </div>
+                <img src="imgs/Settings Sparkle.svg" id="config_Camada" class="toolCamada">
+                <img src="imgs/Arrow Down Contained 01.svg" id="escolher_Camada" class="toolCamada">
+                
+                </div>
         </div>
         <div id="frames">
             <div id="frameS1">
@@ -61,12 +62,13 @@
                 <div id="frame3" class="frame"></div>
                 <div id="frame4" class="frame"></div>
                 <div id="frame5" class="frame"></div>
-            </div>
-            <div id="frameS2">
-                <div id="frame1-2" class="frame"></div>
+                <div id="frame6" class="frame"></div>
+                <div id="frame7" class="frame"></div>
+                <div id="frame8" class="frame"></div>
             </div>
         </div>
     </div>
+    
     <div id="chatcontainer">
         <p id="fechar">X</p>
         <div id="mensagens">

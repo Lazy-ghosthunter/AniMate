@@ -1,6 +1,6 @@
 @font-face {
     font-family: Inter;
-    src: local(Inter), url(/fonte/Inter/Inter-VariableFont_opsz\,wght.ttf);
+    src: local(Inter), url(/fonte/Inter/Inter-VariableFont_opsz,wght.ttf);
 }
 
 h1 {
