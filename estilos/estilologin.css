@@ -174,7 +174,7 @@ input .email, .senha :valid {
 
     .jumbotron2 {
         height: 350px;
-        width: 350px;
+        width: 330px;
     }
 
     .email {
@@ -210,7 +210,7 @@ input .email, .senha :valid {
 
     .botao {
         padding: 10px 35px;
-        width: 245px;
+        width: 230px;
     }
 
     .botao :hover {
@@ -250,4 +250,54 @@ input .email, .senha :valid {
         padding: 0 50px;
     }
     
+}
+
+@media (min-width: 820px) and (min-height: 900px) {
+    .jumbotron2 {
+        height: 700px;
+        width: 600px;
+        font-size: ;
+    }
+
+    .titulo {
+        font-size: 70px;
+    }
+
+    .botao {
+        height: 90px;
+        width: 500px;
+        font-size: 34px;
+    }
+
+    #email {
+        height: 70px;
+        width: 99%;
+    }
+
+    .email {
+        font-size: 34px;
+    }
+
+    #password {
+        height: 70px;
+        width: 99%;
+
+    }
+
+    .senha {
+        font-size: 34px;
+    }
+
+    .lembrete input {
+        height: 80px;
+    }
+
+    .lembrete {
+        font-size: 30px;
+    }
+
+    .container4 img {
+        height: 40px;
+    }
+
 }
