@@ -228,6 +228,10 @@ input .email, .senha :valid {
         padding: 0 50px;
     }
 
+    .botao:hover {
+        width: 240px;
+    }
+
 }
 
 @media (min-width:800px) and (min-height:1100px) {
@@ -238,6 +242,12 @@ input .email, .senha :valid {
 
     .botao3 {
         margin-right: 20px;
+    }
+}
+
+@media (min-width: 1000px) and (max-height: 600px) {
+    .botao:hover {
+        width: 340px;
     }
 }
 
@@ -298,6 +308,12 @@ input .email, .senha :valid {
 
     .container4 img {
         height: 40px;
+    }
+
+    .botao:hover {
+        height: 100px;
+        width: 540px;
+        font-size: 34px;
     }
 
 }
