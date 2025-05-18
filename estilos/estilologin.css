@@ -177,6 +177,21 @@ input .email, .senha :valid {
         background-position: center;
         height: 100vh;
     }
+    
+    .container4 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        position: fixed;
+        top: 5px; 
+        padding: 10px 10px;
+    }
+
+    .titulo {
+        font-size: 30px;
+        padding: 9px;
+    }
 
     .container2 {
         display: flex;
@@ -187,7 +202,7 @@ input .email, .senha :valid {
 
     .jumbotron2 {
         height: 400px;
-        width: 370px;
+        width: 350px;
         margin: 0 auto; 
         display: flex;
         flex-direction: column;
@@ -195,21 +210,30 @@ input .email, .senha :valid {
         justify-content: center;
     }
 
-    .titulo {
-        font-size: 30px;
-        padding: 9px;
+    .email, .senha {
+        font-size: 15px;
     }
 
-    .lembrete, .botaosenha, .lembrete input {
-        font-size: 13px;
-        height: 13px;
-        width: 13px;
+    #email, #password {
+        width: 300px;
     }
 
-    .container4 {
-        padding: 0;
-        height: 3%;
-        width: 3%;
+    .lembrete, .botaosenha {
+        font-size: 13px;;
+    }
+
+    .botao {
+        width: 300px;
+        font-size: 15px;
+    }
+
+    .botao:hover {
+        width: 320px;;
+    }
+
+    .lembrete input {
+        height: 12px;
+        width: 12px;
     }
 }
 
