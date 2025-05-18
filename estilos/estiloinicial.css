@@ -6,11 +6,12 @@
 h1 {
     font-family: Inter;
     color: #B08DF4;
-    font-size: 40px;
+    font-size: 50px;
     font-style: normal;
     font-weight: 1000;
     line-height: normal;
     letter-spacing: 0.9px;
+    margin-bottom: 50px;
 }
 
 body {
@@ -30,8 +31,8 @@ body {
 }
 
 .topo img {
-    height: 130px;
-    width: 130px;
+    height: 100px;
+    width: 110px;
     object-fit: contain;
     margin-top: 4vh;
 }
@@ -40,28 +41,30 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    justify-content: center;
     flex-wrap: wrap;
-    width: 210px;
-    height: 320px;
-    border-radius: 10px;
-    background: #FFF;
-    box-shadow: 0px 4px 4px 0px rgba(140, 74, 255, 0.25);
-    padding: 2%  2% 2% 2%; 
+    gap: 2px;
+    width: 500px;
+    height: 450px;
+    border-radius: 20px;
+    background: #FEFEFF;
+    box-shadow: 0px 4px 8px 5px rgba(71, 157, 228, 0.25);  
+    margin-top: 50px;  
 }
 
 .primeirobtn, .segundobtn, .terceirobtn {
-    width: 100%;
-    height: 4vh;
+    width: 400px;
+    height: 50px;
     font-family: Inter; 
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 600;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    padding: 10px 0;
+    padding: 10px 10px;
     text-decoration: none;
+    margin-top: 10px;
 }
 
 .primeirobtn {
@@ -89,24 +92,24 @@ body {
 
 .primeirobtn:hover {
     background: linear-gradient(270deg, #F99129 0.16%, #FB38B0 103.06%);
-    height: 6vh;
-    width: 90%;
+    height: 60px;
+    width: 420px;
     color: #fff;
     gap: 24px;
 }
 
 .segundobtn:hover {
     background: linear-gradient(270deg, #08C3CD 0.16%, #D63EF8 103.06%);
-    height: 6vh;
-    width: 90%;
+    height: 60px;
+    width: 420px;
     color: #fff;
     gap: 24px;
 }
 
 .terceirobtn:hover {
     background: linear-gradient(90deg, #2C79BD 0%, #B4F5FF 100%);
-    height: 6vh;
-    width: 90%;
+    height: 60px;
+    width: 420px;
     color: #fff;
     gap: 24px;
 }
@@ -120,283 +123,205 @@ body {
         min-height: 100vh;
     }
 
+    h1 {
+        font-size: 50px;
+        margin-bottom: 25px;
+    }
+
     .jumbotron {
-        margin-top: 7%;
-        height: 55vh;
-        width: 70%;
-        gap: 20px;
-        padding: 2% 2%;
+        margin-top: 5px;
+        height: 390px;
+        width: 350px;
     }
 
     .primeirobtn, .segundobtn, .terceirobtn {
-        height: 10%;
-        width: 80%;
+        height: 40px;
+        width: 300px;
+    }
+
+    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
+        height: 45px;
+        width: 312px;
     }
 
     .topo img {
         height: 75px;
     }
-
 }
 
-@media (min-width:560px) and (max-width:1100px) and (min-height:600px){
+@media (min-width:560px) and (max-width:1100px) and (min-height:600px) {
     body {
         height: 100vh;
-        background-repeat: no-repeat;
-        background-position: center;
     }
-    
+
     .jumbotron {
-        height: 500px;
-        width: 50%;
-        margin-top: 4%;
+        height: 570px;
+        width: 500px;
+    }
+
+    h1 {
+        font-size: 60px;
+        margin-bottom: 40px;
     }
 
     .primeirobtn, .segundobtn, .terceirobtn {
         height: 70px;
-        width: 90%;
-        font-size: 23px;
-    }
-
-    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
-        height: 85px;
-        width: 100%;
-    }
-    
-    .loguinho {
-        margin-top: 100px;
-    }
-
-    .topo img {
-        height: 120px;
-    }
-
-}
-
-
-@media (min-width: 1101px) and (max-width: 4000px){
-    body {
-        height: 100vh;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-    
-    .jumbotron {
-        height: auto;
-        width: 30%;
-        margin-top: 4%;
-    }
-
-    .primeirobtn, .segundobtn, .terceirobtn {
-        height: 7vh;
-        width: 100%;
-        font-size: 17px;
-    }
-}
-
-@media (min-height:400px) and (max-height:932px) {
-    .jumbotron {
-        height: 470px;
-    }
-    .primeirobtn, .segundobtn, .terceirobtn {
-        height: 60px;
-        margin-top: 7px;
-    }
-
-    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
-        height: 80px;
-        width: 270px;
-    }
-}
-
-@media (min-height:800px) and (min-width:1280px) and (max-width:1285px){
-    .jumbotron {
-        height: 410px;
-    }
-    .primeirobtn, .segundobtn, .terceirobtn {
-        height: 50px;
-        margin-top: 7px;
-    }
-
-    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
-        height: 60px;
-        width: 395px;
-    }
-
-    .topo img {
-        height: 100px;
-    }
-
-}
-
-
-
-@media (min-width:300px) and (max-width:376px) {
-    .nome h1 {
-        font-size: 32px;
-    }
-
-    .jumbotron {
-        height: 360px;
-    }
-
-    .primeirobtn, .segundobtn, .terceirobtn {
-        height: 32px;
-        margin-top: 0%;
-        margin-bottom: 1%;
-    }
-
-    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
-        height: 35px;
-        width: 230px;
-    }
-}
-
-@media (min-width:540px) and (max-width: 559px) {
-
-    .jumbotron {
-        width: 50vh;
-        height: 290px;
-    }
-
-    .loguinho img {
-        height: 35px;
-        margin-bottom: opx;
-    }
-
-    .topo img {
-        height: 50px;
-    }
-
-    .nome h1 {
-        font-size: 26px;
-    }
-
-    .primeirobtn, .segundobtn, .terceirobtn {
-        height: 20px;
-    }
-
-    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
-        height: 25px;
-    }
-}
-
-@media (min-height:1000px) {
-    .jumbotron {
-        height: 590px;
-        width: 50vh;
-    }
-
-    .topo img {
-        height: 70px;
-    }
-    
-    .nome h1 {
-        font-size: 40px;
-    }
-
-    .primeirobtn, .segundobtn, .terceirobtn {
-        height: 90px;
+        width: 440px;
         margin-top: 15px;
     }
 
     .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
-        height: 130px;
+        height: 80px;
+        width: 460px;
+    }
+
+    .loguinho {
+        margin-top: 40px;
+    }
+
+}
+
+@media (min-width:360px) and (max-width:559px) {
+    body {
+        height: 100vh;
+    }
+
+    .jumbotron {
+        height: 400px;
+        width: 355px;
+        margin-top: 5%;
+    }
+
+    h1 {
+        font-size: 30px;
+        margin-bottom: 50px;
+    }
+
+    .primeirobtn, .segundobtn, .terceirobtn {
+        height: 50px;
+        width: 310px;
+        margin-top: 10px;
+        font-size: 20px;
+    }
+
+    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
+        height: 55px;
+        width: 320px;        
     }
 }
 
-@media (min-width:800px) and (min-height:1300px) {
-    .jumbotron {
-        height: 1000px;
-        width: 800px;
+@media (min-width:1024px) and (min-height: 600px) {
+    body {
+        height: 100vh;
     }
 
-    .nome h1 {
-        font-size: 80px;
+    .topo img {
+        height: 50px;
+        margin-bottom: 1px;
+    }
+
+    h1 {
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    .jumbotron {
+        height: 300px;
+        width: 500px;
+    }
+
+    .primeirobtn, .segundobtn, .terceirobtn {
+        height: 30px;
+        width: 400px;
+        margin-top: 10px;
+        font-size: 20px;
+    }
+
+    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
+        height: 35px;
+        width: 420px;       
+    }
+
+    .loguinho img {
+        height: 20px;
+    }
+
+}
+
+@media (min-width: 1101px) and (max-width: 1900px){
+    body {
+        height: 100vh;
+    }
+
+    .topo img {
+        height: 70px;
+        margin-bottom: 1px;
+    }
+
+    h1 {
+        font-size: 50px;
+        margin-bottom: 30px;
+    }
+
+    .jumbotron {
+        height: 420px;
+        width: 500px;
+    }
+
+    .primeirobtn, .segundobtn, .terceirobtn {
+        height: 50px;
+        width: 400px;
+        margin-top: 10px;
+        font-size: 20px;
+    }
+
+    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
+        height: 60px;
+        width: 420px;       
+    }
+
+    .loguinho img {
+        height: 40px;
+        margin-top: 10px;
+    }
+
+}
+
+@media (min-height: 1300px) {
+    body {
+        height: 100vh;
     }
 
     .topo img {
         height: 100px;
+        margin-bottom: 1px;
+    }
+
+    h1 {
+        font-size: 70px;
+        margin-bottom: 40px;
+    }
+
+    .jumbotron {
+        height: 600px;
+        width: 700px;
     }
 
     .primeirobtn, .segundobtn, .terceirobtn {
-        font-size: 40px;
-        height: 200px;
+        height: 70px;
+        width: 550px;
+        margin-top: 15px;
+        font-size: 20px;
     }
 
     .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
-        height: 250px;
+        height: 75px;
+        width: 575px;       
     }
 
     .loguinho img {
         height: 50px;
-    }
-}
-
-@media (min-height:1310px) {
-    .jumbotron {
-        height: 800px;
+        margin-top: 20px;
     }
 
-    .primeirobtn, .segundobtn, .terceirobtn {
-        height: 110px;
-        margin-top: 0%;
-        margin-bottom: 3%;
-    }
-
-    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
-        height: 160px;
-    }
-}
-
-@media (min-width: 1000px) and (max-width:1023px) {
-
-    .jumbotron {
-        height: 270px;
-        width: 50%;
-    }
-
-    .primeirobtn, .segundobtn, .terceirobtn {
-        height: 27px;
-        margin: 0px;
-    }
-
-    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
-        height: 30px;
-    }
-
-}
-
-@media (max-width: 1024px) and (max-height: 600px) {
-    .jumbotron {
-        height: 280px;
-        width: 50vh;
-
-    }
-
-    .primeirobtn, .segundobtn, .terceirobtn {
-        height: 12px;
-        margin: 0px;
-        font-size: 15px;
-    }
-
-    .primeirobtn:hover, .segundobtn:hover, .terceirobtn:hover {
-        height: 15px;
-        width: 300px;
-    }
-
-    .topo img {
-        height: 30px;
-    }
-
-    .loguinho img {
-        height: 15px;
-    }
-
-}
-
-@media (min-height: 1360px) and (min-width: 1024px) {
-    .jumbotron {
-        margin-top: 50px;
-    }
 }

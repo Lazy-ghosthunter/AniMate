@@ -71,10 +71,6 @@ body {
     flex-direction: column;
 }
 
-#loguinhoem {
-    margin-top: 5%;
-}
-
 .voltar {
     display: flex;
     justify-content: space-between;
@@ -172,7 +168,7 @@ body {
     }
 
     #voltar {
-        padding: 0px 22px;
+        padding: 0px 20px;
         height: 3%;
         width: 3%;
     }

@@ -4,16 +4,6 @@
     src: local(Miltonian_Tattoo), url(/fonte/Miltonian_Tattoo/MiltonianTattoo-Regular.ttf);
 }
 
-.titulo {
-    font-family: Miltonian_Tattoo;
-    color: #67058D;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 0.9px;
-}
-
 @font-face {
     font-family: Pattaya;
     src: local(Pattaya), url(/fonte/Pattaya/Pattaya-Regular.ttf);
@@ -23,6 +13,22 @@
 @font-face {
     font-family: Love_Ya_Like_A_Sister;
     src: local(Love_Ya_Like_A_Sister), url(/fonte/Love_Ya_Like_A_Sister/LoveYaLikeASister-Regular.ttf);
+}
+
+@font-face {
+    font-family: Inter;
+    src: local(Inter), url(/fonte/Inter/Inter-VariableFont_opsz,wght.ttf);
+}
+
+
+.titulo {
+    font-family: Miltonian_Tattoo;
+    color: #67058D;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.9px;
 }
 
 body {
@@ -72,40 +78,31 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     gap: 2px;
-    width: 500px;
+    width: 450px;
     height: 450px;
     border-radius: 20px;
     background: #FEFEFF;
-    box-shadow: 0px 4px 8px 5px rgba(71, 157, 228, 0.25);        
+    box-shadow: 0px 4px 8px 5px rgba(71, 157, 228, 0.25);       
+}
+
+.email {
+    font-family: Pattaya;
+    color: #67058D;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    display: flex;
+    flex-direction: column;
 }
 
 #email {
     border-radius: 8px;
     border: 2px solid var(--Color, #9211BC);
     background-color: #F6FCFF;
-    width: 290px;
-    height: 27px;
-}
-
-#password {
-    border-radius: 8px;
-    border: 2px solid var(--Color, #9211BC);
-    background-color: #FFF3F3;
-    width: 290px;
-    height: 27px;
-    color: #67058D;
-}
-
-.email {
-    color: #67058D;
-    font-family: Pattaya;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 0.4px;
-    display: flex;
-    flex-direction: column;
+    width: 350px;
+    height: 35px;
 }
 
 .senha {
@@ -113,21 +110,30 @@ body {
     font-family: Love_Ya_Like_A_Sister;
     font-size: 18px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     line-height: normal;
     letter-spacing: 0.4px;
     display: flex;
     flex-direction: column;
 }
 
-.lembrete {
+#password {
+    border-radius: 8px;
+    border: 2px solid var(--Color, #9211BC);
+    background-color: #F6FCFF;
+    width: 350px;
+    height: 35px;
+}
+
+.lembrete, .botaosenha {
     display: flex;
-    align-items: center; /* Alinha checkbox e texto */
-    gap: 8px; /* Dá um espaçamento entre o checkbox e o texto */
+    align-items:start; 
+    gap: 8px; 
     color: #67058D;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 400;
     margin-bottom: 10px;
+    font-family: Inter;
 }
 
 .lembrete input {
@@ -140,7 +146,7 @@ body {
     background: linear-gradient(270deg, #90F9FF 0.16%, #EB92FF 103.06%);
     border: 0.5px solid #3982EF;
     color: #450F8C;
-    width: 100%;
+    width: 350px;
     height: 4vh;
     font-family: Inter; 
     font-size: 20px;
@@ -155,7 +161,7 @@ body {
 
 .botao:hover {
     background: linear-gradient(270deg, #08C3CD 0.16%, #D63EF8 103.06%);
-    height: 5vh;
+    height: 5.5vh;
     width: 100%;
     color: #fff;
     gap: 20px;
@@ -165,3 +171,68 @@ input .email, .senha :valid {
     box-shadow: 0 0 5px 1px rgb(0, 255, 21);
 }
 
+@media (max-width: 768px) {
+    body {
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+    }
+
+    .container2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+    }
+
+    .jumbotron2 {
+        height: 400px;
+        width: 370px;
+        margin: 0 auto; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .titulo {
+        font-size: 30px;
+        padding: 9px;
+    }
+
+    .lembrete, .botaosenha, .lembrete input {
+        font-size: 13px;
+        height: 13px;
+        width: 13px;
+    }
+
+    .container4 {
+        padding: 0;
+        height: 3%;
+        width: 3%;
+    }
+}
+
+@media (min-width:560px) and (max-width:1100px) and (min-height:600px) {
+    body {
+        height: 100vh;
+    }
+}
+
+@media (min-width: 1101px) and (max-width: 1900px){
+    body {
+        height: 100vh;
+    }
+}
+
+@media (min-width:360px) and (max-width:559px) {
+    body {
+        height: 100vh;
+    }
+}
+
+@media (min-height:1024px) and (min-width: 768px) {
+    body {
+        height: 100vh;
+    }
+}
