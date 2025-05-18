@@ -5,7 +5,13 @@
 
 h1 {
     font-family: Inter;
-    
+    color: #67058D;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: 0.9px;
+
 }
 
 body {
@@ -36,24 +42,33 @@ body {
     flex-wrap: wrap;
     gap: 2px;
     width: 500px;
-    height: 400px;
+    height: 450px;
     border-radius: 20px;
     background: #FEFEFF;
     box-shadow: 0px 4px 8px 5px rgba(71, 157, 228, 0.25);    
 }
 
-.info, #h4 {
-    font-family: Inter;
-    justify-content: center;
-    align-items: center;
-}
-
 .info {
-    font-size: large;
+    color: rgb(138, 136, 136);
+    font-family: Inter;
+    font-style: italic;
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    padding: 30px 30px;
 }
 
 #h4 {
-    font-size:small;
+    font-family: Inter;
+    color: #67058D;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    display: flex;
+    flex-direction: column;
 }
 
 #loguinhoem {
@@ -64,7 +79,7 @@ body {
     position: absolute; 
     top: 10px; 
     right: 0;
-    padding: 10px 10px;;
+    padding: 10px 10px;
     height: 3%;
     width: 3%;
 }
@@ -92,5 +107,153 @@ body {
     width: 90%;
     color: #fff;
     gap: 20px;
+}
+
+#emailre {
+    border-radius: 8px;
+    border: 2px solid var(--Color, #9211BC);
+    background-color: #F6FCFF;
+    width: 350px;
+    height: 35px;
+}
+
+@media (max-width: 768px) {
+    body {
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+    }
+
+    .containerem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+    }
+
+    .jumbotronem {
+        height: 400px;
+        width: 370px;
+        margin: 0 auto; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #h4 {
+        font-size: 13px;
+        padding: 9px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .info {
+        font-size: 13px;
+    }
+
+    #emailre {
+        width: 300px;
+        padding: 2px 2px;
+    }
+
+    #botaoem2 {
+        padding: 10px 35px;
+        width: 245px;
+    }
+
+    #botaoem2:hover {
+        height: 35px;
+        width: 270px;
+    }
+
+    #voltar {
+        padding: 0px 22px;
+        height: 3%;
+        width: 3%;
+    }
+
+
+}
+
+@media (min-width:560px) and (max-width:1100px) and (min-height:600px) {
+    body {
+        height: 100vh;
+    }
+
+    #voltar {
+        padding: 0 50px;
+    }
+
+}
+
+@media (min-width: 1101px) and (max-width: 1900px){
+    body {
+        height: 100vh;
+    }
+
+    #voltar {
+        padding: 0 50px;
+    }
+
+}
+
+@media (min-width:360px) and (max-width:559px) {
+    body {
+        height: 100vh;
+    }
+
+    #voltar {
+        padding: 0 25px;
+    }
+
+    .jumbotronem {
+        width: 350px;
+        height: 430px;
+    }
+}
+
+@media (max-width:344px) and (max-height:882px) {
+    body {
+        height: 100vh;
+    }
+
+    #voltar {
+        padding: 0 25px;
+    }
+
+    .jumbotronem {
+        width: 340px;
+        height: 430px;
+    }
+
+    #botaoem2 :hover {
+        width: 70%;
+    }
+
+}
+
+@media (min-height:1024px) and (min-width: 768px) {
+    body {
+        height: 100vh;
+    }
+
+    #voltar {
+        padding: 0 25px;
+        height: 5%;
+        width: 5%;
+
+    }
+
+    .jumbotronem {
+        width: 500px;
+        height: 460px;
+    }
+
+    #botaoem2 :hover {
+        width: 80%;
+    }
 }
 
