@@ -134,6 +134,7 @@ body {
     font-weight: 400;
     margin-bottom: 10px;
     font-family: Inter;
+    text-decoration: none;
 }
 
 .lembrete input {
@@ -241,17 +242,19 @@ input .email, .senha :valid {
     body {
         height: 100vh;
     }
+
+    .container4 {
+        width: 98%;
+    }
 }
 
 @media (min-width: 1101px) and (max-width: 1900px){
     body {
         height: 100vh;
     }
-}
 
-@media (min-width:360px) and (max-width:559px) {
-    body {
-        height: 100vh;
+    .container4 {
+        width: 98%;
     }
 }
 
@@ -259,4 +262,36 @@ input .email, .senha :valid {
     body {
         height: 100vh;
     }
+
+    .container4 {
+        width: 96%;
+    }
+}
+
+@media (max-width: 359px) {
+    body {
+        height: 100vh;
+    }
+
+    .jumbotron2 {
+        height: 400px;
+        width: 335px;
+    }
+
+    .botao {
+        height: 40px;
+    }
+
+    .botao:hover {
+        height: 45px;
+        width: 315px;
+    }
+}
+
+
+@media (min-width:360px) and (max-width:559px) {
+    body {
+        height: 100vh;
+    }
+    
 }
