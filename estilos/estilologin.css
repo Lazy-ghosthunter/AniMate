@@ -30,7 +30,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 88vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -62,7 +62,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5%;
+    justify-content: space-between;
 }
 
 .jumbotron2 {
@@ -72,8 +72,8 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     gap: 2px;
-    width: 400px;
-    height: 380px;
+    width: 500px;
+    height: 450px;
     border-radius: 20px;
     background: #FEFEFF;
     box-shadow: 0px 4px 8px 5px rgba(71, 157, 228, 0.25);        
@@ -165,155 +165,3 @@ input .email, .senha :valid {
     box-shadow: 0 0 5px 1px rgb(0, 255, 21);
 }
 
-@media (max-width: 768px) {
-    body {
-        background-size: cover;
-        background-position: center;
-        height: 100vh;
-    }
-
-    .jumbotron2 {
-        height: 350px;
-        width: 330px;
-    }
-
-    .email {
-        font-size: 17px;
-    }
-
-    #email {
-        width: 300px;
-        padding: 2px 2px;
-    }
-
-    .senha {
-        font-size: 17px;
-    }
-
-    #password {
-        width: 300px;
-        padding: 2px 2px;
-    }
-
-    .lembrete {
-        font-size: 15px;
-        text-indent: 0.7px;
-    }
-
-    .botao3 {
-        padding: 0 50px;
-    }
-
-    .titulo {
-        font-size: 30px;
-    }
-
-    .botao {
-        padding: 10px 35px;
-        width: 230px;
-    }
-
-    .botao :hover {
-        height: 30px;
-        width: 70px;
-    }
-}
-
-@media (min-width:340px) and (max-width:1100px) and (min-height:600px) and (max-height:1500px) {
-    body {
-        height: 100vh;
-    }
-
-    .botao3 {
-        padding: 0 50px;
-    }
-
-    .botao:hover {
-        width: 240px;
-    }
-
-}
-
-@media (min-width:800px) and (min-height:1100px) {
-    body {
-        height: 100vh;
-        
-    }
-
-    .botao3 {
-        margin-right: 20px;
-    }
-}
-
-@media (min-width: 1000px) and (max-height: 600px) {
-    .botao:hover {
-        width: 340px;
-    }
-}
-
-@media (min-width: 1101px) and (max-width: 1900px){
-    body {
-        height: 100vh;
-    }
-
-    .botao3 {
-        padding: 0 50px;
-    }
-    
-}
-
-@media (min-width: 820px) and (min-height: 900px) {
-    .jumbotron2 {
-        height: 700px;
-        width: 600px;
-        font-size: ;
-    }
-
-    .titulo {
-        font-size: 70px;
-    }
-
-    .botao {
-        height: 90px;
-        width: 500px;
-        font-size: 34px;
-    }
-
-    #email {
-        height: 70px;
-        width: 99%;
-    }
-
-    .email {
-        font-size: 34px;
-    }
-
-    #password {
-        height: 70px;
-        width: 99%;
-
-    }
-
-    .senha {
-        font-size: 34px;
-    }
-
-    .lembrete input {
-        height: 80px;
-    }
-
-    .lembrete {
-        font-size: 30px;
-    }
-
-    .container4 img {
-        height: 40px;
-    }
-
-    .botao:hover {
-        height: 100px;
-        width: 540px;
-        font-size: 34px;
-    }
-
-}
