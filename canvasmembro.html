@@ -21,6 +21,7 @@
     <div id="divcanvas">
     <canvas id="canvas"></canvas>
     </div>
+
     <div id="ferramentas">
         
         <img src="imgs/Pincel.svg" id="pincel" class="tool">
@@ -66,6 +67,7 @@
         </div>
     </div>
     
+    //! Esqueleto do chat
     <div id="chatcontainer">
         <p id="fechar">X</p>
         <div id="mensagens">
@@ -80,8 +82,7 @@
 
     </div>
     <script>
-
-
+        // Chat funcionalidades
         const chatIcon = document.getElementById('chat');
         const chatContainer = document.getElementById('chatcontainer');
 
@@ -90,11 +91,12 @@
             chatContainer.style.display = 'block';
         });
 
-        // Adiciona o evento de mouse leave para ocultar o chat-container
-        chatIcon.addEventListener('mouseleave', function() {
+        //Funcionalidade para fechar o chat
+        document.getElementById('fechar').addEventListener('click', function() {
             chatContainer.style.display = 'none';
         });
-                const canvas = document.getElementById('canvas');
+
+        const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
         // Carregar configurações salvas
