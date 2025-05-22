@@ -44,8 +44,8 @@ window.onload = () => {
 
 // Variáveis para desenho
 let isDrawing = false;
-let lastX = 0;
-let lastY = 0;
+let lastX = null;
+let lastY = null;
 let pintar = '#000000'; // Cor padrão do pincel
 
 // Eventos de desenho
@@ -77,7 +77,7 @@ canvas.addEventListener('mousemove', (e) => {
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(currentX, currentY);
-    ctx.strokeStyle = pintar;
+    ctx.strokeStyle = colorPicker.value;
     ctx.lineWidth = 2;
     ctx.stroke();
     ctx.closePath();
@@ -93,7 +93,7 @@ canvas.addEventListener('mousemove', (e) => {
         
     lastX = currentX;
     lastY = currentY;
-    
+
 });
 
 // Alterar cor do pincel

@@ -43,23 +43,16 @@ window.onload = () => {
 
 // Variáveis para desenho
 let isDrawing = false;
-let lastX = 0;
-let lastY = 0;
+let lastX = null;
+let lastY = null;
 let pintar = '#000000'; // Cor padrão do pincel
 
 // Eventos de desenho
 canvas.addEventListener('mousedown', (e) => {
     isDrawing = true;
-    [lastX, lastY] = [e.offsetX, e.offsetY];
 });
 
 canvas.addEventListener('mouseup', () => { 
-    isDrawing = false;
-    lastX = null;
-    lastY = null;
-});
-
-canvas.addEventListener('mouseout', () => { 
     isDrawing = false;
     lastX = null;
     lastY = null;
@@ -74,27 +67,32 @@ canvas.addEventListener('mouseleave', () => {
 canvas.addEventListener('mousemove', (e) => {
     if (!isDrawing) return;
 
-        //Para envio do desenho
-        const currentX = e.offsetX;
-        const currentY = e.offsetY;
+    //Para envio do desenho
+    const rect = canvas.getBoundingClientRect();
+    const currentX = e.clientX - rect.left;
+    const currentY = e.clientY - rect.top;
 
-        //Desenho local
-        ctx.beginPath();
-        ctx.moveTo(lastX, lastY);
-        ctx.lineTo(currentX, currentY);
-        ctx.strokeStyle = pintar;
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        ctx.closePath();
+    //Desenho local
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(currentX, currentY);
+    ctx.strokeStyle = colorPicker.value;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.closePath();
 
-        //Manda os dados do desenho para o servidor
+    //Manda os dados do desenho para o servidor
+    if(lastX !== null && lastY !== null) {
         socket.emit('draw', {
             lastX, lastY, currentX, currentY,
-            color: pintar,
+            color: colorPicker.value,
             lineWidth: 2
         });
+    }
         
-        [lastX, lastY] = [e.offsetX, e.offsetY];
+    lastX = currentX;
+    lastY = currentY;
+
 });
 
 // Alterar cor do pincel
