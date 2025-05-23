@@ -33,6 +33,7 @@ canvas{
     canvas {cursor:crosshair;
     }
 }
+
 #timelineFull {
 
     display: inline-flex;
@@ -82,8 +83,6 @@ canvas{
     height: 7px;
 }
 
-
-
 #chat{
     
     width:20;
@@ -92,6 +91,7 @@ canvas{
     left: 55px;
     top:3px;
 }
+
 #avatar{
     
     z-index: 10;
@@ -114,6 +114,7 @@ canvas{
     justify-items: center;
     
 }
+
 
 #timelineTools{
 
@@ -147,6 +148,7 @@ canvas{
 
 
 #corr{
+
     appearance: none;
     background: none;
     border: none;
@@ -156,10 +158,12 @@ canvas{
     
     
 }
+
 #corr::-webkit-color-swatch {
     border: none; 
     border-radius: 5px;
 }
+
 #camadas{
 
     color: #ffffff;
@@ -221,9 +225,11 @@ canvas{
     padding: 5px;
     gap: 10px;
 }
+
 #visivel{
     position: absolute;
 }
+
 #oculto{
     position: absolute;
 }
@@ -254,18 +260,21 @@ canvas{
     
     
 }
+
 .frameativa{
     border: 7.5px solid #531F79;
     width:150px;
     height:35px;
     border-radius: 5px;
 }
+
 .frameAtiva2{
     border: 7.5px solid #c7184f;
     width:150px;
     height:35px;
     border-radius: 5px;
 }
+
 #chatcontainer{
     position: absolute;
     width:350px;
@@ -293,6 +302,7 @@ canvas{
     
 
 }
+
 #espacomsg{
     position: absolute;
     left:10px;
@@ -302,11 +312,13 @@ canvas{
     bottom: 10px;
     border-radius: 5px;
 }
+
 #enviar{
     position: absolute;
     right:15px;
     top:14px;
 }
+
 #fechar{
     position: absolute;
     right:10px;
@@ -318,6 +330,7 @@ canvas{
     border-radius: 10px;
     
 }
+
 #mensagens {
     flex: 1;
     padding: 10px;
@@ -360,9 +373,6 @@ canvas{
     width:55%;
     height: 20%;
 }
-
-
-
 
 
 @media(orientation:portrait){

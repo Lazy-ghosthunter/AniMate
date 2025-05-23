@@ -15,6 +15,7 @@ document.getElementById('fechar').addEventListener('click', () => {
     chatContainer.style.display = 'none';
 })
 
+//Canva + Contexto
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -43,16 +44,56 @@ window.onload = () => {
 };
 
 // Variáveis para desenho
-let isDrawing = false;
+let isDrawing = false; //Desenhar
+let isErasing = false; //Apagar
 let lastX = null;
 let lastY = null;
 let pintar = '#000000'; // Cor padrão do pincel
+let brushSize = 10; //Tamanho do pincel/borracha
+
+//Ferramentas de desenho
+const ferramentas = document.querySelectorAll(".tool");
+let activeTool = "traçar";
+
+//Troca das ferramentas
+const selectTool = ({target}) => {
+    const selectedTool = target;
+    const action = selectedTool.getAttribute("data-action");
+
+    if (action) {
+        activeTool = action;
+    }
+    
+}
+
+ferramentas.forEach((tool) => {
+    tool.addEventListener("click", selectTool)
+});
+
+//Borracha
+const erase = (x, y) => {
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.beginPath();
+    ctx.arc(
+        x - canvas.offsetLeft,
+        y - canvas.offsetTop,
+        brushSize / 2,
+        0,
+        2 * Math.PI
+    )
+    ctx.fill();
+}
 
 // Desenha apenas com os botões esquerdo e direito do mouse
 canvas.addEventListener('mousedown', (e) => {
-    if (e.button === 0 || e.button === 2)
-    isDrawing = true;
-    
+    if (e.button === 0 || e.button === 2) {
+        //Para desenhar
+        if (activeTool == "traçar") {
+            isDrawing = true;
+        } else if (activeTool == "apagar") {
+            isErasing = true;
+        }
+    }
 });
 
 //Não abre o menu do navegador dentro da canva ao estar desenhando com o botão direito
@@ -60,6 +101,7 @@ canvas.addEventListener('contextmenu', (e) => {
     e.preventDefault();
 });
 
+//Configurações para evitar traços indesejados no desenho
 canvas.addEventListener('mouseup', () => { 
     isDrawing = false;
     lastX = null;
@@ -72,7 +114,7 @@ canvas.addEventListener('mouseleave', () => {
     lastY = null;
 });
 
-//Desenhar apenas quando o botão estiver se mexendo e sendo pressionando
+//Desenha apenas quando o botão estiver se mexendo enquanto está sendo pressionando
 canvas.addEventListener('mousemove', (e) => {
     if (!isDrawing) {
 
@@ -80,33 +122,58 @@ canvas.addEventListener('mousemove', (e) => {
         lastX = e.clientX - canvas.getBoundingClientRect().left;
         lastY = e.clientY - canvas.getBoundingClientRect().top;
         return; 
+
     }
 
-    // isDrawing vira verdadeiro apenas quando o botão está sendo pressionado
-    const x = e.clientX - canvas.getBoundingClientRect().left;
-    const y = e.clientY - canvas.getBoundingClientRect().top;
+    if (activeTool == "traçar") {
 
+        const x = e.clientX - canvas.getBoundingClientRect().left;
+        const y = e.clientY - canvas.getBoundingClientRect().top;
 
-    ctx.beginPath();
-    ctx.moveTo(lastX, lastY);
-    ctx.lineTo(x, y);
-    ctx.strokeStyle = pintar; 
-    ctx.lineWidth = 2; 
-    ctx.stroke();
-    ctx.closePath();
+        //Coordenadas do desenho
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(x, y);
+        ctx.strokeStyle = pintar; 
+        ctx.lineWidth = 2; 
+        ctx.stroke();
+        ctx.closePath();
 
-    // Envia o desenho se realmente estiver desenhando
+        // Envia o desenho se realmente estiver desenhando
+        socket.emit('draw', {
+            x0: lastX,
+            y0: lastY,
+            x1: x,
+            y1: y,
+            color: pintar,
+            lineWidth: 2,
+            tool: 'traçar'
+        });
+    
+
+        lastX = x;
+        lastY = y;
+
+    } else if (activeTool == "apagar"){ 
+        isErasing = true;
+        const x = e.clientX - canvas.getBoundingClientRect().left;
+        const y = e.clientY - canvas.getBoundingClientRect().top;
+
+        erase(x, y);
+        ctx.beginPath();
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.lineWidth = 4;
+        ctx.closePath();
+
+    }    
+
+    // Transmite apagamento
     socket.emit('draw', {
-        x0: lastX,
-        y0: lastY,
-        x1: x,
-        y1: y,
-        color: pintar,
-        lineWidth: 2,
+    x: x,
+    y: y,
+    radius: brushSize / 2,
+    tool: 'apagar' 
     });
-
-    lastX = x;
-    lastY = y;
 
 });
 
@@ -229,13 +296,23 @@ onionSkinButton.addEventListener('click', () => {
 
 //Recebe os traços enviados pelo outro usuário
 socket.on('draw', data => {
-    ctx.beginPath();
-    ctx.moveTo(data.x0, data.y0);
-    ctx.lineTo(data.x1, data.y1);
-    ctx.strokeStyle = data.color;
-    ctx.lineWidth = data.lineWidth;
-    ctx.stroke();
-    ctx.closePath();
+    if (data.tool === 'traçar') {
+        ctx.beginPath();
+        ctx.moveTo(data.x0, data.y0);
+        ctx.lineTo(data.x1, data.y1);
+        ctx.strokeStyle = data.color;
+        ctx.lineWidth = data.lineWidth;
+        ctx.stroke();
+        ctx.closePath();
+    } else if (data.tool === 'apagar') {
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.beginPath();
+        ctx.arc(data.x, data.y, data.radius, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.globalCompositeOperation = "source-over"; 
+        ctx.closePath();
+        // Volta ao valor normal da ferramenta
+    }
 });
 
 /*
