@@ -226,6 +226,7 @@ const color = colorPicker.value;
             onionSkinButton.style.opacity = onionSkinEnabled ? 1 : 0.5; // Alterar a opacidade para indicar se está ativado
         });
 
+//Recebe os traços enviados pelo outro usuário
 socket.on('draw', data => {
     ctx.beginPath();
     ctx.moveTo(data.x0, data.y0);

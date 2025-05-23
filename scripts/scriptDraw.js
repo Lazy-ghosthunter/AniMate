@@ -15,23 +15,23 @@ document.getElementById('fechar').addEventListener('click', () => {
     chatContainer.style.display = 'none';
 })
 
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 
-        // Carregar configurações salvas
-        const larguraC = localStorage.getItem('larguracanvas');
-        const alturaC = localStorage.getItem('alturacanvas');
-        const cor = localStorage.getItem('corCanvas');
+// Carregar configurações salvas
+const larguraC = localStorage.getItem('larguracanvas');
+const alturaC = localStorage.getItem('alturacanvas');
+const cor = localStorage.getItem('corCanvas');
 
-        // Configurações da Canvas
-        function updateCanvas() {
-            canvas.width = parseInt(larguraC, 10);
-            canvas.height = parseInt(alturaC, 10);
-            ctx.fillStyle = cor || '#ffffff'; // Cor padrão caso não esteja no localStorage
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
+// Configurações da Canvas
+function updateCanvas() {
+    canvas.width = parseInt(larguraC, 10);
+    canvas.height = parseInt(alturaC, 10);
+    ctx.fillStyle = cor || '#ffffff'; // Cor padrão caso não esteja no localStorage
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
 
-        // Configuração inicial ao carregar a página
+// Configuração inicial ao carregar a página
 window.onload = () => {
     updateCanvas();
     switchFrame('frame1'); // Define o frame inicial
@@ -121,111 +121,113 @@ corPincel.addEventListener('input', () => {
 const colorPicker = document.getElementById('corr');
 const color = colorPicker.value;
 
-        // Variáveis da timeline
-        let currentFrame = 'frame1'; // Frame inicial
-        const frames = {}; // Armazena os desenhos dos frames
+// Variáveis da timeline
+let currentFrame = 'frame1'; // Frame inicial
+const frames = {}; // Armazena os desenhos dos frames
 
-        // Salvar estado do canvas em um frame
-        function saveFrame(frameId) {
-            const frameCanvas = document.createElement('canvas');
-            frameCanvas.width = canvas.width;
-            frameCanvas.height = canvas.height;
-            const frameCtx = frameCanvas.getContext('2d');
-            frameCtx.drawImage(canvas, 0, 0);
-            frames[frameId] = frameCanvas;
+// Salvar estado do canvas em um frame
+function saveFrame(frameId) {
+    const frameCanvas = document.createElement('canvas');
+    frameCanvas.width = canvas.width;
+    frameCanvas.height = canvas.height;
+    const frameCtx = frameCanvas.getContext('2d');
+    frameCtx.drawImage(canvas, 0, 0);
+    frames[frameId] = frameCanvas;
+}
+
+// Restaurar estado de um frame no canvas
+function loadFrame(frameId) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Se Onion Skin estiver ativado, desenha o frame anterior ou próximo semitransparente
+    if (onionSkinEnabled) {
+        const frameIds = Array.from(document.querySelectorAll('.frame')).map(frame => frame.id);
+        const currentIndex = frameIds.indexOf(frameId);
+
+        if (currentIndex > 0) {
+            // Desenha o frame anterior com semitransparência
+            ctx.globalAlpha = 0.5; // 50% de transparência
+            ctx.drawImage(frames[frameIds[currentIndex - 1]], 0, 0);
+            ctx.globalAlpha = 1; // Resetando a transparência
         }
 
-        // Restaurar estado de um frame no canvas
-        function loadFrame(frameId) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Se Onion Skin estiver ativado, desenha o frame anterior ou próximo semitransparente
-            if (onionSkinEnabled) {
-                const frameIds = Array.from(document.querySelectorAll('.frame')).map(frame => frame.id);
-                const currentIndex = frameIds.indexOf(frameId);
-
-                if (currentIndex > 0) {
-                    // Desenha o frame anterior com semitransparência
-                    ctx.globalAlpha = 0.5; // 50% de transparência
-                    ctx.drawImage(frames[frameIds[currentIndex - 1]], 0, 0);
-                    ctx.globalAlpha = 1; // Resetando a transparência
-                }
-                if (currentIndex < frameIds.length - 1) {
-                    // Desenha o frame seguinte com semitransparência
-                    ctx.globalAlpha = 0.5;
-                    ctx.drawImage(frames[frameIds[currentIndex + 1]], 0, 0);
-                    ctx.globalAlpha = 1;
-                }
-            }
-
-            // Desenha o frame atual
-            if (frames[frameId]) {
-                ctx.drawImage(frames[frameId], 0, 0);
-            } else {
-                updateCanvas();
-            }
+        if (currentIndex < frameIds.length - 1) {
+            // Desenha o frame seguinte com semitransparência
+            ctx.globalAlpha = 0.5;
+            ctx.drawImage(frames[frameIds[currentIndex + 1]], 0, 0);
+            ctx.globalAlpha = 1;
         }
+    }
 
-        // Alternar frames
-        function switchFrame(frameId) {
-            saveFrame(currentFrame); // Salva o estado do frame atual
-            loadFrame(frameId); // Carrega o próximo frame
-            currentFrame = frameId; // Atualiza o frame atual
+    // Desenha o frame atual
+    if (frames[frameId]) {
+        ctx.drawImage(frames[frameId], 0, 0);
+    } else {
+        updateCanvas();
+    }
+}
 
-            // Atualizar estilos de destaque
-            document.querySelectorAll('.frame').forEach(frame => frame.classList.remove('frameativa'));
-            document.getElementById(frameId).classList.add('frameativa');
-        }
+// Alternar frames
+function switchFrame(frameId) {
+    saveFrame(currentFrame); // Salva o estado do frame atual
+    loadFrame(frameId); // Carrega o próximo frame
+    currentFrame = frameId; // Atualiza o frame atual
 
-        // Eventos nos frames
-        document.querySelectorAll('.frame').forEach(frame => {
-            frame.addEventListener('click', () => switchFrame(frame.id));
-        });
+    // Atualizar estilos de destaque
+    document.querySelectorAll('.frame').forEach(frame => frame.classList.remove('frameativa'));
+    document.getElementById(frameId).classList.add('frameativa');
+}
 
-        // Controle de animação
-        let isPlaying = false;
-        let animationInterval;
+// Eventos nos frames
+document.querySelectorAll('.frame').forEach(frame => {
+    frame.addEventListener('click', () => switchFrame(frame.id));
+});
 
-        // Reproduzir animação
-        function playAnimation() {
-            if (isPlaying) return;
+// Controle de animação
+let isPlaying = false;
+let animationInterval;
 
-            isPlaying = true;
-            const frameIds = Array.from(document.querySelectorAll('.frame')).map(frame => frame.id);
-            let currentIndex = frameIds.indexOf(currentFrame);
+// Reproduzir animação
+function playAnimation() {
+    if (isPlaying) return;
 
-            // Alteração do tempo para 12 FPS (aproximadamente 83ms por quadro)
-            animationInterval = setInterval(() => {
-                currentIndex = (currentIndex + 1) % frameIds.length;
-                switchFrame(frameIds[currentIndex]);
-            }, 1000 / 12); // 12 FPS
-        }
+    isPlaying = true;
+    const frameIds = Array.from(document.querySelectorAll('.frame')).map(frame => frame.id);
+    let currentIndex = frameIds.indexOf(currentFrame);
 
-        // Pausar animação
-        function pauseAnimation() {
-            if (!isPlaying) return;
+    // Alteração do tempo para 12 FPS (aproximadamente 83ms por quadro)
+    animationInterval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % frameIds.length;
+        switchFrame(frameIds[currentIndex]);
+    }, 1000 / 12); // 12 FPS
+}
 
-            isPlaying = false;
-            clearInterval(animationInterval);
-        }
+// Pausar animação
+function pauseAnimation() {
+    if (!isPlaying) return;
 
-        // Eventos dos botões Play e Pause
-        const playButton = document.getElementById('play');
-        const pauseButton = document.getElementById('pause');
+    isPlaying = false;
+    clearInterval(animationInterval);
+}
 
-        playButton.addEventListener('click', playAnimation);
-        pauseButton.addEventListener('click', pauseAnimation);
+// Eventos dos botões Play e Pause
+const playButton = document.getElementById('play');
+const pauseButton = document.getElementById('pause');
 
-        // Variável para controle do Onion Skin
-        let onionSkinEnabled = false;
+playButton.addEventListener('click', playAnimation);
+pauseButton.addEventListener('click', pauseAnimation);
 
-        // Alternar Onion Skin
-        const onionSkinButton = document.getElementById('onionskin');
-        onionSkinButton.addEventListener('click', () => {
-            onionSkinEnabled = !onionSkinEnabled;
-            onionSkinButton.style.opacity = onionSkinEnabled ? 1 : 0.5; // Alterar a opacidade para indicar se está ativado
-        });
+// Variável para controle do Onion Skin
+let onionSkinEnabled = false;
 
+// Alternar Onion Skin
+const onionSkinButton = document.getElementById('onionskin');
+onionSkinButton.addEventListener('click', () => {
+    onionSkinEnabled = !onionSkinEnabled;
+    onionSkinButton.style.opacity = onionSkinEnabled ? 1 : 0.5; // Alterar a opacidade para indicar se está ativado
+});
+
+//Recebe os traços enviados pelo outro usuário
 socket.on('draw', data => {
     ctx.beginPath();
     ctx.moveTo(data.x0, data.y0);
