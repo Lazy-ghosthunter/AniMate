@@ -84,8 +84,16 @@
     </div>
 
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+    <!-- Conexão ao socket baixado via navegador -->
+
     <script src="/scripts/scriptSocket.js" defer></script>
-    <script src="/scripts/scriptAdm.js" defer></script>
+    <!-- script socket io que envia tudo ao servidor no back-end -->
+
+    <script>window.userRole = 'admin';</script>
+    <!-- Identifica qual tipo de usuário é -->
+
+    <script src="/scripts/scriptDraw.js" defer></script>
+    <!-- Script principal com as funcionalidades do JS -->
 
 </body>
 </html>

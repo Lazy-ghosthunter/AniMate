@@ -5,39 +5,16 @@ window.addEventListener('load', () => {
     //Disponibiliza o socket globalmente para os outros scripts
     window.socket = socket;
 
-    //Seleciona o canvas e o tipo de desenho
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
+    socket.on('connect', () => {
+            console.log('Conectado ao servidor. ID:', socket.id);
+        });
 
-    //Recebe os dados do desenho
-    socket.on('draw', (data) => {
-        ctx.beginPath();
-        ctx.moveTo(data.lastX, data.lastY);
-        ctx.lineTo(data.currentX, data.currentY);
-        ctx.strokeStyle = data.color;
-        ctx.lineWidth = data.lineWidth;
-        ctx.stroke();
-        ctx.closePath();
-    });
+        socket.on('disconnect', () => {
+            console.log('Desconectado do servidor');
+        });
 
-    canvas.addEventListener('mousemove', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const currentX = e.clientX - rect.left;
-    const currentY = e.clientY - rect.top;
-        
-    // Guarda os últimos pontos do desenho
-    if (typeof window.lastX !== "undefined") {
-        socket.emit('draw', {
-            lastX: window.lastX,
-            lastY: window.lastY,
-            currentX,
-            currentY,
-            color: colorPicker.value,     
-            lineWidth: 2         
-            });
-        }
+        socket.on('connect_error', (err) => {
+            console.error('Erro de conexão:', err.message);
+        });
 
-        window.lastX = currentX;
-        window.lastY = currentY;
-    });
 });
