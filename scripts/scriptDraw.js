@@ -1,5 +1,5 @@
 //Conecta ao servidor socket.io
-const socket = io();
+const socket = io('http://localhost:3000');
 
 // Chat funcionalidades
 const chatIcon = document.getElementById('chat');
@@ -48,12 +48,14 @@ let lastX = null;
 let lastY = null;
 let pintar = '#000000'; // Cor padrão do pincel
 
+// Desenha apenas com os botões esquerdo e direito do mouse
 canvas.addEventListener('mousedown', (e) => {
-    if (e.button === 0 || e.button === 2) // apenas botão esquerdo e direito
-        isDrawing = true;
+    if (e.button === 0 || e.button === 2)
+    isDrawing = true;
+    
 });
 
-//Não abre o menu do navegador ao estar desenhando com o botão direito
+//Não abre o menu do navegador dentro da canva ao estar desenhando com o botão direito
 canvas.addEventListener('contextmenu', (e) => {
     e.preventDefault();
 });
@@ -73,6 +75,7 @@ canvas.addEventListener('mouseleave', () => {
 //Desenhar apenas quando o botão estiver se mexendo e sendo pressionando
 canvas.addEventListener('mousemove', (e) => {
     if (!isDrawing) {
+
         // Quando o mouse se mover sem o botão estar pressionado
         lastX = e.clientX - canvas.getBoundingClientRect().left;
         lastY = e.clientY - canvas.getBoundingClientRect().top;
@@ -83,6 +86,7 @@ canvas.addEventListener('mousemove', (e) => {
     const x = e.clientX - canvas.getBoundingClientRect().left;
     const y = e.clientY - canvas.getBoundingClientRect().top;
 
+
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(x, y);
@@ -91,18 +95,19 @@ canvas.addEventListener('mousemove', (e) => {
     ctx.stroke();
     ctx.closePath();
 
-        // Envia o desenho se realmente estiver desenhando
-        socket.emit('draw', {
-            x0: lastX,
-            y0: lastY,
-            x1: x,
-            y1: y,
-            color: pintar,
-            lineWidth: 2,
-        });
-    
+    // Envia o desenho se realmente estiver desenhando
+    socket.emit('draw', {
+        x0: lastX,
+        y0: lastY,
+        x1: x,
+        y1: y,
+        color: pintar,
+        lineWidth: 2,
+    });
+
     lastX = x;
     lastY = y;
+
 });
 
 // Alterar cor do pincel
@@ -221,12 +226,12 @@ const color = colorPicker.value;
             onionSkinButton.style.opacity = onionSkinEnabled ? 1 : 0.5; // Alterar a opacidade para indicar se está ativado
         });
 
-socket.on('draw', ({ lastX, lastY, currentX, currentY, color, lineWidth }) => {
+socket.on('draw', data => {
     ctx.beginPath();
-    ctx.moveTo(lastX, lastY);
-    ctx.lineTo(currentX, currentY);
-    ctx.strokeStyle = color;
-    ctx.lineWidth = lineWidth;
+    ctx.moveTo(data.x0, data.y0);
+    ctx.lineTo(data.x1, data.y1);
+    ctx.strokeStyle = data.color;
+    ctx.lineWidth = data.lineWidth;
     ctx.stroke();
     ctx.closePath();
 });
