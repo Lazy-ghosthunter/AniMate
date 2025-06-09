@@ -5,20 +5,21 @@ const socket = io('http://localhost:3000');
 const chatIcon = document.getElementById('chat');
 const chatContainer = document.getElementById('chatcontainer');
 
-        // Adiciona o evento de mouse enter para mostrar o chat-container
-        chatIcon.addEventListener('mouseenter', function() {
-            chatContainer.style.display = 'block';
-        });
+// Adiciona o evento de mouse enter para mostrar o chat-container
+chatIcon.addEventListener('click', function() {
+    chatContainer.style.display = 'block';
+});
 
 //Função para fechar o chat
 document.getElementById('fechar').addEventListener('click', () => {
     chatContainer.style.display = 'none';
 })
 
-// Quadro dos tamanhos do pincel
+// Funções no quadro dos tamanhos do pincel 
 const botaoTamanho = document.getElementById('tamanho');
 const menuTamanho = document.getElementById('tool-size');
 
+// Mostra o menu de opções
 botaoTamanho.addEventListener('click', () => {
   if (menuTamanho.style.display === 'flex') {
     menuTamanho.style.display = 'none';
@@ -26,6 +27,9 @@ botaoTamanho.addEventListener('click', () => {
     menuTamanho.style.display = 'flex';
   }
 });
+
+//Canva de fundo (Para uma melhor performance da borracha)
+const canvasFundo = document.getElementById("canvasfundo");
 
 //Canva + Contexto
 const canvas = document.getElementById('canvas');
@@ -48,6 +52,7 @@ function updateCanvas() {
 window.onload = () => {
     updateCanvas();
     switchFrame('frame1'); // Define o frame inicial
+    menuTamanho.style.display = 'none';
     const corSalva = localStorage.getItem('corr'); //Aplica a cor ao carregar a página
     if(corSalva) {
         pintar = corSalva;
@@ -57,7 +62,6 @@ window.onload = () => {
 
 // Variáveis para desenho
 let isDrawing = false; //Desenhar
-let isErasing = false; //Apagar
 let lastX = null;
 let lastY = null;
 let pintar = '#000000'; // Cor padrão do pincel
@@ -67,7 +71,7 @@ let brushSize = 10; //Tamanho do pincel/borracha
 const ferramentas = document.querySelectorAll(".tool");
 let activeTool = "traçar";
 
-//Troca das ferramentas
+//Troca entre as ferramentas
 const selectTool = ({target}) => {
     const selectedTool = target;
     const action = selectedTool.getAttribute("data-action");
@@ -96,15 +100,11 @@ const erase = (x, y) => {
     ctx.fill();
 }
 
-// Desenha apenas com os botões esquerdo e direito do mouse
+// Desenha e apagar com os botões esquerdo e direito do mouse
 canvas.addEventListener('mousedown', (e) => {
     if (e.button === 0 || e.button === 2) {
         //Para desenhar
-        if (activeTool == "traçar") {
-            isDrawing = true;
-        } else if (activeTool == "apagar") {
-            isErasing = true;
-        }
+        isDrawing = true;
     }
 });
 
@@ -166,26 +166,30 @@ canvas.addEventListener('mousemove', (e) => {
         lastX = x;
         lastY = y;
 
-    } else if (activeTool == "apagar"){ 
-        isErasing = true;
-        const x = e.clientX - canvas.getBoundingClientRect().left;
-        const y = e.clientY - canvas.getBoundingClientRect().top;
+    }  else if (activeTool == "apagar") {
+    const x = e.clientX - canvas.getBoundingClientRect().left;
+    const y = e.clientY - canvas.getBoundingClientRect().top;
 
-        erase(x, y);
-        ctx.beginPath();
-        ctx.globalCompositeOperation = 'destination-out';
-        ctx.lineWidth = 4;
-        ctx.closePath();
+    // Borracha em formato redondo
+    ctx.globalCompositeOperation = "destination-out";
+    // Pega a cor do fundo salva
+    ctx.beginPath();
+    ctx.arc(x, y, brushSize / 2, 0, 2 * Math.PI);
+    ctx.fill();
 
-    }    
-
-    // Transmite apagamento
+    // Envia o apagamento para os outros usuários
     socket.emit('draw', {
-    x: x,
-    y: y,
-    radius: brushSize / 2,
-    tool: 'apagar' 
+        x: x,
+        y: y,
+        size: brushSize,
+        tool: 'apagar'
     });
+
+    ctx.globalCompositeOperation = "source-over";
+
+    lastX = x;
+    lastY = y;
+}
 
 });
 
@@ -303,11 +307,12 @@ let onionSkinEnabled = false;
 const onionSkinButton = document.getElementById('onionskin');
 onionSkinButton.addEventListener('click', () => {
     onionSkinEnabled = !onionSkinEnabled;
-    onionSkinButton.style.opacity = onionSkinEnabled ? 1 : 0.5; // Alterar a opacidade para indicar se está ativado
+    onionSkinButton.style.opacity = onionSkinEnabled ? 1 : 0.5; 
+    // Alterar a opacidade para indicar se está ativado
 });
 
-//Recebe os traços enviados pelo outro usuário
-socket.on('draw', data => {
+//Recebe e apaga os traços enviados pelos outros usuários
+socket.on('draw', (data) => {
     if (data.tool === 'traçar') {
         ctx.beginPath();
         ctx.moveTo(data.x0, data.y0);
@@ -316,15 +321,16 @@ socket.on('draw', data => {
         ctx.lineWidth = data.lineWidth;
         ctx.stroke();
         ctx.closePath();
+
     } else if (data.tool === 'apagar') {
         ctx.globalCompositeOperation = "destination-out";
         ctx.beginPath();
-        ctx.arc(data.x, data.y, data.radius, 0, 2 * Math.PI);
+        ctx.arc(data.x, data.y, data.size / 2, 0, 2 * Math.PI);
         ctx.fill();
-        ctx.globalCompositeOperation = "source-over"; 
-        ctx.closePath();
-        // Volta ao valor normal da ferramenta
     }
+
+    ctx.globalCompositeOperation = "source-over";
+
 });
 
 /*
