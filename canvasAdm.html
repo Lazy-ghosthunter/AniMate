@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" >
     <title>AniMate</title>
     <link rel="icon" href="/imgs/Logo.svg">
     <link rel="stylesheet" href="/estilos/estiloCanvas.css">
+
 </head>
+
 <body>
+
     <div id="topo">
 
         <div class="userIcons">
             <img src="imgs/pfp anon.svg" id="avatar" class="avatar">
-            <img src="imgs/chat-bubble-icon 1.svg" id="chat">
+            <img src="imgs/chat-bubble-icon 1.svg" id="chat" class="chat">
         </div>
 
         <div class="configs">
@@ -22,8 +26,10 @@
     </div>
 
     <div id="divcanvas">
+
         <canvas id="canvas"></canvas>
         <canvas id="canvasfundo"></canvas>
+
     </div>
 
     <div id="ferramentas">
@@ -63,31 +69,41 @@
     </div>
     
     <div id="timelineFull">
+
+
         <div id="timelineTools">
+
             <img src="imgs/Pause 01.svg" id="pause" class="timeTool">
             <img src="imgs/Play 01.svg" id="play" class="timeTool">
             <img src="imgs/onionskin.svg" id="onionskin" class="timeTool">
+
         </div>
 
         <div id="frameTools">
+
             <img src="imgs/Align Left 02.svg" id="addBefore"  class="frameTool">
             <img src="imgs/Hourglass 02.svg" id="timing" class="frameTool">
             <img src="imgs/File None.svg" id="deleteFrame" class="frameTool">
             <img src="imgs/Align Right 02.svg" id="addAfter" class="frameTool">
+
         </div>
         
         <div id="camadas">
-            
                 
-                <div id="camada1">
-                <p id="layer1">Layer 1</p>
+            <div id="camada1">
+
+                <p id="layer" class="layer"> Layer 1</p>
                 <img src="imgs/Settings Sparkle.svg" id="config_Camada" class="toolCamada">
                 <img src="imgs/Arrow Down Contained 01.svg" id="escolher_Camada" class="toolCamada">
                 
-                </div>
+            </div>
+
         </div>
+
         <div id="frames">
+
             <div id="frameS1">
+
                 <div id="frame1" class="frame"></div>
                 <div id="frame2" class="frame"></div>
                 <div id="frame3" class="frame"></div>
@@ -96,12 +112,19 @@
                 <div id="frame6" class="frame"></div>
                 <div id="frame7" class="frame"></div>
                 <div id="frame8" class="frame"></div>
+                <div id="maisframe" class="maisframe">
+                    <img src="imgs/add_circle_.svg" id="maismais" class="maismais">
+                </div>
+
             </div>
+
         </div>
+
     </div>
     
     <div id="chatcontainer">
-        <p id="fechar">X</p>
+
+        <p id="fechar" class="fechar"> X </p>
         <div id="mensagens">
             <div class="mensagem sender">Oi! Tudo bem?</div>
             <div class="mensagem receiver">Tudo ótimo, e você?</div>
@@ -111,7 +134,6 @@
             <img src="imgs/Send 01.svg" id="enviar">
         </div>
         
-
     </div>
 
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
@@ -127,4 +149,5 @@
     <!-- Script principal com as funcionalidades do JS -->
 
 </body>
+
 </html>

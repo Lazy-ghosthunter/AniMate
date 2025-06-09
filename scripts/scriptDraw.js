@@ -28,9 +28,6 @@ botaoTamanho.addEventListener('click', () => {
   }
 });
 
-//Canva de fundo (Para uma melhor performance da borracha)
-const canvasFundo = document.getElementById("canvasfundo");
-
 //Canva + Contexto
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
@@ -42,6 +39,7 @@ const cor = localStorage.getItem('corCanvas');
 
 // Configurações da Canvas
 function updateCanvas() {
+
     canvas.width = parseInt(larguraC, 10);
     canvas.height = parseInt(alturaC, 10);
     ctx.fillStyle = cor || '#ffffff'; // Cor padrão caso não esteja no localStorage
@@ -50,6 +48,7 @@ function updateCanvas() {
 
 // Configuração inicial ao carregar a página
 window.onload = () => {
+
     updateCanvas();
     switchFrame('frame1'); // Define o frame inicial
     menuTamanho.style.display = 'none';
@@ -58,6 +57,7 @@ window.onload = () => {
         pintar = corSalva;
         corPincel.value = corSalva;
     }
+    
 };
 
 // Variáveis para desenho

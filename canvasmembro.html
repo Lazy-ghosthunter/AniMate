@@ -12,14 +12,18 @@
         <div class="userIcons">
             <img src="imgs/pfp anon.svg" id="avatar" class="avatar">
             <img src="imgs/pfp mem.svg" id="avatar" class="avatarmembro">
-            <img src="imgs/chat-bubble-icon 1.svg" id="chat">
+            <img src="imgs/chat-bubble-icon 1.svg" id="chat" class="chat">
         </div>
         <div class="configs">
             <img src="imgs/3 pontos.svg" id="configuracoes">
         </div>
     </div>
+
     <div id="divcanvas">
-    <canvas id="canvas"></canvas>
+        
+        <canvas id="canvas"></canvas>
+        <canvas id="canvasfundo"></canvas>
+
     </div>
 
     <div id="ferramentas">
@@ -31,6 +35,31 @@
         <input type="color" id="corr" class="tool">
         <img src="imgs/undo.svg" id="undo" class="tool" data-action="ir">
         <img src="imgs/Return.svg" id="redo" class="tool" data-action="voltar">
+
+    </div>
+
+        <!-- Mais tamanhos de traço-->
+    <div class="tool-size" id="tool-size">
+
+        <button class="button_size" data-size="1">
+            <span class="stroken"></span>
+        </button>
+
+        <button class="button_size" data-size="2">
+            <span class="stroken"></span>
+        </button>
+
+        <button class="button_size" data-size="5">
+            <span class="stroken"></span>
+        </button>
+
+        <button class="button_size" data-size="7">
+            <span class="stroken"></span>
+        </button>
+
+        <button class="button_size" data-size="10">
+            <span class="stroken"></span>
+        </button>
 
     </div>
     
@@ -49,13 +78,16 @@
         
         <div id="camadas">
                 <div id="camada1">
-                <p id="layer1">Layer 1</p>
+                <p id="layer"> Layer 1 </p>
                 <img src="imgs/Settings Sparkle.svg" id="config_Camada" class="toolCamada">
                 <img src="imgs/Arrow Down Contained 01.svg" id="escolher_Camada" class="toolCamada">
                 </div>
         </div>
+
         <div id="frames">
+
             <div id="frameS1">
+
                 <div id="frame1" class="frame"></div>
                 <div id="frame2" class="frame"></div>
                 <div id="frame3" class="frame"></div>
@@ -64,13 +96,20 @@
                 <div id="frame6" class="frame"></div>
                 <div id="frame7" class="frame"></div>
                 <div id="frame8" class="frame"></div>
+                <div id="maisframe" class="maisframe">
+                    <img src="imgs/add_circle_.svg" id="maismais" class="maismais">
+                </div>
+
             </div>
+
         </div>
+
     </div>
     
-    //! Esqueleto do chat
+    <!-- Esqueleto do chat -->
     <div id="chatcontainer">
-        <p id="fechar">X</p>
+
+        <p id="fechar" class="fechar">X</p>
         <div id="mensagens">
             <div class="mensagem sender">Oi! Tudo bem?</div>
             <div class="mensagem receiver">Tudo ótimo, e você?</div>
@@ -79,7 +118,6 @@
             <input type="text" id="espacomsg">
             <img src="imgs/Send 01.svg" id="enviar">
         </div>
-        
 
     </div>
     
