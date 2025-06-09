@@ -1,0 +1,1 @@
+const socket = window.socket;

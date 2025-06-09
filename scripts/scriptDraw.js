@@ -15,6 +15,18 @@ document.getElementById('fechar').addEventListener('click', () => {
     chatContainer.style.display = 'none';
 })
 
+// Quadro dos tamanhos do pincel
+const botaoTamanho = document.getElementById('tamanho');
+const menuTamanho = document.getElementById('tool-size');
+
+botaoTamanho.addEventListener('click', () => {
+  if (menuTamanho.style.display === 'flex') {
+    menuTamanho.style.display = 'none';
+  } else {
+    menuTamanho.style.display = 'flex';
+  }
+});
+
 //Canva + Contexto
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');

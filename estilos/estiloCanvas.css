@@ -1,4 +1,9 @@
-body{
+* {
+    font-family: Inter;
+    font-weight: bold;
+}
+
+body {
     margin: 0;
     overflow: hidden;
     display: flex;
@@ -6,13 +11,10 @@ body{
     align-items: center; /* Centraliza os elementos horizontalmente */
     
 }
+
 @font-face {
     font-family: Inter;
     src: local(Inter), url(/fonte/Inter/Inter-VariableFont_opsz,wght.ttf);
-}
-*{
-    font-family: Inter;
-    font-weight: bold;
 }
 
 #divcanvas{
@@ -24,11 +26,12 @@ body{
     padding-bottom: 20vh;
     z-index: 1;
 }
-canvas{
+
+canvas {
     cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 23 23' fill='none'><path d='M6.88082 16.2293C4.10954 12.5932 1.98882 18.9842 1.44976 21.3476C10.2217 18.9596 6.88082 16.2293 6.88082 16.2293Z' fill='black' stroke='black'/><path d='M9.77659 16.2323C9.68007 16.2982 9.58747 16.3547 9.50037 16.3979C9.41281 16.4413 9.29527 16.4897 9.1649 16.5035C9.04416 16.5161 8.85989 16.5015 8.7037 16.3722L8.63869 16.3099L6.85492 14.3163C6.6983 14.1414 6.69123 13.9349 6.70801 13.8094C6.72467 13.6855 6.7712 13.5728 6.81505 13.4847C6.85849 13.3975 6.91459 13.3047 6.98005 13.2083C8.20066 13.7 8.89418 14.4439 9.29144 15.0884C9.52632 15.4695 9.66178 15.8218 9.73737 16.0756C9.75444 16.133 9.76534 16.186 9.77659 16.2323ZM22.0959 1.62751C22.0891 1.74782 22.0511 1.8608 22.0187 1.94305C21.9499 2.11725 21.8333 2.32866 21.6921 2.55675C21.4048 3.02108 20.9596 3.64669 20.4139 4.36852C19.319 5.81666 17.7866 7.69461 16.212 9.53012C14.6378 11.3651 13.0133 13.1674 11.7341 14.4641C11.4922 14.7094 11.2596 14.9369 11.0419 15.1456C10.6635 14.4112 10.2411 13.8015 9.71417 13.2712C9.23168 12.7857 8.67372 12.3786 8.00749 12.0027C8.22172 11.7776 8.45695 11.5363 8.71148 11.2848C9.97665 10.0345 11.7324 8.45333 13.5277 6.91529C15.3236 5.37667 17.1688 3.87324 18.6136 2.77891C19.3343 2.233 19.9645 1.78188 20.4424 1.47893C20.6788 1.32907 20.8928 1.20545 21.0694 1.12547C21.1561 1.08626 21.2539 1.04899 21.3516 1.02769C21.4226 1.01225 21.6204 0.974172 21.814 1.08468L21.9044 1.14838C22.0882 1.30633 22.1012 1.53085 22.0959 1.62751Z' fill='black'/></svg>") 0 30, auto;
 
-    
 }
+
 @media (max-width:500px){
     canvas {cursor:crosshair;
     }
@@ -49,7 +52,7 @@ canvas{
     gap: 20px;
 }
 
-#topo{
+#topo {
     position: absolute;
     display: flex ;
     flex-direction:row;
@@ -63,27 +66,12 @@ canvas{
     
 }
 
-.userIcons{
-
-    position: relative;
-    width: auto;
-    margin-left: 10px;
-    
-}
-
-.configs{
-
-    position: relative;
-    margin-right: 10px;
-    
-    
-}
-#configuracoes{
+#configuracoes {
 
     height: 7px;
 }
 
-#chat{
+#chat {
     
     width:20;
     height: 20px;
@@ -92,31 +80,106 @@ canvas{
     top:3px;
 }
 
-#avatar{
+#tool-size {
+
+  display: flex;
+  flex-direction: column;
+  width: 7vw;
+  background-color: #181722;
+  border-radius: 8px;
+  padding: 7px;
+  position: absolute;
+  align-items: center;
+  justify-items: center;
+  top: 33%; 
+  right: 5%;
+  z-index: 10;
+  gap: 7px;
+
+}
+
+.button_size {
+
+    cursor: pointer;
+    padding: 5px;
+    width: 100%;
+    background: none;
+    border: none;
+    height: auto;
+    
+}
+
+.button_size > span {
+
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    display: block;
+
+}
+
+.button_size :hover {
+
+    background-color: #b7aaff;
+
+}
+
+/*Tamanhos do pincel*/
+.button_size[data-size = "1"] > span {
+
+    height: 1px;
+
+}
+
+.button_size[data-size = "2"] > span {
+
+    height: 2px;
+    
+}
+
+.button_size[data-size = "5"] > span {
+
+    height: 5px;
+
+}
+
+.button_size[data-size = "7"] > span {
+
+    height: 7px;
+  
+}
+
+.button_size[data-size = "10"] > span {
+
+    height: 10px;
+    
+}
+
+#avatar {
     
     z-index: 10;
     height: 50px;
 }
 
-#ferramentas{
+#ferramentas {
+
     display: flex;
     flex-direction: column;
-    right:0.5%;
     position: absolute;
+    align-items: center;
+    justify-items: center;
     height: 40vh;
-    width: 3vw;
+    width: 3%;
     border-radius: 8px;
     background-color: #181722;
     top:25%;
+    right:0.5%;
     z-index: 10;
-    padding: 5px;
-    align-items: center;
-    justify-items: center;
     
 }
 
 
-#timelineTools{
+#timelineTools {
 
     position: absolute;
     display: flex;
@@ -131,7 +194,7 @@ canvas{
     left:19%;
 }
 
-#frameTools{
+#frameTools {
 
     position: absolute;
     display: flex;
@@ -147,7 +210,7 @@ canvas{
 }
 
 
-#corr{
+#corr {
 
     appearance: none;
     background: none;
@@ -164,7 +227,7 @@ canvas{
     border-radius: 5px;
 }
 
-#camadas{
+#camadas {
 
     color: #ffffff;
     position: relative;
@@ -195,7 +258,8 @@ canvas{
     background: gray;
 }
 
-#frames{
+#frames {
+
     position: relative;
     display: inline-flex;
     justify-content: left;
@@ -209,12 +273,10 @@ canvas{
     overflow-x: scroll;
     padding: 10px;
     border: 5px solid  #181722;
-    
-    
 
 }
 
-#camada1{
+#camada1 {
     display: flex;
     flex-direction: row;
     z-index: 12;
@@ -226,15 +288,15 @@ canvas{
     gap: 10px;
 }
 
-#visivel{
+#visivel {
     position: absolute;
 }
 
-#oculto{
+#oculto {
     position: absolute;
 }
 
-#frameS1{
+#frameS1 {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -252,30 +314,7 @@ canvas{
     mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.2) 5%, black 10%, black 90%, rgba(0, 0, 0, 0.2) 95%, transparent 100%);
 } 
 
-.frame{
-    background-color: #b7aaff;
-    width:150px;
-    height:35px;
-    border-radius: 5px;
-    
-    
-}
-
-.frameativa{
-    border: 7.5px solid #531F79;
-    width:150px;
-    height:35px;
-    border-radius: 5px;
-}
-
-.frameAtiva2{
-    border: 7.5px solid #c7184f;
-    width:150px;
-    height:35px;
-    border-radius: 5px;
-}
-
-#chatcontainer{
+#chatcontainer {
     position: absolute;
     width:350px;
     height:500px;
@@ -289,7 +328,8 @@ canvas{
     display: none;
 }
 
-#digitar{
+#digitar {
+
     position:absolute;
     bottom:0;
     width:100%;
@@ -299,11 +339,10 @@ canvas{
     justify-items: center;
     align-items: center;
     box-sizing: border-box;
-    
 
 }
 
-#espacomsg{
+#espacomsg {
     position: absolute;
     left:10px;
     top:10px;
@@ -313,13 +352,13 @@ canvas{
     border-radius: 5px;
 }
 
-#enviar{
+#enviar {
     position: absolute;
     right:15px;
     top:14px;
 }
 
-#fechar{
+#fechar {
     position: absolute;
     right:10px;
     font-size: 20px;
@@ -339,6 +378,45 @@ canvas{
     flex-direction: column;
     gap: 10px; /* Espaçamento entre as mensagens */
     padding-top: 59px;
+}
+
+.userIcons {
+
+    position: relative;
+    width: auto;
+    margin-left: 10px;
+    
+}
+
+.configs {
+
+    position: relative;
+    margin-right: 10px;
+    
+    
+}
+
+.frame {
+    background-color: #b7aaff;
+    width:150px;
+    height:35px;
+    border-radius: 5px;
+    
+    
+}
+
+.frameativa {
+    border: 7.5px solid #531F79;
+    width:150px;
+    height:35px;
+    border-radius: 5px;
+}
+
+.frameAtiva2 {
+    border: 7.5px solid #c7184f;
+    width:150px;
+    height:35px;
+    border-radius: 5px;
 }
 
 /* Estilo geral das mensagens */
@@ -364,28 +442,32 @@ canvas{
     background-color: #362260;
     color: white;
 }
-.avatarmembro{
+.avatarmembro {
     z-index: 5;
     left: 7px;
 }
 
-.tool{
+.tool {
+
     width:55%;
     height: 20%;
+    cursor: pointer;
 }
 
 
-@media(orientation:portrait){
+@media(orientation:portrait) {
     body{overflow: hidden;}
-    #chatcontainer{
+    
+    #chatcontainer {
         width:250px;
     }
-    #ferramentas{
+
+    #ferramentas {
         right:2px;
         padding-left: 0;
         width: 35px;
     }
-    .frame{
+    .frame {
         width:30px;
     }
 }
