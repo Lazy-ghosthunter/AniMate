@@ -98,6 +98,8 @@ const selectSize = ({target}) => {
     selectedTool.classList.add("active");
     //Garante que o valor seja numérico
     brushSize = parseInt(size);
+
+    menuTamanho.style.display = 'none';
     
 }
 
@@ -130,6 +132,29 @@ canvas.addEventListener('mousedown', (e) => {
     if (e.button === 0 || e.button === 2) {
         //Para desenhar
         isDrawing = true;
+
+                // Atualiza lastX e lastY no mousedown para o ponto de início exato
+        lastX = e.clientX - canvas.getBoundingClientRect().left;
+        lastY = e.clientY - canvas.getBoundingClientRect().top;
+
+        // Se for a borracha, faz um "carimbo" inicial no ponto do clique
+        // Isso é importante para que o primeiro toque da borracha seja visível
+        if (activeTool === "apagar") {
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.beginPath();
+            ctx.arc(lastX, lastY, brushSize / 2, 0, 2 * Math.PI); // Desenha um círculo no clique inicial
+            ctx.fill();
+            ctx.closePath();
+            ctx.globalCompositeOperation = "source-over"; // Retorna ao modo normal após o "carimbo"
+        } else if (activeTool === "traçar") {
+            // Se for o pincel, você pode querer um "carimbo" inicial para cliques sem movimento
+            // ctx.globalCompositeOperation = "source-over"; // Já é o padrão, mas por clareza
+            // ctx.beginPath();
+            // ctx.arc(lastX, lastY, brushSize / 2, 0, 2 * Math.PI);
+            // ctx.fillStyle = pintar;
+            // ctx.fill();
+            // ctx.closePath();
+        }
     }
 });
 
