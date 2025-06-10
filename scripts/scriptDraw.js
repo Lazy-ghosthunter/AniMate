@@ -91,14 +91,23 @@ const selectTool = ({target}) => {
 // Troca do tamanho das ferramentas
 const selectSize = ({target}) => {
 
-    const selectedTool = target;
-    const size = selectedTool.getAttribute("data-size");
+    //Pegar o click próximo ao botão
+    const selectedButton = target.closest(".button_size");
+
+    // Evitar caso haja click fora do botão
+    if (!selectedButton) {
+        return;
+    }
+
+    const size = selectedButton.getAttribute("data-size");
 
     sizeButtons.forEach((button) => button.classList.remove("active"));
-    selectedTool.classList.add("active");
+    selectedButton.classList.add("active");
+    
     //Garante que o valor seja numérico
     brushSize = parseInt(size);
 
+    //Fecha o menu após o click
     menuTamanho.style.display = 'none';
     
 }
