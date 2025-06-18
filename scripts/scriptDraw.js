@@ -1,5 +1,14 @@
 //Conecta ao servidor socket.io
-const socket = io('http://localhost:3000');
+window.addEventListener('load', () => {
+    const socket = window.socket;
+    
+    if (!socket) {
+        console.error('❌ Socket não encontrado!');
+        return;
+    }
+
+});
+
 
 // Chat funcionalidades
 const chatIcon = document.getElementById('chat');
