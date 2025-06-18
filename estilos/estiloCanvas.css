@@ -318,6 +318,7 @@ canvas {
     mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.2) 5%, black 10%, black 90%, rgba(0, 0, 0, 0.2) 95%, transparent 100%);
 } 
 
+/* CSS do chat */
 #chatcontainer {
     position: absolute;
     width:350px;
@@ -347,6 +348,7 @@ canvas {
 }
 
 #espacomsg {
+
     position: absolute;
     left:10px;
     top:10px;
@@ -354,15 +356,20 @@ canvas {
     width:80%;
     bottom: 10px;
     border-radius: 5px;
+
 }
 
 #enviar {
+
     position: absolute;
-    right:15px;
+    right:5px;
     top:14px;
+    cursor: pointer;
+
 }
 
 #fechar {
+
     position: absolute;
     right:10px;
     font-size: 20px;
@@ -377,6 +384,8 @@ canvas {
 
 
 #mensagens {
+
+    max-height: 400px;
     flex: 1;
     padding: 10px;
     overflow-y: auto; /* Adiciona barra de rolagem quando necessário */
@@ -384,6 +393,50 @@ canvas {
     flex-direction: column;
     gap: 10px; /* Espaçamento entre as mensagens */
     padding-top: 59px;
+
+}
+
+#mensagens::-webkit-scrollbar {
+
+    width: 6px;
+
+}
+
+#mensagens::-webkit-scrollbar-thumb {
+
+    background-color: #a95fee;
+    border-radius: 10px;
+
+}
+
+/* Estilo geral das mensagens */
+.mensagem {
+
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word; /* Garante quebra de linha */
+
+}
+
+/* Mensagem do remetente */
+.sender {
+
+    align-self: flex-end;
+    background-color: #a95fee;
+    color: white;
+
+}
+
+/* Mensagem do destinatário */
+.receiver {
+
+    align-self: flex-start;
+    background-color: #362260;
+    color: white;
+
 }
 
 .userIcons {
@@ -426,35 +479,6 @@ canvas {
     border-radius: 5px;
 }
 
-/* Estilo geral das mensagens */
-.mensagem {
-
-    max-width: 70%;
-    padding: 10px 15px;
-    border-radius: 10px;
-    font-size: 14px;
-    line-height: 1.5;
-    word-wrap: break-word; /* Garante quebra de linha */
-
-}
-
-/* Mensagem do remetente */
-.sender {
-
-    align-self: flex-end;
-    background-color: #a95fee;
-    color: white;
-
-}
-
-/* Mensagem do destinatário */
-.receiver {
-
-    align-self: flex-start;
-    background-color: #362260;
-    color: white;
-
-}
 .avatarmembro {
 
     z-index: 5;

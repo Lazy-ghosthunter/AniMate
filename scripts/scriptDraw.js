@@ -9,20 +9,6 @@ window.addEventListener('load', () => {
 
 });
 
-// Chat funcionalidades
-const chatIcon = document.getElementById('chat');
-const chatContainer = document.getElementById('chatcontainer');
-
-// Adiciona o evento de mouse enter para mostrar o chat-container
-chatIcon.addEventListener('click', function() {
-    chatContainer.style.display = 'block';
-});
-
-//Função para fechar o chat
-document.getElementById('fechar').addEventListener('click', () => {
-    chatContainer.style.display = 'none';
-})
-
 // Funções no quadro dos tamanhos do pincel 
 const botaoTamanho = document.getElementById('tamanho');
 const menuTamanho = document.getElementById('tool-size');
