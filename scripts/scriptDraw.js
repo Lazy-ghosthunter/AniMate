@@ -1,4 +1,4 @@
-//Conecta ao servidor socket.io
+//Conecta ao servidor socket.io após toda a página estar carregada
 window.addEventListener('load', () => {
     const socket = window.socket;
     
@@ -8,7 +8,6 @@ window.addEventListener('load', () => {
     }
 
 });
-
 
 // Chat funcionalidades
 const chatIcon = document.getElementById('chat');
