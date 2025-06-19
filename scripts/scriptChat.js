@@ -1,4 +1,4 @@
-//Conecta ao servidor socket.io após toda a página estar carregada
+// Conecta ao servidor socket.io após toda a página estar carregada
 window.addEventListener('load', () => {
     const socket = window.socket;
     
@@ -9,7 +9,7 @@ window.addEventListener('load', () => {
 
 });
 
-// Chat funcionalidades
+// Funcionalidades do chat
 const chatIcon = document.getElementById('chat');
 const chatContainer = document.getElementById('chatcontainer');
 const mensagens = document.getElementById('mensagens');
@@ -17,7 +17,7 @@ const espacoMsg = document.getElementById('espacomsg');
 const enviarBtn = document.getElementById('enviar');
 const fecharBtn = document.getElementById('fechar');
 
-// Enviar mensagem
+// Envia as mensagens
 function sendMessage() {
     const message = espacoMsg.value.trim();
     if (!message) return;
@@ -31,13 +31,13 @@ function sendMessage() {
     espacoMsg.value = '';
 }
 
-// Receber mensagem
+// Recebe as mensagens
 socket.on('receive_message', (data) => {
     if (data.authorId === socket.id) return; // Já renderiza na função sendMessage
     renderMessage(data.authorId, data.text, false);
 });
 
-// Renderiza mensagens
+// Renderiza as mensagens
 function renderMessage(author, text, isSender) {
     const msgDiv = document.createElement('div');
     msgDiv.classList.add('mensagem');
@@ -50,7 +50,7 @@ function renderMessage(author, text, isSender) {
     mensagens.scrollTop = mensagens.scrollHeight;
 }
 
-// Eventos
+// Evento de envio das mensagens
 enviarBtn.addEventListener('click', sendMessage);
 
 espacoMsg.addEventListener('keypress', (e) => {
@@ -64,7 +64,7 @@ chatIcon.addEventListener('click', function() {
     chatContainer.style.display = 'block';
 });
 
-//Função para fechar o chat
+// Função para fechar o chat
 document.getElementById('fechar').addEventListener('click', () => {
     chatContainer.style.display = 'none';
 })
