@@ -35,7 +35,8 @@ body{
     margin-top:5%;
 }
 
-.cadastro{
+.cadastro {
+
     background: rgb(255,228,78);
     background: linear-gradient(90deg, rgba(255,228,78,1) 0%, rgba(255,138,210,1) 100%);
     border-radius: 5px;
@@ -54,7 +55,9 @@ body{
     box-sizing: border-box;
     
 }
-.login{
+
+.login {
+
     background: linear-gradient(269.85deg, #90f9ff, #eb92ff);
     border-radius: 5px;
     width:130px;
@@ -72,10 +75,14 @@ body{
     box-sizing: border-box;
 
 }
+
 .logotop{
+
     height:75px;
+
 }
 .nomeuser{
+
     font-weight:bold;
     font-size:23px;
     border-bottom: 5px solid #28054d;
@@ -88,11 +95,11 @@ body{
     transform: translateX(-50%);
     padding: 0; /* Reset padding */
     line-height: 1;
-    
-    
 
 }
+
 .fundobranco{
+
     background-color: rgb(250, 255, 255);
     width:400px;
     position:relative;
@@ -104,14 +111,16 @@ body{
     padding-bottom:20px;
 
 }
-.btnsala{
+.btnsala {
+
     background: linear-gradient(90deg, #ffd1b8, #ff7ab6);
     border: 0.5px solid #d00161;
     color:#b4004f;
     
-
 }
-.btn{
+
+.btn {
+
     border-radius: 10px;
     box-sizing: border-box;
     font-size: 23px;
@@ -129,7 +138,9 @@ body{
     transition: all 0.3s ease;
 
 }
+
 .codsala input {
+
     text-align: center; 
     width: 270px;
     height: 50px;       
@@ -146,14 +157,20 @@ body{
     cursor: pointer;
 
 }
-.codsala input::placeholder{
+
+.codsala input::placeholder {
+
     color:#791079;
     text-transform: none;
 }
-input:focus{
+
+input:focus {
+
     outline: none;
 }
+
 .btnsala:hover {
+
     color: white; /* Cor do texto ao passar o mouse */
     width:280px;
     height:55px;
@@ -166,7 +183,8 @@ input:focus{
     background: linear-gradient(90deg, #ffb68f, #ff59a4);
 
 }
-.codsala input:hover{
+
+.codsala input:hover {
     color: white;
     background: linear-gradient(90deg, #9a65d3, #ff4f75);
     width: 280px;
@@ -183,21 +201,27 @@ input:focus{
     font-size: 23px;
     
 }
+
 .cadastro:hover {
+
     background: linear-gradient(270deg, #F99129 0.16%, #FB38B0 103.06%);
     height: 45px;
     width: 135px;
     color: #fff;
     gap: 24px;
+    
 }
 
 .login:hover {
+
     background: linear-gradient(270deg, #08C3CD 0.16%, #D63EF8 103.06%);
     height: 45px;
     width: 135px;
     color: #fff;
     gap: 24px;
+
 }
+
 #popupAviso{
     position: fixed;
     top: 0;

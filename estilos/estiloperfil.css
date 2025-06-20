@@ -8,6 +8,98 @@ body {
   background-position: center;
 }
 
+.btnsala {
+
+  background: linear-gradient(90deg, #ffd1b8, #ff7ab6);
+  border: 0.5px solid #d00161;
+  color:#b4004f;
+  border-radius: 5px;
+  width:140px;
+  height:40px;
+  text-align: center;
+  display: flex;      
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  right: 14%;
+  position:absolute;
+  top:3%;
+  box-sizing: border-box;
+    
+}
+
+.btnsala:hover {
+
+  color: white; /* Cor do texto ao passar o mouse */
+  height: 45px;
+  width: 135px;
+  display:flex;
+  justify-content: center;
+  text-align:center;
+  background: linear-gradient(90deg, #ffb68f, #ff59a4);
+  cursor: pointer;
+  gap: 24px;
+
+}
+
+.codsala input {
+
+  color:#950396; 
+  background: linear-gradient(90deg, #ba7aff, #ff88a2);
+  border: 0.5px solid #46003f;
+  border-radius: 5px;
+  width:140px;
+  height:40px;
+  font-size: 15px;
+  text-align: center;
+  display: flex;      
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  right: 3%;
+  position:absolute;
+  top:3%;
+  box-sizing: border-box;
+
+}
+
+.codsala input::placeholder {
+
+  color:#791079;
+  text-transform: none;
+
+}
+
+input:focus {
+
+  outline: none;
+
+}
+
+.codsala input:hover {
+
+  color: white;
+  background: linear-gradient(90deg, #9a65d3, #ff4f75);
+  height: 45px;
+  width: 135px;
+  gap: 24px;
+    
+}
+
+.codsala input:hover::placeholder {
+
+  color: white;
+  gap: 24px;
+
+}
+
+.codsala input:hover::placeholder{
+
+  color:white;
+  gap: 24px;
+    
+}
+
 .topo img {
   display: block;
   margin: 20px auto;
