@@ -2,15 +2,17 @@
     font-family: Inter;
     src: local(Inter), url(/fonte/Inter/Inter-VariableFont_opsz,wght.ttf);
 }
-*{
+
+* {
     font-family: Inter;
     
 }
-a{
+
+a {
     text-decoration: none;
 }
 
-body{
+body {
     background-image: url(GIF\ -\ Background/harpy.gif);
     background-size: cover;
     background-repeat: no-repeat;
@@ -18,21 +20,28 @@ body{
     overflow:hidden;
     
 }
+
 @media (orientation:portrait) {
+
     body {
+
         background-size:cover;
         height:100vh;
         background-position: center;
         overflow:hidden;
     }
+
 }
+
 .pfpAnon{
+
     width: 100%;
     position: relative;
     max-width: 100%;
     overflow: hidden;
     height: 135px;
     margin-top:5%;
+
 }
 
 .cadastro {
@@ -76,12 +85,13 @@ body{
 
 }
 
-.logotop{
+.logotop {
 
     height:75px;
 
 }
-.nomeuser{
+
+.nomeuser {
 
     font-weight:bold;
     font-size:23px;
@@ -111,6 +121,7 @@ body{
     padding-bottom:20px;
 
 }
+
 .btnsala {
 
     background: linear-gradient(90deg, #ffd1b8, #ff7ab6);
@@ -185,6 +196,7 @@ input:focus {
 }
 
 .codsala input:hover {
+
     color: white;
     background: linear-gradient(90deg, #9a65d3, #ff4f75);
     width: 280px;
@@ -193,10 +205,13 @@ input:focus {
 }
 
 .codsala input:hover::placeholder {
+
     color: white;
+
 }
 
 .codsala input:hover::placeholder{
+
     color:white;
     font-size: 23px;
     
@@ -209,7 +224,7 @@ input:focus {
     width: 135px;
     color: #fff;
     gap: 24px;
-    
+
 }
 
 .login:hover {
@@ -223,6 +238,7 @@ input:focus {
 }
 
 #popupAviso{
+
     position: fixed;
     top: 0;
     left: 0;
@@ -231,7 +247,9 @@ input:focus {
     background-color: rgba(231, 193, 255, 0.5);
     display: none;
     z-index: 1000;
+    
 }
+
 .overlay{
     display: flex;
     flex-direction: column;
@@ -318,10 +336,12 @@ input:focus {
     color:white;
 
 }
+
 #voltar:hover{
     color:white;
     background-color: #076d9c;
 }
+
 #configTela{
     display:none;
     z-index:1000;
