@@ -100,9 +100,17 @@ canvas {
     
 }
 
-#configuracoes {
+.configuracoes {
 
     height: 7px;
+}
+
+.seta_voltar {
+
+    margin-right: 20px;
+    height: 25px;
+    margin-top: 5px;
+
 }
 
 #chat {
@@ -442,6 +450,7 @@ canvas {
 .userIcons {
 
     position: relative;
+    flex-direction: column;
     width: auto;
     margin-left: 10px;
     
@@ -451,7 +460,6 @@ canvas {
 
     position: relative;
     margin-right: 10px;
-    
     
 }
 
