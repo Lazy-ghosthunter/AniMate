@@ -1,18 +1,16 @@
 const base_url = "http://localhost:8080";
 
-const axios = require("axios");
-
 const signup = async () => {
-  const username = document.getElementById("#username").value.trim();
-  const email = document.getElementById("#email").value.trim();
-  const password = document.getElementById("#password").value();
-  const repassword = document.getElementById("#repass").value();
+  const username = document.getElementById("username").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const repassword = document.getElementById("repass").value;
 
   const body = {
     username: username,
     email: email,
     password: password,
-    repassword: repassword,
+    rePassword: repassword, 
   };
 
   try {
@@ -20,8 +18,8 @@ const signup = async () => {
     console.log(response.data);
     alert("Dados cadastrados com sucesso");
     window.location.href = "animateperfil.html";
-  } catch (erro) {
-    console.error("Erro no cadastro: ", erro);
+  } catch (error) {
+    console.error("Erro no cadastro: ", error);
     const errorMessage = error.response?.data || "Erro desconhecido";
     alert(`Falha no cadastro: ${errorMessage}`);
   }
@@ -29,7 +27,8 @@ const signup = async () => {
 
 //submit do form do cadastro
 const cad = document.getElementById('signup-Form');
-cad.addEventListener('submit',() =>{
+cad.addEventListener('submit', (e) => {
+  e.preventDefault();
   signup();
 });
 
@@ -38,7 +37,7 @@ cad.addEventListener('submit',() =>{
 
 const signin = async () => {
   const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value();
+  const password = document.getElementById("password").value;
 
   const body = {
     email: email,
