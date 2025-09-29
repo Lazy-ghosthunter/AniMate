@@ -95,7 +95,7 @@ body {
     height: 27px;
 }
 
-#password {
+.password {
     border-radius: 8px;
     border: 2px solid var(--Color, #9211BC);
     background-color: #FFF3F3;

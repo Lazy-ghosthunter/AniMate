@@ -6,6 +6,7 @@
     <title>AniMate</title>
     <link rel="stylesheet" href="estilos/estilocadastro.css">
     <link rel="icon" href="imgs/Logo.svg">
+    <script src="scripts/scriptAuth.js" defer></script>
 <body>
     <div class="container4">
         <a href="index.html" class="botao3" role="button">
@@ -17,7 +18,7 @@
         <div class ="container2">
         <h1 class="titulo">Criar conta</h1>
         <div class="jumbotron2">
-            <form id="loginform">
+            <form id="signup-Form">
         
                 <div class="email">
                     <label for="email">E-mail:</label>
@@ -42,23 +43,24 @@
                     id="password" 
                     minlength="8"
                     maxlength="15"
-                    required />
+                    required
+                    class="password" />
                     <br>
     
                     <div class="senha">
-                        <label for="confirm-password">Confirmar Senha:</label>
+                        <label for="repass">Confirmar Senha:</label>
                         <input 
                         type="password" 
-                        id="password" 
+                        id="repass" 
                         minlength="8"
                         maxlength="15"
-                        required />
+                        required 
+                        class="password"/>
                         <br>
                 </div>
         
-                
-                <a href="animateperfil.html" class="botao" id="botao" role="button">Cadastrar</a>   
-        
+                <button type="submit" class="botao" id="signup">Cadastrar</button>
+                 
             </form>
         </div>    
     </div>
