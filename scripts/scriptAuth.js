@@ -25,16 +25,6 @@ const signup = async () => {
   }
 };
 
-//submit do form do cadastro
-const cad = document.getElementById('signup-Form');
-cad.addEventListener('submit', (e) => {
-  e.preventDefault();
-  signup();
-});
-
-
-
-
 const signin = async () => {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
@@ -56,12 +46,19 @@ const signin = async () => {
   }
 };
 
-//submit do form do login
-const loginForm = document.getElementById('loginform');
-loginForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  signin();
+document.addEventListener('DOMContentLoaded', () => {
+  const loginForm = document.getElementById('loginform');
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      signin();
+    });
+  }
+  const cad = document.getElementById('signup-Form');
+  if (cad) {
+    cad.addEventListener('submit', (e) => {
+      e.preventDefault();
+      signup();
+    });
+  }
 });
-
-
-
