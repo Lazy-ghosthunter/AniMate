@@ -21,10 +21,11 @@ body {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  right: 14%;
+  right: 10%;
   position:absolute;
   top:3%;
   box-sizing: border-box;
+  margin-right: 5%;
     
 }
 
@@ -99,6 +100,21 @@ input:focus {
   color:white;
   gap: 24px;
     
+}
+
+#logout {
+
+  right: 0.5%;
+  position:absolute;
+  top:3.5%;
+  box-sizing: border-box;
+
+}
+
+#logout img {
+
+  height: 30px;
+
 }
 
 .topo img {
@@ -472,6 +488,7 @@ label {
   .btnsala {
 
     right:30%;
+    margin-right: 5%;
 
   }
 
@@ -493,6 +510,7 @@ label {
   .btnsala {
 
     right:30%;
+    margin-right: 5%;
     
   }
 
@@ -508,10 +526,6 @@ label {
 
   #bio {
     height: 80px;
-  }
-
-  .btnsala {
-    right:22%;
   }
 
 }
