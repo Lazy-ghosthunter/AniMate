@@ -37,12 +37,40 @@ const signin = async () => {
   try {
     const response = await axios.post(`${base_url}/auth/signin`, body);
     console.log(response.data);
+    // Salva o token
+    localStorage.setItem("token", response.data.token);
     alert("Login realizado com sucesso");
     window.location.href = "animateperfil.html";
   } catch (error) {
     console.error("Erro no login: ", error);
     const errorMessage = error.response?.data || "Erro desconhecido";
     alert(`Falha no login: ${errorMessage}`);
+  }
+};
+
+const signout = async () => {
+  console.log("Logout iniciado");
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    alert("Usuário não está logado.");
+    window.location.href = "index.html";
+    return;
+  }
+
+  try {
+    await axios.post(`${base_url}/auth/signout`, null, {
+      headers: {
+        'token': token
+      }
+    });
+
+    localStorage.removeItem("token");
+    alert("Logout realizado com sucesso");
+    window.location.href = "index.html";
+  } catch (error) {
+    console.error("Erro no logout: ", error);
+    alert("Erro ao fazer logout");
   }
 };
 
@@ -54,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
       signin();
     });
   }
+
   const cad = document.getElementById('signup-Form');
   if (cad) {
     cad.addEventListener('submit', (e) => {
@@ -61,4 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
       signup();
     });
   }
+
+  const logoutLink = document.getElementById('signout');
+  if (logoutLink) {
+    logoutLink.addEventListener('click', (e) => {
+      e.preventDefault(); // Impede o redirecionamento automático
+      signout();          // Executa o logout e redireciona manualmente
+    });
+  }
+
 });
