@@ -17,7 +17,17 @@ const signup = async () => {
     const response = await axios.post(`${base_url}/auth/signup`, body);
     console.log(response.data);
     alert("Dados cadastrados com sucesso");
+
+    const loginResponse = await axios.post(`${base_url}/auth/signin`, {
+      email: email,
+      password: password
+    });
+
+    localStorage.setItem("token", loginResponse.data.token);
+    localStorage.setItem("username", loginResponse.data.username);
+
     window.location.href = "animateperfil.html";
+
   } catch (error) {
     console.error("Erro no cadastro: ", error);
     const errorMessage = error.response?.data || "Erro desconhecido";
@@ -37,8 +47,11 @@ const signin = async () => {
   try {
     const response = await axios.post(`${base_url}/auth/signin`, body);
     console.log(response.data);
-    // Salva o token
+
+    // Salva o token e o username
     localStorage.setItem("token", response.data.token);
+    localStorage.setItem("username", response.data.username);
+
     alert("Login realizado com sucesso");
     window.location.href = "animateperfil.html";
   } catch (error) {
