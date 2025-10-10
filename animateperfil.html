@@ -100,10 +100,18 @@
 
       <img src="imgs/Foto usuario.svg" class="avatar"></img>
       <p class="arroba" id="username" > @usuario_01 </p>
-      <div class="textarea">
-      <input type="text" placeholder="Escreva sua bio aqui" id="bio"></input>
 
+      <div id="bioAltArea" class="hidden">
+      <input type="text" placeholder="Escreva sua bio aqui" id="bioAlt"></input>
+
+      <button id="change">Confirmar</button>
       </div>
+      
+      <div id="bioArea">
+      <p id="bio"> Adicione uma bio!! </p>
+      <button id="toggleChange">Mudar</button>
+      </div>
+
     </div>
     <div class="lista">
       <div id='ok' class="botao" role="button"> 
