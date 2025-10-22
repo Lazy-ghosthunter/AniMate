@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AniMate</title>
+  <link rel="stylesheet" href="estilos/estilopersonalizar.css">
+  <link rel="icon" href="imgs/Logo.svg">
+  
+</head>
+<body>
+
+    <div class="topo">
+        <img src="imgs/Logo.svg">
+    </div>
+
+    <div id="return">
+
+        <a id="signout" href="#">
+            <img src="imgs/logout.svg" alt="Logout">
+        </a>
+
+        <a href="animateperfil.html" id="botaov" role="button">
+            <img src="imgs/Arrow Down Square Contained.svg">
+        </a>
+
+    </div>
+
+    <div class="container">
+
+        <div class="user-info">
+
+            <div id="insertPic">
+
+                <label for="pictureInput"> Nova foto de perfil: </label>
+                <br> <br>
+                <input type="file" id="pictureInput" accept="image/*">
+                <br>
+                <button id="savePictureButton">Salvar Foto</button>
+
+            </div>
+
+            <button id="altPhoto" ></button>
+            
+            <img src="imgs/Foto usuario.svg" class="avatar"></img>
+            <p class="arroba" id="username" > @usuario_01 </p>
+
+            <div id="bioAltArea" class="hidden">
+            <input type="text" placeholder="Escreva sua bio aqui" id="bioAlt"></input>
+
+            <button id="change"> Confirmar </button>
+            </div>
+            
+            <div id="bioArea">
+
+                <p id="bio"> Adicione uma bio!! </p>
+                <br>
+                <button id="toggleChange"> Mudar </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="scripts/scriptUser.js" defer></script>
+    <!-- Script para atualizar o nome-->
+
+    <script src="scripts/scriptAuth.js" defer></script>
+    <!-- Script do Auth-->
+
+
+</body>
+</html>

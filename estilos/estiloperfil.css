@@ -10,7 +10,41 @@ body {
   overflow: hidden;
 }
 
+#personalize {
 
+  background: linear-gradient(90deg, #ba7aff, #ff88a2);
+  border: 0.5px solid #46003f;
+  border-radius: 5px;
+  width:100px;
+  height:30px;
+  text-align: center;
+  display: flex;      
+  align-items: center;
+  justify-content: center;
+
+}
+
+#personalize a {
+
+  text-decoration: none;
+  font-weight: bold;
+  color:#791079; 
+
+}
+
+#personalize:hover {
+
+  background: linear-gradient(90deg, #9a65d3, #ff4f75);
+  width: 105px;
+  height:35px;
+
+}
+
+#personalize a:hover {
+
+  color: white;
+
+}
 
 .btnsala {
 
@@ -122,24 +156,30 @@ input:focus {
 }
 
 .topo img {
+
   display: block;
   margin: 20px auto;
-  width: 150px;
+  width: 110px;
+
 }
 
 .container {
+
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding: 50px;
   gap: 20px;
+
 }
 
 .user-info, .lista {
+
   background: rgba(252, 248, 255, 0.80);
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
 }
 
 .user-info {
@@ -160,11 +200,12 @@ input:focus {
 }
 
 .arroba {
+
   font-weight: bold;
   color: #67058D;
   margin-top: 10px;
-}
 
+}
 
 
 #bioAlt, #bio {
@@ -478,7 +519,9 @@ label {
 
 
 /* Responsividade */
+
 @media (max-width: 768px) {
+
   body {
     overflow: scroll;
 
@@ -498,6 +541,7 @@ label {
   }
 
   #configs {
+
     flex-direction: column;
   }
 
@@ -546,29 +590,24 @@ label {
 
 }
 
+@media (max-width: 1100px) {
+
+  .btnsala {
+
+    right:15%;
+    margin-right: 5%;
+    
+  }
+
+  .codsala input {
+
+    right: 4%;
+
+  }
+
+}
+
 .hidden {
   display: none;
 }
-
-#altPhoto{
-
-  background: none;
-  background-image: url("../imgs/camera.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-
-  border:none;
-  cursor: pointer;
-  outline: none;
-
-  width:25px;
-  height: 25px;
-
-  position: relative;
-  left: 25%;
-  top: 15%;
-
-}
-
 
