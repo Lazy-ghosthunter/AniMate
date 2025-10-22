@@ -78,6 +78,24 @@ body {
 
 }
 
+#toggleChange {
+    
+  background: linear-gradient(90deg, #ba7aff, #ff88a2);
+  border: 0.5px solid #46003f;
+  border-radius: 5px;
+  width:100px;
+  height:30px;
+
+}
+
+#toggleChange :hover {
+
+  background: linear-gradient(90deg, #9a65d3, #ff4f75);
+  width: 105px;
+  height:35px;
+
+}
+
 .topo img {
 
   display: block;
