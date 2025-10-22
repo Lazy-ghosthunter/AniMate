@@ -6,7 +6,11 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  height: 100dvh;
+  overflow: hidden;
 }
+
+
 
 .btnsala {
 
@@ -134,14 +138,19 @@ input:focus {
 .user-info, .lista {
   background: rgba(252, 248, 255, 0.80);
   border-radius: 10px;
-  padding: 20px;
+  padding: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .user-info {
+  display: flex;
+  flex-direction: column;
   width: 250px;
   flex-shrink: 0;
   text-align: center;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .user-info img {
@@ -470,6 +479,10 @@ label {
 
 /* Responsividade */
 @media (max-width: 768px) {
+  body {
+    overflow: scroll;
+
+  }
   .container {
     flex-direction: column;
     padding: 20px;
@@ -536,3 +549,26 @@ label {
 .hidden {
   display: none;
 }
+
+#altPhoto{
+
+  background: none;
+  background-image: url("../imgs/camera.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  border:none;
+  cursor: pointer;
+  outline: none;
+
+  width:25px;
+  height: 25px;
+
+  position: relative;
+  left: 25%;
+  top: 15%;
+
+}
+
+

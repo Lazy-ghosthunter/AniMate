@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   //* lógicas da Bio
-
   const loadProfile = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -66,11 +65,16 @@ document.addEventListener('DOMContentLoaded', () => {
       errorMessage = typeof error.response.data === 'string' ? error.response.data : JSON.stringify(error.response.data);
       alert(`Falha na alteração: ${errorMessage}`);
     }
-  
-};
+  };
 
-const save = document.getElementById('change');
-save.addEventListener('click', altBio);
+  const save = document.getElementById('change');
+  save.addEventListener('click', altBio);
+
+  //*foto de perfil
+                                            
+  
+
+
 
 
   
