@@ -30,11 +30,11 @@
 
             <div id="insertPic">
 
-                <label for="pictureInput"> Nova foto de perfil: </label>
+                <label id="newPhoto" for="pictureInput"> Nova foto de perfil: </label>
                 <br> <br>
                 <input type="file" id="pictureInput" accept="image/*">
                 <br>
-                <button id="savePictureButton">Salvar Foto</button>
+                <button id="savePictureButton"> Salvar Foto </button>
 
             </div>
 
@@ -43,10 +43,25 @@
             <img src="imgs/Foto usuario.svg" class="avatar"></img>
             <p class="arroba" id="username" > @usuario_01 </p>
 
-            <div id="bioAltArea" class="hidden">
-            <input type="text" placeholder="Escreva sua bio aqui" id="bioAlt"></input>
+            <div id="nameAreaAlt" class="hiddenName">
 
-            <button id="change"> Confirmar </button>
+                <input type="text" placeholder="Escreva seu novo nome" id="nameAlt"></input>
+
+            </div>
+            
+            <div id="nameArea">
+
+                <button id="changeName"></button>
+
+            </div>
+
+            
+            <div id="bioAltArea" class="hidden">
+
+                <input type="text" placeholder="Escreva sua bio aqui" id="bioAlt"></input>
+
+                <button id="change"> Confirmar </button>
+
             </div>
             
             <div id="bioArea">

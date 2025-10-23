@@ -1,6 +1,6 @@
 /* Layout geral */
 body {
-  
+
   margin: 0;
   font-family: Arial, sans-serif;
   background-image: url('GIF - Background/BALL.gif');
@@ -9,6 +9,7 @@ body {
   background-position: center;
   height: 100dvh;
   overflow: hidden;
+  
 }
 
 #personalize {

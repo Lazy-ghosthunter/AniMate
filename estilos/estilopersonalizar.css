@@ -89,11 +89,15 @@ body {
 
 }
 
-#toggleChange :hover {
+#change {
 
-  background: linear-gradient(90deg, #9a65d3, #ff4f75);
-  width: 105px;
-  height:35px;
+  background: linear-gradient(90deg, #ffd1b8, #ff7ab6);
+  border: 0.5px solid #d00161;
+  color:#b4004f;
+  border-radius: 5px;
+  width:100px;
+  height:30px;
+  margin-top: 15px;
 
 }
 
@@ -154,11 +158,13 @@ body {
 }
 
 #bioAlt, #bio {
+
   width: 100%;
   height: 100px;
   border-radius: 5px;
   border: 2px solid #67058D;
   padding: 5px;
+
 }
 
 .hidden {
@@ -183,6 +189,52 @@ body {
   position: relative;
   left: 25%;
   top: 15%;
+
+}
+
+#changeName {
+
+  background: none;
+  background-image: url("../imgs/stylus_.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  border:none;
+  cursor: pointer;
+  outline: none;
+
+  width:25px;
+  height: 25px;
+
+}
+
+#nameAlt {
+
+  width: 80%;
+  height: 15px;
+  border-radius: 5px;
+  border: 2px solid #67058D;
+  padding: 5px;
+
+}
+
+#savePictureButton {
+
+  background: linear-gradient(90deg, #ffd1b8, #ff7ab6);
+  border: 0.5px solid #d00161;
+  color:#b4004f;
+  border-radius: 5px;
+  margin-top: 10px;
+  height: 25px;
+
+}
+
+#newPhoto {
+
+  font-weight: bold;
+  color:#791079; 
+  font-family: Arial, Helvetica, sans-serif;
 
 }
 
