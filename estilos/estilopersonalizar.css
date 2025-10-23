@@ -1,14 +1,15 @@
 /* Layout geral */
 
 body {
+
   margin: 0;
   font-family: Arial, sans-serif;
   background-image: url('GIF - Background/BALL.gif');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 100dvh;
-  overflow: hidden;
+  height: 100%;
+
 }
 
 #personalize {
@@ -64,8 +65,8 @@ body {
 
 #return {
 
-    display:flex;
-    flex-direction: column;
+  display:flex;
+  flex-direction: column;
 
 }
 
@@ -100,7 +101,7 @@ body {
 
   display: block;
   margin: 20px auto;
-  width: 110px;
+  width: 90px;
 
 }
 
