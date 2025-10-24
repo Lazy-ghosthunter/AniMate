@@ -192,7 +192,7 @@ body {
 
 }
 
-#changeName {
+#toggleCN {
 
   background: none;
   background-image: url("../imgs/stylus_.svg");
@@ -205,6 +205,18 @@ body {
   outline: none;
 
   width:25px;
+  height: 25px;
+
+}
+
+#changeName{
+
+  background: linear-gradient(90deg, #ba7aff, #ff88a2);
+  border: 0.5px solid #46003f;
+  color: #67058D;
+  border-radius: 5px;
+  margin-top: 15px;
+  margin-bottom: 10px;
   height: 25px;
 
 }

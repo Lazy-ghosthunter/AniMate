@@ -4,6 +4,7 @@ if (!localStorage.getItem("token")) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+
   const usernameElement = document.getElementById("username");
   const username = localStorage.getItem("username");
 
@@ -11,6 +12,66 @@ document.addEventListener('DOMContentLoaded', () => {
     usernameElement.textContent = `@${username}`;
   }
 
+  //* Lógica do nome
+
+  const toggleNameAlt = () => {
+
+    const nameAltArea = document.getElementById('nameAreaAlt');
+    const nameArea = document.getElementById('nameArea');
+    nameAltArea.classList.toggle('hiddenName');
+    nameArea.classList.toggle('hiddenName');
+
+  };
+
+  const toggleBtnName = document.getElementById('toggleCN');
+  if(toggleBtnName) toggleBtnName.addEventListener('click', toggleNameAlt);
+
+  const altName = async () => {
+
+    const nameInput = document.getElementById("nameAlt");
+    if (!nameInput) return;
+    const name = nameInput.value.trim();
+    if (!name) {
+      alert("Digite um nome válido.");
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+
+
+    const body = {
+
+      name : username,
+
+    };
+
+    try {
+      const response = await axios.put(`${base_url}/profile/name?token=${token}`, body);
+      console.log(response.data);
+
+      // Atualiza localStorage com o nome retornado ou com o nome enviado
+      const newName = response.data?.name || response.data?.username || name;
+      localStorage.setItem("username", newName);
+
+      // Atualiza a UI sem depender apenas do reload
+      const usernameElement = document.getElementById("username");
+      if (usernameElement) usernameElement.textContent = `@${newName}`;
+
+      alert("Nome alterado com sucesso!!");
+
+      // Fecha a área de edição (opcional)
+      toggleNameAlt();
+
+    } catch (error) {
+      console.error("Erro na alteração: ", error);
+      const errorMessage = error.response?.data || error.message || "Erro desconhecido";
+      alert(`Falha na alteração: ${typeof errorMessage === 'string' ? errorMessage : JSON.stringify(errorMessage)}`);
+    }
+
+  };
+
+  const saveName = document.getElementById('changeName');
+  saveName.addEventListener('click', altName);
 
   //* lógicas da Bio
   const loadProfile = async () => {
@@ -29,11 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error("Erro ao carregar perfil:", error);
       alert("Não foi possível carregar as informações do perfil.");
     }
+
   };
 
   loadProfile();
 
-
+  //Esconde a parte de edição
   const toggleBioAlt = () => {
     const bioAltArea = document.getElementById('bioAltArea');
     const bioArea = document.getElementById('bioArea');
@@ -46,12 +108,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   const altBio = async () => {
-  const bio = document.getElementById("bioAlt").value.trim();
-  const token = localStorage.getItem("token");
-  
-  const body = {
-    bio: bio, 
-  };
+    const bio = document.getElementById("bioAlt").value.trim();
+    const token = localStorage.getItem("token");
+    
+    const body = {
+      bio: bio, 
+    };
 
     try {
       const response = await axios.put(`${base_url}/profile/bio?token=${token}`, body);
@@ -70,13 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const save = document.getElementById('change');
   save.addEventListener('click', altBio);
 
+
   //*foto de perfil
                                             
-  
-
-
-
-
   
 });
 

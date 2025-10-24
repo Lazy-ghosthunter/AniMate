@@ -41,17 +41,18 @@
             <button id="altPhoto" ></button>
             
             <img src="imgs/Foto usuario.svg" class="avatar"></img>
-            <p class="arroba" id="username" > @usuario_01 </p>
+            <p class="arroba" id="username" > @usuario </p>
 
             <div id="nameAreaAlt" class="hiddenName">
 
                 <input type="text" placeholder="Escreva seu novo nome" id="nameAlt"></input>
+                <button id="changeName"> Salvar nome </button>
 
             </div>
             
             <div id="nameArea">
 
-                <button id="changeName"></button>
+                <button id="toggleCN"></button>
 
             </div>
 
@@ -79,12 +80,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <script src="scripts/scriptUser.js" defer></script>
-    <!-- Script para atualizar o nome-->
 
     <script src="scripts/scriptAuth.js" defer></script>
     <!-- Script do Auth-->
 
-
-</body>
-</html>
+    <script src="scripts/scriptUser.js" defer></script>
+    <!-- Script do User-->
