@@ -97,17 +97,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const response = await axios.put(`${base_url}/profile/username?token=${token}`, body);
-      console.log(response.data);
-      alert("Nome alterado com sucesso!!");
+      if (response.data && response.data.username) {
+        localStorage.setItem("username", response.data.username); 
+      }
+      
+      console.log(response.data);
+      alert("Nome alterado com sucesso!!");
 
-      window.location.reload();
+      window.location.reload(); 
 
-    } catch (error) {
-      console.error("Erro na alteração: ", error);
-      errorMessage = typeof error.response.data === 'string' ? error.response.data : JSON.stringify(error.response.data);
-      alert(`Falha na alteração: ${errorMessage}`);
-    }
-  };
+    } catch (error) {
+        console.error("Erro na alteração: ", error);
+        let errorMessage;
+        if (error.response) {
+            errorMessage = typeof error.response.data === 'string' ? error.response.data : JSON.stringify(error.response.data);
+        } else {
+            errorMessage = error.message; 
+        }
+        alert(`Falha na alteração: ${errorMessage}`);
+    }
+  };
 
   const saveName = document.getElementById('changeName');
   saveName.addEventListener('click', altName);
@@ -116,19 +125,3 @@ document.addEventListener('DOMContentLoaded', () => {
                                             
   
 });
-
-/*
-BR
-
-Pular navegação
-Pesquisar
-
-
-
-
-Criar
-
-
-Imagem do avatar
-*/
-
