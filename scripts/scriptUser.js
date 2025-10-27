@@ -6,72 +6,11 @@ if (!localStorage.getItem("token")) {
 document.addEventListener('DOMContentLoaded', () => {
 
   const usernameElement = document.getElementById("username");
-  const username = localStorage.getItem("username");
+  const usernameStorage = localStorage.getItem("username");
 
-  if (username && usernameElement) {
-    usernameElement.textContent = `@${username}`;
+  if (usernameStorage && usernameElement) {
+    usernameElement.textContent = `@${usernameStorage}`;
   }
-
-  //* Lógica do nome
-
-  const toggleNameAlt = () => {
-
-    const nameAltArea = document.getElementById('nameAreaAlt');
-    const nameArea = document.getElementById('nameArea');
-    nameAltArea.classList.toggle('hiddenName');
-    nameArea.classList.toggle('hiddenName');
-
-  };
-
-  const toggleBtnName = document.getElementById('toggleCN');
-  if(toggleBtnName) toggleBtnName.addEventListener('click', toggleNameAlt);
-
-  const altName = async () => {
-
-    const nameInput = document.getElementById("nameAlt");
-    if (!nameInput) return;
-    const name = nameInput.value.trim();
-    if (!name) {
-      alert("Digite um nome válido.");
-      return;
-    }
-
-    const token = localStorage.getItem("token");
-
-
-    const body = {
-
-      name : username,
-
-    };
-
-    try {
-      const response = await axios.put(`${base_url}/profile/name?token=${token}`, body);
-      console.log(response.data);
-
-      // Atualiza localStorage com o nome retornado ou com o nome enviado
-      const newName = response.data?.name || response.data?.username || name;
-      localStorage.setItem("username", newName);
-
-      // Atualiza a UI sem depender apenas do reload
-      const usernameElement = document.getElementById("username");
-      if (usernameElement) usernameElement.textContent = `@${newName}`;
-
-      alert("Nome alterado com sucesso!!");
-
-      // Fecha a área de edição (opcional)
-      toggleNameAlt();
-
-    } catch (error) {
-      console.error("Erro na alteração: ", error);
-      const errorMessage = error.response?.data || error.message || "Erro desconhecido";
-      alert(`Falha na alteração: ${typeof errorMessage === 'string' ? errorMessage : JSON.stringify(errorMessage)}`);
-    }
-
-  };
-
-  const saveName = document.getElementById('changeName');
-  saveName.addEventListener('click', altName);
 
   //* lógicas da Bio
   const loadProfile = async () => {
@@ -83,8 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const userProfile = response.data;
       
       const bioP = document.getElementById('bio'); 
-      if (bioP && userProfile.bio) {
+
+      if (bioP && userProfile.bio && usernameElement && userProfile.username) {
         bioP.textContent = userProfile.bio;
+        usernameElement.textContent = `@${userProfile.username}`;
       }
     } catch (error) {
       console.error("Erro ao carregar perfil:", error);
@@ -106,6 +47,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.getElementById('toggleChange');
   toggleBtn.addEventListener('click', toggleBioAlt);
 
+  const toggleNameAlt = () => {
+    const nameAltArea = document.getElementById('nameAreaAlt');
+    const nameArea = document.getElementById('nameArea');
+
+    if(!nameAltArea || !nameArea) return;
+
+    nameAltArea.classList.toggle('hiddenName');
+    nameArea.classList.toggle('hiddenName');
+  }
+
+  const toggleName = document.getElementById('toggleCN');
+  if (toggleName) {
+    toggleName.addEventListener('click', toggleNameAlt);
+  }
 
   const altBio = async () => {
     const bio = document.getElementById("bioAlt").value.trim();
@@ -132,10 +87,48 @@ document.addEventListener('DOMContentLoaded', () => {
   const save = document.getElementById('change');
   save.addEventListener('click', altBio);
 
+  const altName = async () => {
+    const username = document.getElementById("nameAlt").value.trim();
+    const token = localStorage.getItem("token");
+    
+    const body = {
+      username: username, 
+    };
+
+    try {
+      const response = await axios.put(`${base_url}/profile/username?token=${token}`, body);
+      console.log(response.data);
+      alert("Nome alterado com sucesso!!");
+
+      window.location.reload();
+
+    } catch (error) {
+      console.error("Erro na alteração: ", error);
+      errorMessage = typeof error.response.data === 'string' ? error.response.data : JSON.stringify(error.response.data);
+      alert(`Falha na alteração: ${errorMessage}`);
+    }
+  };
+
+  const saveName = document.getElementById('changeName');
+  saveName.addEventListener('click', altName);
 
   //*foto de perfil
                                             
   
 });
 
+/*
+BR
+
+Pular navegação
+Pesquisar
+
+
+
+
+Criar
+
+
+Imagem do avatar
+*/
 

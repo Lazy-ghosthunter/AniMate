@@ -171,6 +171,12 @@ body {
   display: none;
 }
 
+.hiddenName {
+
+  display: none;
+
+}
+
 #altPhoto{
 
   background: none;
@@ -195,14 +201,13 @@ body {
 #toggleCN {
 
   background: none;
-  background-image: url("../imgs/stylus_.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-
   border:none;
   cursor: pointer;
   outline: none;
+
+}
+
+#toggleCN img {
 
   width:25px;
   height: 25px;
