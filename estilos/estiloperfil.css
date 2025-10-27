@@ -530,7 +530,16 @@ label {
   margin-right: 3px;
 
 }
-
+#profilePic {
+  
+  border-radius: 50%;
+  width: 150px; 
+  height: 150px;
+  object-fit: cover; 
+  object-position: center;
+  border: 2px solid #67058D;
+  box-shadow: 0px 5px 15px rgba(166, 153, 255, 0.5);
+}
 
 /* Responsividade */
 

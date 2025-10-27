@@ -28,19 +28,27 @@
 
         <div class="user-info">
 
-            <div id="insertPic">
+            <button id="altPhoto" ></button>
 
-                <label id="newPhoto" for="pictureInput"> Nova foto de perfil: </label>
-                <br> <br>
-                <input type="file" id="pictureInput" accept="image/*">
-                <br>
-                <button id="savePictureButton"> Salvar Foto </button>
+                <div id="insertPic" class="hidden">
+                    <div id="overlay">
+                        <div class="insertPic-content">
+                        <div class="insertPic-header">
+                        <label id="newPhoto"> Nova foto de perfil: </label>
+                        <button id="close-popup" class="close-button">&times;</button>
+                        </div>
+                        <br> <br>
+                        <input type="file" id="picInput" accept="image/*">
+                        <br>
+                        <button id="picBtn"> Salvar Foto </button>
+                    </div>
+                </div>
 
             </div>
 
-            <button id="altPhoto" ></button>
             
-            <img src="imgs/Foto usuario.svg" class="avatar"></img>
+            
+            <img src="imgs/Foto usuario.svg" class="avatar" id="profilePic"></img>
             <p class="arroba" id="username" > @usuario </p>
 
             <div id="nameAreaAlt" class="hiddenName">
@@ -82,9 +90,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-
+    <script src="scripts/config.js" defer></script>
+    <!--Configs das url do chibisafe-->
     <script src="scripts/scriptAuth.js" defer></script>
     <!-- Script do Auth-->
-
     <script src="scripts/scriptUser.js" defer></script>
     <!-- Script do User-->

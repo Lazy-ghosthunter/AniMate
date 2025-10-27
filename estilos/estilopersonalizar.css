@@ -8,7 +8,8 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
 
 }
 
@@ -167,9 +168,7 @@ body {
 
 }
 
-.hidden {
-  display: none;
-}
+
 
 .hiddenName {
 
@@ -236,7 +235,7 @@ body {
 
 }
 
-#savePictureButton {
+#picBtn {
 
   background: linear-gradient(90deg, #ffd1b8, #ff7ab6);
   border: 0.5px solid #d00161;
@@ -253,6 +252,106 @@ body {
   color:#791079; 
   font-family: Arial, Helvetica, sans-serif;
 
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+    z-index: 1000;
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start;
+    padding-top: 15vh;
+}
+
+#insertPic{
+    /* Este seletor agora apenas controla a visibilidade */
+    z-index: 1001; /* Garante que o conteúdo fique sobre o overlay */
+}
+
+
+.insertPic-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    width: 450px;
+    height: 220px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative; /* Necessário para posicionar o botão de fechar */
+}
+
+.insertPic-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #d6a4ff;
+  height: 50px;
+  border-radius: 10px 10px 0 0;
+}
+
+#newPhoto {
+    font-weight: bold;
+    color:#791079; 
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  font-weight: bold;
+  color: #791079;
+  cursor: pointer;
+}
+
+#picInput {
+  width: 100%; /* Faz o input ocupar toda a largura do modal */
+  max-width: 350px; /* Um limite para não ficar grande demais */
+  margin-top: 15px;
+}
+
+#picInput::file-selector-button {
+  /* Pegando o estilo dos seus outros botões */
+  background: linear-gradient(90deg, #ba7aff, #ff88a2);
+  border: 0.5px solid #46003f;
+  border-radius: 5px;
+  color: #791079;
+  font-weight: bold;
+  
+  /* Ajustes de aparência */
+  padding: 8px 15px;
+  margin-right: 15px; /* Cria um espaço entre o botão e o texto "Nenhum arquivo..." */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Efeito hover para o botão ficar mais dinâmico */
+#picInput::file-selector-button:hover {
+  background: linear-gradient(90deg, #9a65d3, #ff4f75);
+  color: white;
+}
+
+#profilePic {
+  
+  border-radius: 50%;
+  width: 150px; 
+  height: 150px;
+  object-fit: cover; 
+  object-position: center;
+  border: 2px solid #67058D;
+  box-shadow: 0px 5px 15px rgba(166, 153, 255, 0.5);
 }
 
 /* Responsividade */
@@ -310,6 +409,10 @@ body {
     height: 80px;
   }
 
+}
+
+.hidden {
+  display: none;
 }
 
 

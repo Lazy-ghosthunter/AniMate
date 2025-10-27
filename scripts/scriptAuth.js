@@ -1,5 +1,3 @@
-const base_url = "http://localhost:8080";
-
 const signup = async () => {
   const username = document.getElementById("username").value.trim();
   const email = document.getElementById("email").value.trim();
