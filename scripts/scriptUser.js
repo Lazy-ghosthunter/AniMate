@@ -71,7 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
   save.addEventListener('click', altBio);
 
   //*foto de perfil
-                                            
+  const picInput = document.getElementById('picInput');
+  const savePicButton = document.getElementById('picBtn');
+  const         
   
 
 
