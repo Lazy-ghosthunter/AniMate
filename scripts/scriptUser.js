@@ -5,6 +5,8 @@ if (!localStorage.getItem("token")) {
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  let oldImageUrl = null;
+  let oldImageUuid = null;
   const usernameElement = document.getElementById("username");
   const usernameStorage = localStorage.getItem("username");
 
@@ -29,10 +31,24 @@ document.addEventListener('DOMContentLoaded', () => {
         usernameElement.textContent = `@${userProfile.username}`;
       }
 
+      if(profilePicture){
+        console.log('loadProfile: userProfile.imageUrl =', userProfile.imageUrl);
+      }
+
       if(profilePicture && userProfile.imageUrl){
         // Garante que a URL esteja bem formada, removendo "http://" duplicado
         const correctedUrl = userProfile.imageUrl.replace(/^(http:\/\/)+/g, 'http://');
         profilePicture.src = correctedUrl;
+        oldImageUrl = correctedUrl;
+        // capture uuid if provided by backend
+        if (userProfile.imageUuid) {
+          oldImageUuid = userProfile.imageUuid;
+          window._oldImageUuid = oldImageUuid;
+          console.log('loadProfile: oldImageUuid set to', oldImageUuid);
+        }
+        // expose for debugging in console
+        window._oldImageUrl = oldImageUrl;
+        console.log('loadProfile: oldImageUrl set to', oldImageUrl);
       }
 
     } catch (error) {
@@ -134,6 +150,64 @@ document.addEventListener('DOMContentLoaded', () => {
     const newPicDiv = document.getElementById('insertPic');
     newPicDiv.classList.toggle('hidden');
   }
+  const deleteFromChibisafe = async (imageUrl) => {
+    if (!imageUrl) {
+      console.log('deleteFromChibisafe: imageUrl está vazia — nada a deletar');
+      return;
+    }
+
+    try {
+      // Extrai o nome do arquivo com extensão. Ex: "abc.jpg"
+      const filenameWithExt = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
+      const dotIndex = filenameWithExt.lastIndexOf('.');
+      const filenameWithoutExt = dotIndex > 0 ? filenameWithExt.substring(0, dotIndex) : filenameWithExt;
+
+      console.log('deleteFromChibisafe: tentando deletar (com extensão):', filenameWithExt);
+
+      // tenta extrair possíveis UUIDs embutidos na URL (tokens longos)
+      const uuidCandidates = [];
+      // candidate: filename without extension
+      uuidCandidates.push(filenameWithoutExt);
+      // candidate: filename with extension
+      uuidCandidates.push(filenameWithExt);
+      // candidate: any long token in the path
+      try {
+        const pathParts = new URL(imageUrl).pathname.split('/').filter(Boolean);
+        pathParts.forEach(part => {
+          if (/[A-Za-z0-9_-]{8,}/.test(part)) uuidCandidates.push(part);
+        });
+      } catch (e) {
+        // ignore URL parse errors
+      }
+      // make candidates unique
+      const uniqCandidates = Array.from(new Set(uuidCandidates));
+      console.log('deleteFromChibisafe: uuidCandidates =', uniqCandidates);
+
+      // Tente cada candidate até um succeed
+      for (const candidate of uniqCandidates) {
+        try {
+          console.log('deleteFromChibisafe: tentando DELETE /api/file/' + candidate);
+          const res = await axios.delete(`${chibisafeUrl}/api/file/${encodeURIComponent(candidate)}`, {
+            headers: { 'x-api-key': chibisafeApiKey }
+          });
+          console.log('deleteFromChibisafe: sucesso com candidate=', candidate, res && res.status);
+          return;
+        } catch (err) {
+          console.warn('deleteFromChibisafe: tentativa falhou para', candidate, err.response?.status || err.message);
+          // continue to next candidate
+        }
+      }
+
+      // nenhuma candidate funcionou — log final
+      console.error('deleteFromChibisafe: nenhuma candidate deletou a imagem. Veja candidatos:', uniqCandidates);
+
+      window.location.reload();
+
+    } catch (error) {
+      console.error('deleteFromChibisafe: erro inesperado', error);
+    }
+  };
+
 
   const picInput = document.getElementById('picInput');
   const savePicButton = document.getElementById('picBtn');
@@ -160,19 +234,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
       });
 
-      const newImgUrl = chibiRes.data.url;
+  const newImgUrl = chibiRes.data.url;
+  const newImgUuid = chibiRes.data.uuid || null;
       console.log('Imagem salva: ', newImgUrl);
 
       const token = localStorage.getItem('token');
       const body = {
         imageUrl: newImgUrl,
+        imageUuid: newImgUuid,
       };
 
       console.log('Enviando pro back');
       await axios.put(`${base_url}/profile/picture?token=${token}`, body);
 
+      console.log('handlePicSave: oldImageUrl =', oldImageUrl);
+      console.log('handlePicSave: oldImageUuid =', oldImageUuid);
+      console.log('handlePicSave: newImgUrl =', newImgUrl, ' newImgUuid=', newImgUuid);
+
+      // expose for debugging in console
+      window._oldImageUrl = oldImageUrl;
+      window._oldImageUuid = oldImageUuid;
+      window._newImgUrl = newImgUrl;
+      window._newImgUuid = newImgUuid;
+
+      // Note: server will attempt to delete the previous image using imageUuid. We avoid deleting from frontend to keep API key secret.
+
+      // helper to trigger delete manually from console if needed
+      window._debug_delete = async (url) => {
+        console.log('manual debug delete called with', url);
+        return deleteFromChibisafe(url);
+      };
+
       alert('Foto alterada com sucesso!!! :D');
-      window.location.reload();
+      
 
     } catch (error) {
       console.error('Erro ao atualizar a foto: ', error);

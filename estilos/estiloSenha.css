@@ -1,6 +1,7 @@
 @font-face {
     font-family: Inter;
-    src: local(Inter), url(/fonte/Inter/Inter-VariableFont_opsz,wght.ttf);
+    /* fonts folder is one level up from estilos, wrap URL in quotes because filename contains comma */
+    src: local('Inter'), url('../fonte/Inter/Inter-VariableFont_opsz,wght.ttf');
 }
 
 h1 {
@@ -15,7 +16,8 @@ h1 {
 }
 
 body {
-    background-image: url(GIF\ -\ Background/ana.gif);
+    /* use quoted url for paths with spaces */
+    background-image: url("GIF - Background/ana.gif");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -217,7 +219,8 @@ body {
         height: 430px;
     }
 
-    #botaoem2 :hover {
+    /* remove accidental space before :hover so selector matches the element */
+    #botaoem2:hover {
         width: 70%;
     }
 
@@ -237,7 +240,7 @@ body {
         height: 460px;
     }
 
-    #botaoem2 :hover {
+    #botaoem2:hover {
         width: 80%;
     }
 }
