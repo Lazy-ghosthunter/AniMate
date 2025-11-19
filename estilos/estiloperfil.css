@@ -8,7 +8,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   height: 100dvh;
-  overflow: hidden;
+  
   
 }
 
@@ -540,6 +540,8 @@ label {
   border: 2px solid #67058D;
   box-shadow: 0px 5px 15px rgba(166, 153, 255, 0.5);
 }
+
+
 
 /* Responsividade */
 
