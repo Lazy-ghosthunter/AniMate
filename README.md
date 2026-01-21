@@ -32,7 +32,6 @@ Com o Chibisafe rodando, precisamos de uma chave de API para autorizar os upload
 
 1.  **Acesse o Chibisafe**: Abra seu navegador e vá para `http://localhost:24424`.
 2.  **Crie uma conta**: O primeiro usuário a se registrar se torna o administrador. Crie sua conta.
- - As credenciais iniciais tanto para o nome do usuário, quanto para a senha são: **admin**;
  - Caso não seja possível criar uma nova conta, utilize: admin em ambos os campos;
  - Desta forma você poderá seguir para os próximos passos desse tutorial.
 3.  **Vá para Configurações**: Após o login, clique no seu nome de usuário no canto superior direito e vá para **Settings**.
