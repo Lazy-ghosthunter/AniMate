@@ -62,6 +62,7 @@ body {
     padding: 10px 10px;;
     height: 3%;
     width: 3%;
+    cursor: pointer;
 }
 
 .container2 {
@@ -158,6 +159,8 @@ body {
     border-radius: 10px;
     padding: 10px 0;
     text-decoration: none;
+    cursor: pointer;
+
 }
 
 .botao:hover {
