@@ -23,7 +23,7 @@ N√≥s usamos uma imagem Docker do Chibisafe para garantir que o ambiente seja id√
 
 siga os passos no guia oficial do chibisafe para configura-lo corretamente:
 
-https://chibisafe.moe/guides/running-with-docker
+https://chibisafe.app/docs/installation/running-with-docker
 
 
 ### Passo 2: Obtendo a API Key
