@@ -9,7 +9,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   height: 100dvh;
-  overflow: hidden;
+  overflow:auto;
 
 }
 
@@ -77,6 +77,8 @@ body {
   position:absolute;
   top: 3.2%;
   box-sizing: border-box;
+  cursor: pointer;
+
 
 }
 
@@ -358,6 +360,9 @@ body {
 @media (max-width: 768px) {
   body {
     overflow: scroll;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
 
   }
 
@@ -415,6 +420,16 @@ body {
   display: none;
 }
 
+@media (min-width: 1000px) {
+
+  body {
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+
+  }
+
+}
 
 
 

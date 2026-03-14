@@ -65,6 +65,8 @@ body {
     padding: 10px 10px;
     text-decoration: none;
     margin-top: 10px;
+    cursor: pointer;
+
 }
 
 .primeirobtn {
