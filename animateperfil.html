@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>AniMate</title>
-  <link rel="stylesheet" href="estilos/estiloperfil.css">
-  <link rel="icon" href="imgs/Logo.svg">
-  
+    <title>AniMate</title>
+    <link rel="stylesheet" href="estilos/estiloperfil.css">
+    <link rel="icon" href="imgs/Logo.svg">
+
+    <script type="text/javascript">
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "ww88sangu0");
+    </script>
+    
 </head>
+
 <body>
 
     <div class="topo">
@@ -19,9 +29,9 @@
     <a id="membro" href="canvasmembro.html">
 
         <div class="codsala btn">
-            <input type="text" id="codsala" placeholder="Código de sala:" maxlength="5" >
+            <input type="text" id="codsala" placeholder="Código de sala:" maxlength="5">
         </div>
-        
+
     </a>
 
     <a id="signout" href="#">
@@ -31,7 +41,7 @@
 
     <!-- POP UP de aviso! -->
 
-        <div id="popupAviso">
+    <div id="popupAviso">
 
         <div id="avisotemp" class="overlay">
             <div class="vermelho">
@@ -39,9 +49,13 @@
                 <h1 class="aviso">Aviso!</h1>
             </div>
             <div class="msg">
-                <p>esta sala fechará automaticamente após 5 horas, quando o limite de tempo for atingido você terá uma chance para baixar o arquivo antes dele ser deletado.</p>
+                <p>esta sala fechará automaticamente após 5 horas, quando o limite de tempo for atingido você terá uma
+                    chance para baixar o arquivo antes dele ser deletado.</p>
             </div>
-            <div id="botoes"><div id="voltar">voltar</div><div id="okk">Ok</div></div>
+            <div id="botoes">
+                <div id="voltar">voltar</div>
+                <div id="okk">Ok</div>
+            </div>
         </div>
     </div>
 
@@ -56,7 +70,7 @@
                         <label for="largura">Largura</label>
                         <input type="number" id="largura" name="largura" min="100" max="4000" value="1080">Px
                     </div>
-                        <br>
+                    <br>
                     <div id="altura1">
                         <label for="altura" id="labelaltura">Altura</label>
                         <input type="number" id="altura" name="altura" min="100" max="4000" value="1980">Px
@@ -67,14 +81,14 @@
                         <label for="fpsinput">FPS</label>
                         <input type="number" id="fpsinput" name="fpsinput" min="1" max="24" value="12">
                     </div>
-                <div id="cores">
-                    <label for="cor">Cor de Fundo</label>
-                    <br>
-                    <input type="color" id="cor" name="cor" value="#D1D1D1"> 
-                </div>
+                    <div id="cores">
+                        <label for="cor">Cor de Fundo</label>
+                        <br>
+                        <input type="color" id="cor" name="cor" value="#D1D1D1">
+                    </div>
                 </div>
             </div>
-            
+
             <div id="editmembros">
                 <p id="compartilhameno"> Compartilhamento </p>
                 <label for="membros"> Max membros: </label>
@@ -87,43 +101,45 @@
                     <input type="checkbox" value="editarcanvas">Editar canvas<br>
                     <input type="checkbox" value="editarmembros">Editar membros<br>
                 </div>
-                <a href="canvasAdm.html"><div id="criar">Criar</div></a>
+                <a href="canvasAdm.html">
+                    <div id="criar">Criar</div>
+                </a>
             </div>
-            
+
         </div>
-        
+
     </div>
 
     <div class="container">
 
         <div class="user-info">
-            
+
             <img src="imgs/Foto usuario.svg" class="avatar" id="profilePic"></img>
-            <p class="arroba" id="username" > @usuario_01 </p>
+            <p class="arroba" id="username"> @usuario_01 </p>
 
             <div id="bioAltArea" class="hidden">
 
                 <input type="text" id="bioAlt">
                 </input>
-                
+
             </div>
-            
+
             <div id="bioArea">
 
-                <p id="bio">  </p>
+                <p id="bio"> </p>
 
-            </div>         
+            </div>
 
             <button id="personalize">
 
                 <a href="perfiledicao.html"> Editar perfil </a>
-                
+
             </button>
 
         </div>
 
         <div class="lista">
-            <div id='ok' class="botao" role="button"> 
+            <div id='ok' class="botao" role="button">
                 <br>
                 <br>
                 <br>
@@ -136,7 +152,8 @@
                 <br>
                 <br>
                 <br>
-                <br>Nome do arquivo</div>
+                <br>Nome do arquivo
+            </div>
 
             <br>
 
@@ -159,73 +176,76 @@
             </div>
 
             <br>
-                
+
         </div>
 
-    </div>  
-      
-  </div>
-  <div id="configTela">
-    <div id="configs">
-        <div id="canvas">
-            <div id="tamanho">
-                <p id="canvasconfig">Configurações da canvas</p>
-                <p>Tamanho</p>
-                <div id="largura1">
-                    <label for="largura">Largura</label>
-                    <input type="number" id="largura" name="largura" min="100" max="4000" value="1080">Px
-                </div>
-                    <br>
-                <div id="altura1">
-                    <label for="altura" id="labelaltura">Altura</label>
-                    <input type="number" id="altura" name="altura" min="100" max="4000" value="1980">Px
-                </div>
-            </div>
-            <div id="fpsecor">
-                <div id="fps">
-                    <label for="fpsinput">FPS</label>
-                    <input type="number" id="fpsinput" name="fpsinput" min="1" max="24" value="12">
-                </div>
-            <div id="cores">
-                <label for="cor">Cor de Fundo</label>
-                <br>
-                <input type="color" id="cor" name="cor" value="#D1D1D1"> 
-            </div>
-            </div>
-        </div>
-        
-        <div id="editmembros">
-            <p id="compartilhameno">Compartilhamento</p>
-            <label for="membros">Max membros:</label>
-            <input type="number" id="membros" name="membros" max="10" value="4">
-            <p id="permissoes">Permissões padrão para membros</p>
-            <div id="opçoes">
-                <input type="checkbox" value="desenhar">Desenhar<br>
-                <input type="checkbox" value="interferencia">Interferência<br>
-                <input type="checkbox" value="comentarios">Comentários<br>
-                <input type="checkbox" value="editarcanvas">Editar canvas<br>
-                <input type="checkbox" value="editarmembros">Editar membros<br>
-            </div>
-            <a href="canvasAdm.html"><div id="criar">Criar</div></a>
-        </div>
-        
     </div>
-    
-</div>
 
-<script src="scripts/config.js" defer></script>
-<!--Configs das url do chibisafe-->
+    </div>
+    <div id="configTela">
+        <div id="configs">
+            <div id="canvas">
+                <div id="tamanho">
+                    <p id="canvasconfig">Configurações da canvas</p>
+                    <p>Tamanho</p>
+                    <div id="largura1">
+                        <label for="largura">Largura</label>
+                        <input type="number" id="largura" name="largura" min="100" max="4000" value="1080">Px
+                    </div>
+                    <br>
+                    <div id="altura1">
+                        <label for="altura" id="labelaltura">Altura</label>
+                        <input type="number" id="altura" name="altura" min="100" max="4000" value="1980">Px
+                    </div>
+                </div>
+                <div id="fpsecor">
+                    <div id="fps">
+                        <label for="fpsinput">FPS</label>
+                        <input type="number" id="fpsinput" name="fpsinput" min="1" max="24" value="12">
+                    </div>
+                    <div id="cores">
+                        <label for="cor">Cor de Fundo</label>
+                        <br>
+                        <input type="color" id="cor" name="cor" value="#D1D1D1">
+                    </div>
+                </div>
+            </div>
 
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <div id="editmembros">
+                <p id="compartilhameno">Compartilhamento</p>
+                <label for="membros">Max membros:</label>
+                <input type="number" id="membros" name="membros" max="10" value="4">
+                <p id="permissoes">Permissões padrão para membros</p>
+                <div id="opçoes">
+                    <input type="checkbox" value="desenhar">Desenhar<br>
+                    <input type="checkbox" value="interferencia">Interferência<br>
+                    <input type="checkbox" value="comentarios">Comentários<br>
+                    <input type="checkbox" value="editarcanvas">Editar canvas<br>
+                    <input type="checkbox" value="editarmembros">Editar membros<br>
+                </div>
+                <a href="canvasAdm.html">
+                    <div id="criar">Criar</div>
+                </a>
+            </div>
 
-<script src="scripts/scriptUser.js" defer></script>
-<!-- Script para atualizar o nome-->
-<script src="scripts/scriptNewCanvas.js" defer></script>
-<!-- Script para a criação de uma nova canvas -->
-<script src="scripts/scriptAuth.js" defer></script>
-<!-- Script do Auth-->
+        </div>
+
+    </div>
+
+    <script src="scripts/config.js" defer></script>
+    <!--Configs das url do chibisafe-->
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="scripts/scriptUser.js" defer></script>
+    <!-- Script para atualizar o nome-->
+    <script src="scripts/scriptNewCanvas.js" defer></script>
+    <!-- Script para a criação de uma nova canvas -->
+    <script src="scripts/scriptAuth.js" defer></script>
+    <!-- Script do Auth-->
 
 
 
 </body>
+
 </html>
