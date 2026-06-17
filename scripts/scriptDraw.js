@@ -326,7 +326,14 @@ function loadFrame(frameId) {
 // Alternar frames
 function switchFrame(frameId) {
     if (frameId !== currentFrame) {
-        saveFrame(currentFrame); // Salva o estado do frame atual
+        // Durante a restauração inicial, não sobrescrever o frame atual
+        if (window.__drawingRestored) {
+            console.log('switchFrame: restauração pendente — pulando saveFrame para evitar sobrescrever frames restaurados');
+            // limpar a flag para que próximas trocas funcionem normalmente
+            window.__drawingRestored = false;
+        } else {
+            saveFrame(currentFrame); // Salva o estado do frame atual
+        }
     }
 
     loadFrame(frameId); // Carrega o próximo frame

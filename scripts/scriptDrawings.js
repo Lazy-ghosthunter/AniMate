@@ -13,14 +13,43 @@ function serializeDrawing() {
     const width  = canvasEl.width;
     const height = canvasEl.height;
 
-    // Força salvar o frame que está visível agora no objeto frames
-    // antes de serializar tudo
+    // Tenta usar a função centralizada `saveFrame` (definida em scriptDraw.js)
+    // para garantir que o frame atual é salvo corretamente antes de serializar.
     if (typeof currentFrame !== 'undefined' && typeof frames !== 'undefined') {
-        const fc = document.createElement('canvas');
-        fc.width  = width;
-        fc.height = height;
-        fc.getContext('2d').drawImage(canvasEl, 0, 0);
-        frames[currentFrame] = fc;
+        if (typeof saveFrame === 'function') {
+            try {
+                saveFrame(currentFrame);
+            } catch (e) {
+                console.warn('serializeDrawing: saveFrame falhou, usando fallback:', e);
+                const fc = document.createElement('canvas');
+                fc.width  = width;
+                fc.height = height;
+                fc.getContext('2d').drawImage(canvasEl, 0, 0);
+                frames[currentFrame] = fc;
+            }
+        } else {
+            // Fallback: copia direto do canvas visível
+            const fc = document.createElement('canvas');
+            fc.width  = width;
+            fc.height = height;
+            fc.getContext('2d').drawImage(canvasEl, 0, 0);
+            frames[currentFrame] = fc;
+        }
+    }
+
+    // DEBUG: informações para entender por que o primeiro frame pode ficar vazio
+    try {
+        console.log('serializeDrawing: currentFrame=', currentFrame);
+        console.log('serializeDrawing: frames keys=', Object.keys(frames || {}));
+        if (frames && frames[currentFrame]) {
+            const dataUrl = frames[currentFrame].toDataURL('image/png');
+            const sample = dataUrl.slice(0,80);
+            console.log('serializeDrawing: frames[currentFrame] sample=', sample, '... (length=', dataUrl.length, ')');
+        } else {
+            console.log('serializeDrawing: frames[currentFrame] is MISSING');
+        }
+    } catch (e) {
+        console.warn('serializeDrawing: erro ao logar frames:', e);
     }
 
     // Serializa cada frame como PNG base64

@@ -1,5 +1,14 @@
 //Conecta ao servidor socket.io
-const socket = io('http://localhost:3000');
+let socket = null;
+try {
+    if (window.enableSockets === false) {
+        console.log('scriptMembro: sockets desabilitados (window.enableSockets=false)');
+    } else {
+        socket = io('http://localhost:3000');
+    }
+} catch (e) {
+    console.warn('scriptMembro: falha ao inicializar socket (servidor pode não estar rodando):', e);
+}
 
 // Chat funcionalidades
 const chatIcon = document.getElementById('chat');
