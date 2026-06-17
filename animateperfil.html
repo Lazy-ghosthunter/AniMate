@@ -13,6 +13,52 @@
             y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
         })(window, document, "clarity", "script", "ww88sangu0");
     </script>
+
+    <!-- ✅ Estilos extras para a lista de desenhos -->
+    <style>
+        .drawing-item-info {
+            flex: 1;
+        }
+        .drawing-title {
+            font-weight: bold;
+            margin: 0 0 4px 0;
+        }
+        .drawing-date {
+            font-size: 0.8em;
+            color: #aaa;
+            margin: 0;
+        }
+        .drawing-item-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .btn-open-drawing {
+            background: #450F8C;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 14px;
+            cursor: pointer;
+            font-size: 0.85em;
+        }
+        .btn-open-drawing:hover {
+            background: #6320b8;
+        }
+        .btn-delete-drawing {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            padding: 4px;
+        }
+        .itens {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+        }
+    </style>
     
 </head>
 
@@ -27,22 +73,17 @@
     </div>
 
     <a id="membro" href="canvasmembro.html">
-
         <div class="codsala btn">
             <input type="text" id="codsala" placeholder="Código de sala:" maxlength="5">
         </div>
-
     </a>
 
     <a id="signout" href="#">
         <img src="imgs/logout.svg" alt="Logout">
     </a>
 
-
     <!-- POP UP de aviso! -->
-
     <div id="popupAviso">
-
         <div id="avisotemp" class="overlay">
             <div class="vermelho">
                 <img src="imgs/Warning Triangle.svg" class="triangle">
@@ -60,7 +101,6 @@
     </div>
 
     <div id="configTela">
-
         <div id="configs">
             <div id="canvas">
                 <div id="tamanho">
@@ -105,146 +145,62 @@
                     <div id="criar">Criar</div>
                 </a>
             </div>
-
         </div>
-
     </div>
 
     <div class="container">
 
         <div class="user-info">
 
-            <img src="imgs/Foto usuario.svg" class="avatar" id="profilePic"></img>
+            <img src="imgs/Foto usuario.svg" class="avatar" id="profilePic">
             <p class="arroba" id="username"> @usuario_01 </p>
 
             <div id="bioAltArea" class="hidden">
-
                 <input type="text" id="bioAlt">
-                </input>
-
             </div>
 
             <div id="bioArea">
-
                 <p id="bio"> </p>
-
             </div>
 
             <button id="personalize">
-
                 <a href="perfiledicao.html"> Editar perfil </a>
-
             </button>
 
         </div>
 
         <div class="lista">
-            <div id='ok' class="botao" role="button">
-                <br>
-                <br>
-                <br>
-                <br>Criar novo
-            </div>
-            <br>
-            <div class="itens">
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>Nome do arquivo
+
+            <!-- ✅ Botão "Criar novo" — abre o canvas em branco -->
+            <div id="ok" class="botao" role="button">
+                <br><br><br><br>Criar novo
             </div>
 
-            <br>
-
-            <div class="itens">
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>Nome do arquivo
-            </div>
-
-            <div class="itens">
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>Nome do arquivo
-            </div>
-
-            <br>
+            <!-- ✅ Os desenhos salvos serão inseridos aqui dinamicamente pelo scriptDrawings.js -->
 
         </div>
 
     </div>
 
-    </div>
-    <div id="configTela">
-        <div id="configs">
-            <div id="canvas">
-                <div id="tamanho">
-                    <p id="canvasconfig">Configurações da canvas</p>
-                    <p>Tamanho</p>
-                    <div id="largura1">
-                        <label for="largura">Largura</label>
-                        <input type="number" id="largura" name="largura" min="100" max="4000" value="1080">Px
-                    </div>
-                    <br>
-                    <div id="altura1">
-                        <label for="altura" id="labelaltura">Altura</label>
-                        <input type="number" id="altura" name="altura" min="100" max="4000" value="1980">Px
-                    </div>
-                </div>
-                <div id="fpsecor">
-                    <div id="fps">
-                        <label for="fpsinput">FPS</label>
-                        <input type="number" id="fpsinput" name="fpsinput" min="1" max="24" value="12">
-                    </div>
-                    <div id="cores">
-                        <label for="cor">Cor de Fundo</label>
-                        <br>
-                        <input type="color" id="cor" name="cor" value="#D1D1D1">
-                    </div>
-                </div>
-            </div>
-
-            <div id="editmembros">
-                <p id="compartilhameno">Compartilhamento</p>
-                <label for="membros">Max membros:</label>
-                <input type="number" id="membros" name="membros" max="10" value="4">
-                <p id="permissoes">Permissões padrão para membros</p>
-                <div id="opçoes">
-                    <input type="checkbox" value="desenhar">Desenhar<br>
-                    <input type="checkbox" value="interferencia">Interferência<br>
-                    <input type="checkbox" value="comentarios">Comentários<br>
-                    <input type="checkbox" value="editarcanvas">Editar canvas<br>
-                    <input type="checkbox" value="editarmembros">Editar membros<br>
-                </div>
-                <a href="canvasAdm.html">
-                    <div id="criar">Criar</div>
-                </a>
-            </div>
-
+    <!-- Popup foto de perfil -->
+    <div id="overlay" class="hidden">
+        <div id="insertPic" class="hidden">
+            <button id="close-popup">X</button>
+            <input type="file" id="picInput" accept="image/*">
+            <button id="picBtn">Salvar foto</button>
         </div>
-
     </div>
 
-    <script src="scripts/config.js" defer></script>
-    <!--Configs das url do chibisafe-->
-
+    <!-- Scripts -->
+    <script src="scripts/config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script src="scripts/scriptUser.js" defer></script>
-    <!-- Script para atualizar o nome-->
     <script src="scripts/scriptNewCanvas.js" defer></script>
-    <!-- Script para a criação de uma nova canvas -->
     <script src="scripts/scriptAuth.js" defer></script>
-    <!-- Script do Auth-->
 
-
+    <!-- ✅ NOVO: carrega a lista de desenhos salvos -->
+    <script src="scripts/scriptDrawings.js" defer></script>
 
 </body>
 
