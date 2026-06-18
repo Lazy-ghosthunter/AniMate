@@ -42,7 +42,20 @@ function updateCanvas() {
 }
 
 // Configuração inicial ao carregar a página
-window.onload = () => {
+window.addEventListener('load', () => {
+    const pendingData = localStorage.getItem('pendingDrawingData');
+    const restoreFlag = window.__drawingRestored || false;
+
+    if (pendingData || restoreFlag) {
+        console.log('⏳ Restauração de desenho pendente detectada, pulando reset inicial do canvas');
+        menuTamanho.style.display = 'none';
+        const corSalva = localStorage.getItem('corr'); //Aplica a cor ao carregar a página
+        if(corSalva) {
+            pintar = corSalva;
+            corPincel.value = corSalva;
+        }
+        return;
+    }
 
     updateCanvas();
     switchFrame('frame1'); // Define o frame inicial
@@ -53,7 +66,7 @@ window.onload = () => {
         corPincel.value = corSalva;
     }
 
-};
+});
 
 // Variáveis para desenho
 let isDrawing = false; //Desenhar
@@ -312,13 +325,26 @@ function loadFrame(frameId) {
 
 // Alternar frames
 function switchFrame(frameId) {
-    saveFrame(currentFrame); // Salva o estado do frame atual
+    if (frameId !== currentFrame) {
+        // Durante a restauração inicial, não sobrescrever o frame atual
+        if (window.__drawingRestored) {
+            console.log('switchFrame: restauração pendente — pulando saveFrame para evitar sobrescrever frames restaurados');
+            // limpar a flag para que próximas trocas funcionem normalmente
+            window.__drawingRestored = false;
+        } else {
+            saveFrame(currentFrame); // Salva o estado do frame atual
+        }
+    }
+
     loadFrame(frameId); // Carrega o próximo frame
     currentFrame = frameId; // Atualiza o frame atual
 
     // Atualizar estilos de destaque
     document.querySelectorAll('.frame').forEach(frame => frame.classList.remove('frameativa'));
-    document.getElementById(frameId).classList.add('frameativa');
+    const frameEl = document.getElementById(frameId);
+    if (frameEl) {
+        frameEl.classList.add('frameativa');
+    }
 }
 
 // Eventos nos frames

@@ -21,8 +21,18 @@
 
         <div class="configs">
             <a href="animateperfil.html">
-                <img src="/AniMate/imgs/arrow_back_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" class="seta_voltar">
-            </a>            
+                <img src="imgs/arrow_back_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" class="seta_voltar">
+            </a>
+
+            <!-- Botão novo desenho -->
+            <img src="imgs/File None.svg" id="btnNew" class="configuracoes" title="Novo desenho" style="cursor:pointer;">
+
+            <!-- Botão salvar desenho -->
+            <img src="imgs/Save 02.svg" id="btnSave" class="configuracoes" title="Salvar desenho" style="cursor:pointer;">
+
+            <!-- Botão salvar novo desenho -->
+            <button id="btnSaveNew" class="configuracoes" title="Salvar como novo" style="cursor:pointer;border:none;background:none;color:white;font-size:14px;padding:0 8px;">Salvar novo</button>
+
             <img src="imgs/3 pontos.svg" class="configuracoes">
         </div>
 
@@ -142,21 +152,20 @@
         
     </div>
 
+    <!-- Configs globais (base_url, chibisafe) -->
+    <script src="scripts/config.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
-    <!-- Conexão ao socket baixado via navegador -->
 
     <script src="scripts/scriptSocket.js" defer></script>
-    <!-- script socket io que envia tudo ao servidor no back-end -->
-
     <script src="scripts/scriptDraw.js" defer></script>
-    <!-- Script principal com as funcionalidades do JS -->
-
     <script src="scripts/scriptChat.js" defer></script>
-    <!-- Script do chat -->
+
+    <!-- ✅ NOVO: Script de salvar/abrir desenhos -->
+    <script src="scripts/scriptDrawings.js" defer></script>
 
     <script> window.userRole = 'admin'; </script>
-    <!-- Identifica qual tipo de usuário é -->
-
 
 </body>
 
