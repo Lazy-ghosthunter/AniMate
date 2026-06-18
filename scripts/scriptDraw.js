@@ -26,6 +26,9 @@ botaoTamanho.addEventListener('click', () => {
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
+const canvasFundo = document.getElementById('canvasfundo');
+const ctxFundo = canvasFundo.getContext('2d');
+
 // Carregar configurações salvas
 const larguraC = localStorage.getItem('larguracanvas');
 const alturaC = localStorage.getItem('alturacanvas');
@@ -39,6 +42,8 @@ function updateCanvas() {
     canvas.height = parseInt(alturaC, 10);
     ctx.fillStyle = cor || '#ffffff'; // Cor padrão caso não esteja no localStorage
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    salvarEstado(); // snapshot em branco como ponto inicial
 }
 
 // Configuração inicial ao carregar a página
@@ -52,7 +57,6 @@ window.onload = () => {
         pintar = corSalva;
         corPincel.value = corSalva;
     }
-
 };
 
 // Variáveis para desenho
@@ -168,10 +172,14 @@ canvas.addEventListener('contextmenu', (e) => {
 
 //Configurações para evitar traços indesejados no desenho
 canvas.addEventListener('mouseup', () => { 
+    if (isDrawing) salvarEstado();
     isDrawing = false;
     lastX = null;
     lastY = null;
 });
+
+document.getElementById('undo').addEventListener('click', undo);
+document.getElementById('redo').addEventListener('click', redo);
 
 canvas.addEventListener('mouseleave', () => {
     isDrawing = false;
@@ -406,6 +414,41 @@ socket.on('draw', (data) => {
     ctx.globalCompositeOperation = "source-over";
 
 });
+
+// Histórico para undo/redo
+const historico = [];
+let historicoIndex = -1;
+
+// Salva o estado atual do canvas no histórico
+function salvarEstado() {
+    // Remove tudo que vem depois do index atual (ao desenhar após um undo)
+    historico.splice(historicoIndex + 1);
+    historico.push(canvas.toDataURL());
+    historicoIndex++;
+}
+
+// Undo
+function undo() {
+    if (historicoIndex <= 0) return;
+    historicoIndex--;
+    restaurarEstado(historico[historicoIndex]);
+}
+
+// Redo
+function redo() {
+    if (historicoIndex >= historico.length - 1) return;
+    historicoIndex++;
+    restaurarEstado(historico[historicoIndex]);
+}
+
+function restaurarEstado(dataURL) {
+    const img = new Image();
+    img.src = dataURL;
+    img.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+    };
+}
 
 /*
 // Suporte para dispositivos móveis
