@@ -40,10 +40,13 @@ function updateCanvas() {
 
     canvas.width = parseInt(larguraC, 10);
     canvas.height = parseInt(alturaC, 10);
-    ctx.fillStyle = cor || '#ffffff'; // Cor padrão caso não esteja no localStorage
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    salvarEstado(); // snapshot em branco como ponto inicial
+    canvasFundo.width = canvas.width;
+    canvasFundo.height = canvas.height;
+
+    desenharFundo(currentFrame);
+
+    salvarEstado();
 }
 
 // Configuração inicial ao carregar a página
@@ -290,32 +293,12 @@ function saveFrame(frameId) {
 function loadFrame(frameId) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Se Onion Skin estiver ativado, desenha o frame anterior ou próximo semitransparente
-    if (onionSkinEnabled) {
-        const frameIds = Array.from(document.querySelectorAll('.frame')).map(frame => frame.id);
-        const currentIndex = frameIds.indexOf(frameId);
-
-        if (currentIndex > 0) {
-            // Desenha o frame anterior com semitransparência
-            ctx.globalAlpha = 0.5; // 50% de transparência
-            ctx.drawImage(frames[frameIds[currentIndex - 1]], 0, 0);
-            ctx.globalAlpha = 1; // Resetando a transparência
-        }
-
-        if (currentIndex < frameIds.length - 1) {
-            // Desenha o frame seguinte com semitransparência
-            ctx.globalAlpha = 0.5;
-            ctx.drawImage(frames[frameIds[currentIndex + 1]], 0, 0);
-            ctx.globalAlpha = 1;
-        }
-    }
-
-    // Desenha o frame atual
     if (frames[frameId]) {
         ctx.drawImage(frames[frameId], 0, 0);
-    } else {
-        updateCanvas();
     }
+    // se não existir ainda, o canvas já fica transparente — frame novo em branco
+
+    desenharFundo(frameId);
 }
 
 // Alternar frames
@@ -375,9 +358,33 @@ let onionSkinEnabled = false;
 const onionSkinButton = document.getElementById('onionskin');
 onionSkinButton.addEventListener('click', () => {
     onionSkinEnabled = !onionSkinEnabled;
-    onionSkinButton.style.opacity = onionSkinEnabled ? 1 : 0.5; 
-    // Alterar a opacidade para indicar se está ativado
+    onionSkinButton.style.opacity = onionSkinEnabled ? 1 : 0.5;
+    desenharFundo(currentFrame); // mostra ou esconde o fantasma imediatamente
 });
+
+//Função responsável pelo que aparece ao fundo da canva
+const ONION_SKIN_ALPHA = 0.4; // ajuste à vontade: 0 (invisível) até 1 (opaco)
+
+function desenharFundo(frameId) {
+    // Limpa e repinta a cor de fundo
+    ctxFundo.clearRect(0, 0, canvasFundo.width, canvasFundo.height);
+    ctxFundo.fillStyle = cor || '#ffffff';
+    ctxFundo.fillRect(0, 0, canvasFundo.width, canvasFundo.height);
+
+    if (!onionSkinEnabled) return; // sem fantasma, já terminou
+
+    const frameIds = Array.from(document.querySelectorAll('.frame')).map(f => f.id);
+    const currentIndex = frameIds.indexOf(frameId);
+
+    if (currentIndex > 0) {
+        const frameAnterior = frames[frameIds[currentIndex - 1]];
+        if (frameAnterior) {
+            ctxFundo.globalAlpha = ONION_SKIN_ALPHA;
+            ctxFundo.drawImage(frameAnterior, 0, 0);
+            ctxFundo.globalAlpha = 1; // sempre resetar depois!
+        }
+    }
+}
 
 //Recebe e apaga os traços enviados pelos outros usuários
 socket.on('draw', (data) => {
