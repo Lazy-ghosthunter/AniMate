@@ -107,8 +107,6 @@ canvas {
 }
 
 .seta_voltar {
-
-    margin-right: 20px;
     height: 25px;
     margin-top: 5px;
     cursor: pointer;
@@ -553,3 +551,18 @@ canvas {
 
 #canvas { z-index: 2; }
 
+.config{
+    
+
+}
+.add{
+    border-right: 2px solid #edecf7;
+    padding-right: 10px;
+}
+
+.backbtn{
+    background: none;
+    border: none;
+    margin-left: 15px;
+
+}
