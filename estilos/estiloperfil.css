@@ -661,6 +661,7 @@ label {
             padding: 6px 14px;
             cursor: pointer;
             font-size: 0.85em;
+            margin-left: 5px;
         }
         .btn-open-drawing:hover {
             background: #6320b8;
