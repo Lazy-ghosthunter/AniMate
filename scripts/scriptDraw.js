@@ -73,8 +73,6 @@ window.addEventListener('load', () => {
         pintar = corSalva;
         corPincel.value = corSalva;
     }
-};
-
 });
 
 // Variáveis para desenho
