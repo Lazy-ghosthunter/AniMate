@@ -281,7 +281,7 @@ async function loadDrawingsList() {
                 </div>
                 <div class="drawing-item-actions">
                     <button class="btn-open-drawing"   data-id="${drawing.id}">Abrir</button>
-                    <button class="btn-delete-drawing" data-id="${drawing.id}">🗑</button>
+                    <button class="btn-delete-drawing" data-id="${drawing.id}"><img src="imgs/delete_file.svg" title="Deletar animação"></button>
                 </div>
             `;
             lista.appendChild(item);
