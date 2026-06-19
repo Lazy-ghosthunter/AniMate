@@ -26,6 +26,9 @@ botaoTamanho.addEventListener('click', () => {
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
+const canvasFundo = document.getElementById('canvasfundo');
+const ctxFundo = canvasFundo.getContext('2d');
+
 // Carregar configurações salvas
 const larguraC = localStorage.getItem('larguracanvas');
 const alturaC = localStorage.getItem('alturacanvas');
@@ -37,8 +40,13 @@ function updateCanvas() {
 
     canvas.width = parseInt(larguraC, 10);
     canvas.height = parseInt(alturaC, 10);
-    ctx.fillStyle = cor || '#ffffff'; // Cor padrão caso não esteja no localStorage
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    canvasFundo.width = canvas.width;
+    canvasFundo.height = canvas.height;
+
+    desenharFundo(currentFrame);
+
+    salvarEstado();
 }
 
 // Configuração inicial ao carregar a página
@@ -65,6 +73,7 @@ window.addEventListener('load', () => {
         pintar = corSalva;
         corPincel.value = corSalva;
     }
+};
 
 });
 
@@ -90,9 +99,19 @@ const selectTool = ({target}) => {
         ferramentas.forEach((tool) => tool.classList.remove("active"));
         selectedTool.classList.add("active");
         activeTool = action;
-
+        atualizarCursor();
     }
     
+}
+
+// NOVO: troca o ícone do cursor conforme a ferramenta ativa
+function atualizarCursor() {
+    if (activeTool === "apagar") {
+        canvas.style.cursor = `url("data:image/svg+xml;utf8,<svg width='15' height='25' viewBox='0 0 15 25' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M12.8351 23.0954C12.4814 23.6689 11.8481 24.0511 11.125 24.048L2.87503 24.0122C2.15189 24.0091 1.52194 23.6214 1.17315 23.0449L12.8351 23.0954ZM13.1374 21.1807C13.1094 21.1781 13.0811 21.1765 13.0524 21.1764L0.972482 21.1241C0.943843 21.1239 0.915517 21.1253 0.887505 21.1276L0.949918 6.71857C0.977941 6.72115 1.00618 6.72369 1.03486 6.72382L13.1148 6.77614C13.1435 6.77626 13.1718 6.77397 13.1998 6.77163L13.1374 21.1807ZM11.2289 0.0481822C12.3335 0.0529666 13.225 0.952267 13.2202 2.05683L13.2081 4.86051C13.1801 4.85793 13.1518 4.85636 13.1231 4.85624L1.04317 4.80391C1.01454 4.80379 0.9862 4.80512 0.958197 4.80745L0.970341 2.00377C0.975125 0.899206 1.87443 0.00766275 2.97899 0.0124472L11.2289 0.0481822Z' fill='black'/><rect x='0.0791016' y='5.75995' width='14' height='16.32' rx='1' transform='rotate(0.248178 0.0791016 5.75995)' fill='black'/></svg>") 7 12, auto`;
+    } else if (activeTool === "traçar") {
+        canvas.style.cursor = ''; // remove o estilo inline → volta a usar o cursor do CSS (pincel)
+    }
+    // Para "mudartam", "ir", "voltar" não fazemos nada — o cursor permanece como estava
 }
 
 // Troca do tamanho das ferramentas
@@ -181,10 +200,14 @@ canvas.addEventListener('contextmenu', (e) => {
 
 //Configurações para evitar traços indesejados no desenho
 canvas.addEventListener('mouseup', () => { 
+    if (isDrawing) salvarEstado();
     isDrawing = false;
     lastX = null;
     lastY = null;
 });
+
+document.getElementById('undo').addEventListener('click', undo);
+document.getElementById('redo').addEventListener('click', redo);
 
 canvas.addEventListener('mouseleave', () => {
     isDrawing = false;
@@ -295,32 +318,12 @@ function saveFrame(frameId) {
 function loadFrame(frameId) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Se Onion Skin estiver ativado, desenha o frame anterior ou próximo semitransparente
-    if (onionSkinEnabled) {
-        const frameIds = Array.from(document.querySelectorAll('.frame')).map(frame => frame.id);
-        const currentIndex = frameIds.indexOf(frameId);
-
-        if (currentIndex > 0) {
-            // Desenha o frame anterior com semitransparência
-            ctx.globalAlpha = 0.5; // 50% de transparência
-            ctx.drawImage(frames[frameIds[currentIndex - 1]], 0, 0);
-            ctx.globalAlpha = 1; // Resetando a transparência
-        }
-
-        if (currentIndex < frameIds.length - 1) {
-            // Desenha o frame seguinte com semitransparência
-            ctx.globalAlpha = 0.5;
-            ctx.drawImage(frames[frameIds[currentIndex + 1]], 0, 0);
-            ctx.globalAlpha = 1;
-        }
-    }
-
-    // Desenha o frame atual
     if (frames[frameId]) {
         ctx.drawImage(frames[frameId], 0, 0);
-    } else {
-        updateCanvas();
     }
+    // se não existir ainda, o canvas já fica transparente — frame novo em branco
+
+    desenharFundo(frameId);
 }
 
 // Alternar frames
@@ -393,9 +396,33 @@ let onionSkinEnabled = false;
 const onionSkinButton = document.getElementById('onionskin');
 onionSkinButton.addEventListener('click', () => {
     onionSkinEnabled = !onionSkinEnabled;
-    onionSkinButton.style.opacity = onionSkinEnabled ? 1 : 0.5; 
-    // Alterar a opacidade para indicar se está ativado
+    onionSkinButton.style.opacity = onionSkinEnabled ? 1 : 0.5;
+    desenharFundo(currentFrame); // mostra ou esconde o fantasma imediatamente
 });
+
+//Função responsável pelo que aparece ao fundo da canva
+const ONION_SKIN_ALPHA = 0.4; // ajuste à vontade: 0 (invisível) até 1 (opaco)
+
+function desenharFundo(frameId) {
+    // Limpa e repinta a cor de fundo
+    ctxFundo.clearRect(0, 0, canvasFundo.width, canvasFundo.height);
+    ctxFundo.fillStyle = cor || '#ffffff';
+    ctxFundo.fillRect(0, 0, canvasFundo.width, canvasFundo.height);
+
+    if (!onionSkinEnabled) return; // sem fantasma, já terminou
+
+    const frameIds = Array.from(document.querySelectorAll('.frame')).map(f => f.id);
+    const currentIndex = frameIds.indexOf(frameId);
+
+    if (currentIndex > 0) {
+        const frameAnterior = frames[frameIds[currentIndex - 1]];
+        if (frameAnterior) {
+            ctxFundo.globalAlpha = ONION_SKIN_ALPHA;
+            ctxFundo.drawImage(frameAnterior, 0, 0);
+            ctxFundo.globalAlpha = 1; // sempre resetar depois!
+        }
+    }
+}
 
 //Recebe e apaga os traços enviados pelos outros usuários
 socket.on('draw', (data) => {
@@ -432,6 +459,41 @@ socket.on('draw', (data) => {
     ctx.globalCompositeOperation = "source-over";
 
 });
+
+// Histórico para undo/redo
+const historico = [];
+let historicoIndex = -1;
+
+// Salva o estado atual do canvas no histórico
+function salvarEstado() {
+    // Remove tudo que vem depois do index atual (ao desenhar após um undo)
+    historico.splice(historicoIndex + 1);
+    historico.push(canvas.toDataURL());
+    historicoIndex++;
+}
+
+// Undo
+function undo() {
+    if (historicoIndex <= 0) return;
+    historicoIndex--;
+    restaurarEstado(historico[historicoIndex]);
+}
+
+// Redo
+function redo() {
+    if (historicoIndex >= historico.length - 1) return;
+    historicoIndex++;
+    restaurarEstado(historico[historicoIndex]);
+}
+
+function restaurarEstado(dataURL) {
+    const img = new Image();
+    img.src = dataURL;
+    img.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+    };
+}
 
 /*
 // Suporte para dispositivos móveis
