@@ -1,7 +1,7 @@
 //Conecta ao servidor socket.io após toda a página estar carregada
 window.addEventListener('load', () => {
     const socket = window.socket;
-    
+
     if (!socket) {
         console.error('❌ Socket não encontrado!');
         return;
@@ -15,11 +15,11 @@ const menuTamanho = document.getElementById('tool-size');
 
 // Mostra o menu de opções
 botaoTamanho.addEventListener('click', () => {
-  if (menuTamanho.style.display === 'flex') {
-    menuTamanho.style.display = 'none';
-  } else {
-    menuTamanho.style.display = 'flex';
-  }
+    if (menuTamanho.style.display === 'flex') {
+        menuTamanho.style.display = 'none';
+    } else {
+        menuTamanho.style.display = 'flex';
+    }
 });
 
 //Canva + Contexto
@@ -58,7 +58,7 @@ window.addEventListener('load', () => {
         console.log('⏳ Restauração de desenho pendente detectada, pulando reset inicial do canvas');
         menuTamanho.style.display = 'none';
         const corSalva = localStorage.getItem('corr'); //Aplica a cor ao carregar a página
-        if(corSalva) {
+        if (corSalva) {
             pintar = corSalva;
             corPincel.value = corSalva;
         }
@@ -69,13 +69,13 @@ window.addEventListener('load', () => {
     switchFrame('frame1'); // Define o frame inicial
     menuTamanho.style.display = 'none';
     const corSalva = localStorage.getItem('corr'); //Aplica a cor ao carregar a página
-    if(corSalva) {
+    if (corSalva) {
         pintar = corSalva;
         corPincel.value = corSalva;
     }
-};
-
 });
+
+
 
 // Variáveis para desenho
 let isDrawing = false; //Desenhar
@@ -89,7 +89,7 @@ const ferramentas = document.querySelectorAll(".tool");
 let activeTool = "traçar";
 
 // Troca entre as ferramentas
-const selectTool = ({target}) => {
+const selectTool = ({ target }) => {
 
     const selectedTool = target;
     const action = selectedTool.getAttribute("data-action");
@@ -101,7 +101,7 @@ const selectTool = ({target}) => {
         activeTool = action;
         atualizarCursor();
     }
-    
+
 }
 
 // NOVO: troca o ícone do cursor conforme a ferramenta ativa
@@ -115,7 +115,7 @@ function atualizarCursor() {
 }
 
 // Troca do tamanho das ferramentas
-const selectSize = ({target}) => {
+const selectSize = ({ target }) => {
 
     //Pegar o click próximo ao botão
     const selectedButton = target.closest(".button_size");
@@ -129,13 +129,13 @@ const selectSize = ({target}) => {
 
     sizeButtons.forEach((button) => button.classList.remove("active"));
     selectedButton.classList.add("active");
-    
+
     //Garante que o valor seja numérico
     brushSize = parseInt(size);
 
     //Fecha o menu após o click
     menuTamanho.style.display = 'none';
-    
+
 }
 
 // Seleciona a ferramenta
@@ -168,7 +168,7 @@ canvas.addEventListener('mousedown', (e) => {
         //Para desenhar
         isDrawing = true;
 
-                // Atualiza lastX e lastY no mousedown para o ponto de início exato
+        // Atualiza lastX e lastY no mousedown para o ponto de início exato
         lastX = e.clientX - canvas.getBoundingClientRect().left;
         lastY = e.clientY - canvas.getBoundingClientRect().top;
 
@@ -199,7 +199,7 @@ canvas.addEventListener('contextmenu', (e) => {
 });
 
 //Configurações para evitar traços indesejados no desenho
-canvas.addEventListener('mouseup', () => { 
+canvas.addEventListener('mouseup', () => {
     if (isDrawing) salvarEstado();
     isDrawing = false;
     lastX = null;
@@ -222,7 +222,7 @@ canvas.addEventListener('mousemove', (e) => {
         // Quando o mouse se mover sem o botão estar pressionado
         lastX = e.clientX - canvas.getBoundingClientRect().left;
         lastY = e.clientY - canvas.getBoundingClientRect().top;
-        return; 
+        return;
 
     }
 
@@ -237,8 +237,8 @@ canvas.addEventListener('mousemove', (e) => {
         ctx.beginPath();
         ctx.moveTo(lastX, lastY);
         ctx.lineTo(x, y);
-        ctx.strokeStyle = pintar; 
-        ctx.lineWidth = brushSize; 
+        ctx.strokeStyle = pintar;
+        ctx.lineWidth = brushSize;
         ctx.lineCap = "round";
         ctx.stroke();
         ctx.closePath();
@@ -253,13 +253,13 @@ canvas.addEventListener('mousemove', (e) => {
             lineWidth: brushSize,
             tool: 'traçar'
         });
-    
+
 
         lastX = x;
         lastY = y;
 
         // Funcionalidade apagar
-    }  else if (activeTool == "apagar") {
+    } else if (activeTool == "apagar") {
 
         // Borracha em formato redondo
         ctx.globalCompositeOperation = "destination-out";
@@ -445,10 +445,10 @@ socket.on('draw', (data) => {
 
         ctx.globalCompositeOperation = "destination-out";
         ctx.beginPath();
-        ctx.moveTo(data.x0, data.y0); 
-        ctx.lineTo(data.x1, data.y1); 
-        ctx.strokeStyle = '#000000'; 
-        ctx.lineWidth = data.size; 
+        ctx.moveTo(data.x0, data.y0);
+        ctx.lineTo(data.x1, data.y1);
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = data.size;
         ctx.lineCap = "round";
         ctx.stroke();
         ctx.closePath();
