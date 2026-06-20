@@ -9,6 +9,49 @@ window.addEventListener('load', () => {
 
 });
 
+const avatarImg = document.getElementById('avatar');
+    if (!avatarImg) return; // página sem avatar no topo, nada a fazer
+ 
+    const AVATAR_PADRAO = 'imgs/pfp anon.svg';
+ 
+    const loadAvatar = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            avatarImg.src = AVATAR_PADRAO;
+            return;
+        }
+ 
+        try {
+            const response = await axios.get(`${base_url}/profile/me?token=${token}`);
+            const userProfile = response.data;
+ 
+            console.log('scriptAvatar: userProfile.imageUrl =', userProfile.imageUrl);
+ 
+            if (userProfile.imageUrl) {
+                // Mesma correção usada em animateperfil.html: remove "http://" duplicado
+                const correctedUrl = userProfile.imageUrl.replace(/^(http:\/\/)+/g, 'http://');
+                avatarImg.src = correctedUrl;
+            } else {
+                avatarImg.src = AVATAR_PADRAO;
+            }
+ 
+        } catch (error) {
+            console.error('scriptAvatar: erro ao carregar foto de perfil:', error);
+            avatarImg.src = AVATAR_PADRAO; // fallback silencioso, não trava a tela de desenho
+        }
+    };
+ 
+    loadAvatar();
+ 
+    // Caso a foto seja trocada em outra aba/página (ex: animateperfil.html)
+    // e o usuário volte para o canvas sem dar reload, escutamos o evento
+    // 'storage' para refletir a troca em tempo real.
+    window.addEventListener('storage', (event) => {
+        if (event.key === 'avatarUpdatedAt') {
+            loadAvatar();
+        }
+    });
+
 // Funções no quadro dos tamanhos do pincel 
 const botaoTamanho = document.getElementById('tamanho');
 const menuTamanho = document.getElementById('tool-size');
@@ -492,6 +535,77 @@ function restaurarEstado(dataURL) {
         ctx.drawImage(img, 0, 0);
     };
 }
+
+// Controle do dropdown de seleção de camadas (#listLayers)
+// Lista de camadas - substitua pela sua fonte real de dados (array do projeto, etc.)
+let camadas = [
+    { id: 1, nome: "Layer 1" },
+    { id: 2, nome: "Layer 2" },
+];
+
+let camadaAtivaId = 1;
+
+const btnEscolherCamada = document.getElementById("escolher_Camada");
+const listLayers = document.getElementById("listLayers");
+const labelLayer = document.getElementById("layer");
+
+function renderizarCamadas() {
+    listLayers.innerHTML = "";
+    camadas.forEach((camada) => {
+        const item = document.createElement("div");
+        item.classList.add("itemCamada");
+        item.dataset.id = camada.id;
+        if (camada.id === camadaAtivaId) {
+            item.classList.add("ativa");
+        }
+        item.textContent = camada.nome;
+        item.addEventListener("click", () => {
+            selecionarCamada(camada.id);
+        });
+        listLayers.appendChild(item);
+    });
+}
+
+function selecionarCamada(id) {
+    camadaAtivaId = id;
+    const camada = camadas.find((c) => c.id === id);
+    if (camada) {
+        labelLayer.textContent = camada.nome;
+    }
+    renderizarCamadas();
+    fecharDropdownCamadas();
+}
+
+function abrirDropdownCamadas() {
+    renderizarCamadas();
+    listLayers.classList.add("open");
+}
+
+function fecharDropdownCamadas() {
+    listLayers.classList.remove("open");
+}
+
+function toggleDropdownCamadas() {
+    if (listLayers.classList.contains("open")) {
+        fecharDropdownCamadas();
+    } else {
+        abrirDropdownCamadas();
+    }
+}
+
+btnEscolherCamada.addEventListener("click", (event) => {
+    event.stopPropagation();
+    toggleDropdownCamadas();
+});
+
+
+// Fecha o dropdown ao clicar fora dele
+document.addEventListener("click", (event) => {
+    const cliqueDentro = listLayers.contains(event.target) || btnEscolherCamada.contains(event.target);
+    if (!cliqueDentro) {
+        fecharDropdownCamadas();
+    }
+});
 
 /*
 // Suporte para dispositivos móveis
