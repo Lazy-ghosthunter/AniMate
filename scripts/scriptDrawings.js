@@ -46,84 +46,148 @@ function serializeDrawing() {
 }
 
 // ── Restaurar desenho no canvas (NOVO SISTEMA DE CAMADAS) ───────
+//
+// IMPORTANTE: esta função NUNCA deve deixar o app num estado "vazio"
+// (sem layers/currentLayerId) se algo der errado no meio do caminho —
+// isso é o que fazia os botões pararem de responder depois de reabrir
+// um desenho. Por isso ela:
+//   1. Valida a estrutura recebida antes de tocar no estado global;
+//   2. Dá timeout + onerror em cada imagem, para nunca travar o
+//      Promise.all esperando para sempre por um dataURL corrompido;
+//   3. Em caso de falha em qualquer etapa, cai num fallback explícito
+//      (initializeDefaultLayers) em vez de deixar currentLayerId nulo.
+const IMG_LOAD_TIMEOUT_MS = 8000;
+
+function loadImageSafe(dataUrl, timeoutMs = IMG_LOAD_TIMEOUT_MS) {
+    return new Promise((resolve, reject) => {
+        if (!dataUrl) {
+            reject(new Error('dataUrl vazio'));
+            return;
+        }
+        const img = new Image();
+        const timer = setTimeout(() => {
+            reject(new Error('Timeout ao carregar frame (dataURL possivelmente corrompido/truncado)'));
+        }, timeoutMs);
+
+        img.onload = () => {
+            clearTimeout(timer);
+            resolve(img);
+        };
+        img.onerror = () => {
+            clearTimeout(timer);
+            reject(new Error('Falha ao decodificar dataURL do frame'));
+        };
+        img.src = dataUrl;
+    });
+}
+
 async function deserializeDrawing(canvasDataJson) {
-    const data = JSON.parse(canvasDataJson);
+    let data;
+    try {
+        data = JSON.parse(canvasDataJson);
+    } catch (e) {
+        console.error('deserializeDrawing: JSON inválido/corrompido (possível truncamento no backend):', e);
+        throw e; // quem chamou decide o fallback
+    }
+
+    // Validação mínima da estrutura — sem isso, seguir adiante só
+    // espalha o problema (currentLayerId acaba apontando para nada).
+    if (!data || typeof data !== 'object' || !data.layerOrder || !data.layerOrder.length || !data.layers) {
+        throw new Error('deserializeDrawing: estrutura de dados incompleta (layers/layerOrder ausentes)');
+    }
+
     const canvasEl = document.getElementById('canvas');
     if (!canvasEl) return;
 
+    const width = parseInt(data.width, 10) || 800;
+    const height = parseInt(data.height, 10) || 600;
+
     // Configura tamanho e fundo
-    canvasEl.width = data.width;
-    canvasEl.height = data.height;
-    localStorage.setItem('larguracanvas', data.width);
-    localStorage.setItem('alturacanvas', data.height);
-    localStorage.setItem('corCanvas', data.backgroundColor);
+    canvasEl.width = width;
+    canvasEl.height = height;
+    localStorage.setItem('larguracanvas', width);
+    localStorage.setItem('alturacanvas', height);
+    localStorage.setItem('corCanvas', data.backgroundColor || '#ffffff');
 
-    // Substitui o estado global das camadas pelas informações salvas
-    // (sem "window." — layers/layerOrder/layerCanvases são `let` no topo de
-    // scriptDraw.js; escrever em window.X cria uma propriedade separada que
-    // as funções de desenho nunca leem)
-    layers = data.layers || {};
-    layerOrder = data.layerOrder || [];
-    layerCanvases = {};
+    // Estado temporário — só substitui o estado global (layers/layerOrder/
+    // layerCanvases) depois que TUDO carregou com sucesso. Assim, se algo
+    // falhar no meio, o estado atual da página não fica pela metade.
+    const newLayers = data.layers;
+    const newLayerOrder = data.layerOrder;
+    const newLayerCanvases = {};
 
-    const loadPromises = [];
+    const loadJobs = [];
 
-    // Recria as canvas de cada frame de cada camada
     if (data.canvases) {
         for (const lId in data.canvases) {
-            layerCanvases[lId] = {};
+            newLayerCanvases[lId] = {};
             for (const fId in data.canvases[lId]) {
                 const frameData = data.canvases[lId][fId];
-                
+
                 // Lida com a nova versão (com duração) ou versão antiga
-                const dataUrl = typeof frameData === 'string' ? frameData : frameData.dataUrl;
+                const dataUrl = typeof frameData === 'string' ? frameData : frameData?.dataUrl;
                 const duration = typeof frameData === 'object' ? frameData.duration : 100;
 
-                const promise = new Promise((resolve) => {
-                    const img = new Image();
-                    img.onload = () => {
+                const job = loadImageSafe(dataUrl)
+                    .then((img) => {
                         const fc = document.createElement('canvas');
-                        fc.width = data.width;
-                        fc.height = data.height;
+                        fc.width = width;
+                        fc.height = height;
                         fc.frameDuration = duration;
                         fc.getContext('2d').drawImage(img, 0, 0);
-                        layerCanvases[lId][fId] = fc;
-                        resolve();
-                    };
-                    img.src = dataUrl;
-                });
-                loadPromises.push(promise);
+                        newLayerCanvases[lId][fId] = fc;
+                    })
+                    .catch((err) => {
+                        // Um frame corrompido não pode travar a restauração inteira:
+                        // loga o problema e segue com uma canvas em branco no lugar.
+                        console.error(`deserializeDrawing: frame ${lId}/${fId} falhou ao carregar:`, err);
+                        const fc = document.createElement('canvas');
+                        fc.width = width;
+                        fc.height = height;
+                        fc.frameDuration = duration;
+                        newLayerCanvases[lId][fId] = fc;
+                    });
+
+                loadJobs.push(job);
             }
         }
     }
 
-    // Espera todas as imagens (base64) carregarem
-    await Promise.all(loadPromises);
+    // Cada job já trata seu próprio erro internamente (.catch acima), então
+    // este Promise.all sempre resolve — nunca fica pendurado esperando
+    // para sempre por um dataURL inválido.
+    await Promise.all(loadJobs);
 
-    // Restaura a camada e o índice atual
-    if (layerOrder.length > 0) {
-        currentLayerId = data.currentLayerId || layerOrder[layerOrder.length - 1];
-        currentFrameIndex = data.currentFrameIndex || 0;
-        
-        // Usa a função existente para descobrir o ID do frame
-        if (typeof getFrameIdAtIndex === 'function') {
-            currentFrameId = getFrameIdAtIndex(currentLayerId, currentFrameIndex);
-        }
+    // Só agora, com tudo pronto, substitui o estado global de fato
+    // (sem "window." — layers/layerOrder/layerCanvases são `let` no topo de
+    // scriptDraw.js; escrever em window.X cria uma propriedade separada que
+    // as funções de desenho nunca leem)
+    layers = newLayers;
+    layerOrder = newLayerOrder;
+    layerCanvases = newLayerCanvases;
 
-        // Atualiza a UI
-        const layerLabel = document.getElementById('layer');
-        if (layerLabel && layers[currentLayerId]) {
-            layerLabel.textContent = layers[currentLayerId].name;
-        }
+    currentLayerId = data.currentLayerId && layers[data.currentLayerId]
+        ? data.currentLayerId
+        : layerOrder[layerOrder.length - 1];
+    currentFrameIndex = data.currentFrameIndex || 0;
 
-        // updateCanvas() PRIMEIRO: ele redimensiona canvasFundo/Below/Above,
-        // e redimensionar uma canvas limpa o conteúdo dela. Se rodasse depois
-        // de loadFrame(), apagaria tudo que acabou de ser desenhado.
-        if (typeof updateCanvas === 'function') updateCanvas();
-        if (typeof renderLayersDropdown === 'function') renderLayersDropdown();
-        if (typeof renderFrames === 'function') renderFrames();
-        if (typeof loadFrame === 'function') loadFrame();
+    if (typeof getFrameIdAtIndex === 'function') {
+        currentFrameId = getFrameIdAtIndex(currentLayerId, currentFrameIndex);
     }
+
+    // Atualiza a UI
+    const layerLabel = document.getElementById('layer');
+    if (layerLabel && layers[currentLayerId]) {
+        layerLabel.textContent = layers[currentLayerId].name;
+    }
+
+    // updateCanvas() PRIMEIRO: ele redimensiona canvasFundo/Below/Above,
+    // e redimensionar uma canvas limpa o conteúdo dela. Se rodasse depois
+    // de loadFrame(), apagaria tudo que acabou de ser desenhado.
+    if (typeof updateCanvas === 'function') updateCanvas();
+    if (typeof renderLayersDropdown === 'function') renderLayersDropdown();
+    if (typeof renderFrames === 'function') renderFrames();
+    if (typeof loadFrame === 'function') loadFrame();
 }
 
 // ── Salvar novo desenho ───────────────────────────────
@@ -178,8 +242,17 @@ function newDrawing() {
     localStorage.removeItem('currentDrawingId');
     localStorage.removeItem('currentDrawingTitle');
     localStorage.removeItem('pendingDrawingData');
+
+    // Limpa também as configurações de tamanho/cor da canvas anterior.
+    // Sem isso, a próxima vez que uma canvas nova for criada (tela de
+    // configurações) ela herda largura/altura/cor da canvas antiga, porque
+    // updateCanvas() sempre lê esses valores do localStorage e nada os
+    // reseta entre uma sessão e outra.
+    localStorage.removeItem('larguracanvas');
+    localStorage.removeItem('alturacanvas');
+    localStorage.removeItem('corCanvas');
     
-    console.log('IDs removidos do localStorage');
+    console.log('IDs e configurações de canvas removidos do localStorage');
     
     // Limpa o objeto frames
     if (typeof frames !== 'undefined') {
@@ -193,11 +266,24 @@ function newDrawing() {
         console.log('currentFrame resetado');
     }
     
+    // Reseta também o sistema de camadas atual (em uso), além das chaves
+    // de localStorage acima — caso contrário layers/currentLayerId desta
+    // sessão continuam apontando para o desenho antigo na memória.
+    if (typeof initializeDefaultLayers === 'function') {
+        initializeDefaultLayers();
+        const layerLabelEl = document.getElementById('layer');
+        if (layerLabelEl && typeof layers !== 'undefined' && layers[currentLayerId]) {
+            layerLabelEl.textContent = layers[currentLayerId].name;
+        }
+        if (typeof renderFrames === 'function') renderFrames();
+        if (typeof renderLayersDropdown === 'function') renderLayersDropdown();
+    }
+
     // Limpa o canvas visível
     const canvas = document.getElementById('canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
-        const bgColor = localStorage.getItem('corCanvas') || '#ffffff';
+        const bgColor = '#ffffff'; // valor padrão, já que corCanvas foi resetado acima
         ctx.fillStyle = bgColor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         console.log('Canvas limpo');
@@ -375,6 +461,26 @@ window.addEventListener('load', async () => {
             console.log('Desenho restaurado com sucesso - ID:', currentId);
         } catch (err) {
             console.error('Erro ao restaurar desenho:', err);
+
+            // Sem este fallback, layers/currentLayerId ficam vazios e TODOS
+            // os botões (frames, camadas, undo, etc.) param de responder,
+            // porque suas funções fazem "if (!currentLayerId) return;".
+            // Melhor degradar para uma canvas em branco utilizável do que
+            // deixar a tela "morta".
+            alert('Não foi possível restaurar este desenho corretamente. Um novo desenho em branco foi iniciado.');
+            localStorage.removeItem('pendingDrawingData');
+            localStorage.removeItem('currentDrawingId');
+            localStorage.removeItem('currentDrawingTitle');
+
+            if (typeof updateCanvas === 'function') updateCanvas();
+            if (typeof initializeDefaultLayers === 'function') initializeDefaultLayers();
+            const layerLabelEl = document.getElementById('layer');
+            if (layerLabelEl && typeof layers !== 'undefined' && layers[currentLayerId]) {
+                layerLabelEl.textContent = layers[currentLayerId].name;
+            }
+            if (typeof loadFrame === 'function') loadFrame();
+            if (typeof renderFrames === 'function') renderFrames();
+            if (typeof renderLayersDropdown === 'function') renderLayersDropdown();
         }
     } else {
         console.log('Nenhum desenho pendente ou canvas não encontrado');
