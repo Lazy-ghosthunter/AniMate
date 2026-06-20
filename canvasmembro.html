@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <title>AniMate</title>
     <link rel="icon" href="/imgs/Logo.svg">
     <link rel="stylesheet" href="/estilos/estiloCanvas.css">
+
 </head>
+
 <body>
+
     <div id="topo">
 
         <div class="userIcons">
@@ -17,25 +22,29 @@
         </div>
 
         <div class="configs">
-            <a href="/animateperfil.html">
-                <img src="imgs/arrow_back_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" class="seta_voltar">
-            </a>
-            <img src="imgs/3 pontos.svg" class="configuracoes">
+
+            <Button class="backbtn" title="voltar">
+                <a href="/animateperfil.html">
+                    <img src="imgs/arrow_back_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" class="seta_voltar">
+                </a>
+            </Button>
+            <img src="imgs/3 pontos.svg" class="configuracoes" title="configurações">
+
         </div>
+
     </div>
 
     <div id="divcanvas">
-        
+        <canvas id="canvasBelow"></canvas>
         <canvas id="canvas"></canvas>
+        <canvas id="canvasAbove"></canvas>
         <canvas id="canvasfundo"></canvas>
-
     </div>
 
     <div id="ferramentas">
-            
+
         <img src="imgs/Pincel.svg" id="pincel" class="tool" data-action="traçar">
         <img src="imgs/stylus_pencil.svg" id="tamanho" class="tool" data-action="mudartam">
-        <!--Adicionar mais tamanhos de traço-->
         <img src="imgs/borracha.svg" id="borracha" class="tool" data-action="apagar">
         <input type="color" id="corr" class="tool">
         <img src="imgs/undo.svg" id="undo" class="tool" data-action="ir">
@@ -43,7 +52,7 @@
 
     </div>
 
-        <!-- Mais tamanhos de traço-->
+    <!-- Mais tamanhos de traço-->
     <div class="tool-size" id="tool-size">
 
         <button class="button_size" data-size="1">
@@ -67,50 +76,100 @@
         </button>
 
     </div>
-    
+
     <div id="timelineFull">
+
+
         <div id="timelineTools">
+
             <img src="imgs/Pause 01.svg" id="pause" class="timeTool">
             <img src="imgs/Play 01.svg" id="play" class="timeTool">
             <img src="imgs/onionskin.svg" id="onionskin" class="timeTool">
+
         </div>
+
         <div id="frameTools">
-            <img src="imgs/Align Left 02.svg" id="addBefore"  class="frameTool">
+
+            <img src="imgs/Align Left 02.svg" id="addBefore" class="frameTool">
             <img src="imgs/Hourglass 02.svg" id="timing" class="frameTool">
             <img src="imgs/File None.svg" id="deleteFrame" class="frameTool">
             <img src="imgs/Align Right 02.svg" id="addAfter" class="frameTool">
+
         </div>
-        
+
         <div id="camadas">
-                <div id="camada1">
-                <p id="layer"> Layer 1 </p>
+
+            <div id="camadaAtual">
+                <p id="layer" class="layer"> Layer 1</p>
                 <img src="imgs/Settings Sparkle.svg" id="config_Camada" class="toolCamada">
                 <img src="imgs/Arrow Down Contained 01.svg" id="escolher_Camada" class="toolCamada">
+            </div>
+
+            <div id="listLayers">
+                <div id="layersScrollArea"></div>
+                <button id="btnAddLayer" class="addLayerBtn" style="cursor:pointer;">+ Nova Camada</button>
+            </div>
+
+            <div id="layerSettings">
+
+                <div class="layerSettingsRow" id="renameRow">
+                    <label class="layerSettingsLabel" for="layerNameInput">Nome</label>
+                    <input type="text" id="layerNameInput" class="layerNameInput" maxlength="40" spellcheck="false">
                 </div>
+
+                <div class="layerSettingsRow">
+                    <label class="layerSettingsLabel" for="layerOpacitySlider">Opacidade</label>
+                    <div class="opacityControl">
+                        <input type="range" id="layerOpacitySlider" class="layerOpacitySlider" min="0" max="100" step="1" value="100">
+                        <span id="opacityValue" class="layerOpacityValue">100%</span>
+                    </div>
+                </div>
+
+                <div class="layerSettingsRow toggleRow">
+                    <label class="layerSettingsLabel" for="layerVisibleToggle">Visível</label>
+                    <label class="switch">
+                        <input type="checkbox" id="layerVisibleToggle" checked>
+                        <span class="slider-toggle"></span>
+                    </label>
+                </div>
+
+                <div class="layerSettingsDivider"></div>
+
+                <button type="button" id="btnDuplicateLayer" class="layerActionBtn">
+                    Duplicar camada
+                </button>
+
+                <button type="button" id="btnDeleteLayer" class="layerActionBtn danger">
+                    Excluir camada
+                </button>
+
+            </div>
+
+            <div id="deleteLayerModal" class="confirmOverlay">
+                <p class="confirmText">Excluir esta camada? Essa ação é permanente e não pode ser desfeita.</p>
+
+                <label class="confirmCheckboxRow">
+                    <input type="checkbox" id="dontWarnAgain">
+                    <span>Não mostrar este aviso novamente</span>
+                </label>
+
+                <div class="confirmActions">
+                    <button type="button" id="btnCancelDelete" class="confirmBtn">Cancelar</button>
+                    <button type="button" id="btnConfirmDelete" class="confirmBtn danger">Excluir</button>
+                </div>
+            </div>
+
         </div>
 
         <div id="frames">
 
             <div id="frameS1">
-
-                <div id="frame1" class="frame"></div>
-                <div id="frame2" class="frame"></div>
-                <div id="frame3" class="frame"></div>
-                <div id="frame4" class="frame"></div>
-                <div id="frame5" class="frame"></div>
-                <div id="frame6" class="frame"></div>
-                <div id="frame7" class="frame"></div>
-                <div id="frame8" class="frame"></div>
-                <div id="maisframe" class="maisframe">
-                    <img src="imgs/add_circle_.svg" id="maismais" class="maismais">
-                </div>
-
+                <div id="maisframe"></div>
+                <img src="imgs/add_circle_.svg" id="maismais" class="maismais" alt="+">
             </div>
 
         </div>
-
     </div>
-    
     <!-- Esqueleto do chat -->
     <div id="chatcontainer">
 
@@ -124,23 +183,24 @@
             <input type="text" id="espacomsg">
             <img src="imgs/Send 01.svg" id="enviar">
         </div>
-        
+
     </div>
-    
+
+    <!-- Configs globais (base_url, chibisafe) -->
+    <script src="/scripts/config.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
-    <!-- Conexão ao socket baixado via navegador -->
 
     <script src="/scripts/scriptSocket.js" defer></script>
-    <!-- script socket io que envia tudo ao servidor no back-end -->
-
     <script src="/scripts/scriptDraw.js" defer></script>
-    <!-- Script principal com as funcionalidades do JS -->
-
     <script src="/scripts/scriptChat.js" defer></script>
-    <!-- Script do chat -->
+
+    <!-- ✅ NOVO: Script de salvar/abrir desenhos -->
+    <script src="/scripts/scriptDrawings.js" defer></script>
 
     <script>window.userRole = 'member';</script>
-    <!-- Identifica qual tipo de usuário é -->
 
 </body>
+
 </html>
