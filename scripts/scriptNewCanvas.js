@@ -40,6 +40,15 @@ const fundo = document.getElementById('cor')
 const salvar = document.getElementById('criar');
     
 salvar.addEventListener('click', () =>{
+    // Garante que esta é de fato uma canvas NOVA: limpa qualquer resíduo
+    // de um desenho previamente aberto/salvo. Sem isso, se o usuário chegou
+    // aqui depois de ter aberto um desenho salvo, scriptDrawings.js encontraria
+    // "pendingDrawingData" no localStorage e tentaria restaurar o desenho
+    // antigo por cima da canvas nova configurada aqui.
+    localStorage.removeItem('currentDrawingId');
+    localStorage.removeItem('currentDrawingTitle');
+    localStorage.removeItem('pendingDrawingData');
+
     localStorage.setItem('larguracanvas', largura.value);
     localStorage.setItem('alturacanvas', altura.value);
     localStorage.setItem('corCanvas', fundo.value);
@@ -72,4 +81,4 @@ function updateCanvas() {
 window.onload = () => {
     // Chama a função que atualiza a canvas com as configurações do localStorage
     updateCanvas();  
-}; 
+};
