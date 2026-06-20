@@ -31,6 +31,7 @@ body {
 canvas {
     cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 23 23' fill='none'><path d='M6.88082 16.2293C4.10954 12.5932 1.98882 18.9842 1.44976 21.3476C10.2217 18.9596 6.88082 16.2293 6.88082 16.2293Z' fill='black' stroke='black'/><path d='M9.77659 16.2323C9.68007 16.2982 9.58747 16.3547 9.50037 16.3979C9.41281 16.4413 9.29527 16.4897 9.1649 16.5035C9.04416 16.5161 8.85989 16.5015 8.7037 16.3722L8.63869 16.3099L6.85492 14.3163C6.6983 14.1414 6.69123 13.9349 6.70801 13.8094C6.72467 13.6855 6.7712 13.5728 6.81505 13.4847C6.85849 13.3975 6.91459 13.3047 6.98005 13.2083C8.20066 13.7 8.89418 14.4439 9.29144 15.0884C9.52632 15.4695 9.66178 15.8218 9.73737 16.0756C9.75444 16.133 9.76534 16.186 9.77659 16.2323ZM22.0959 1.62751C22.0891 1.74782 22.0511 1.8608 22.0187 1.94305C21.9499 2.11725 21.8333 2.32866 21.6921 2.55675C21.4048 3.02108 20.9596 3.64669 20.4139 4.36852C19.319 5.81666 17.7866 7.69461 16.212 9.53012C14.6378 11.3651 13.0133 13.1674 11.7341 14.4641C11.4922 14.7094 11.2596 14.9369 11.0419 15.1456C10.6635 14.4112 10.2411 13.8015 9.71417 13.2712C9.23168 12.7857 8.67372 12.3786 8.00749 12.0027C8.22172 11.7776 8.45695 11.5363 8.71148 11.2848C9.97665 10.0345 11.7324 8.45333 13.5277 6.91529C15.3236 5.37667 17.1688 3.87324 18.6136 2.77891C19.3343 2.233 19.9645 1.78188 20.4424 1.47893C20.6788 1.32907 20.8928 1.20545 21.0694 1.12547C21.1561 1.08626 21.2539 1.04899 21.3516 1.02769C21.4226 1.01225 21.6204 0.974172 21.814 1.08468L21.9044 1.14838C22.0882 1.30633 22.1012 1.53085 22.0959 1.62751Z' fill='black'/></svg>") 0 30, auto;
 
+
 }
 
 @media (max-width:500px){
@@ -203,9 +204,9 @@ canvas {
 }
 
 #avatar {
-    
     z-index: 10;
     height: 50px;
+    width: 50px;
 }
 
 #ferramentas {
@@ -305,42 +306,461 @@ canvas {
 
 /*dropdown da lista de camadas*/
 #listLayers{
-    display: flex;
+    display: none;
     position: absolute;
     bottom: 100%;
     left: 0;
     margin-bottom: 10px;
     background-color: #181722d8;
     width: 150px;
-    height: 30px;
-    max-height: 30vh;
+    height: auto;
+    max-height: 22vh; /* limite para a lista não ocupar a tela toda; ajuste conforme necessidade */
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 8px;
     gap: 6px;
     flex-direction: column;
     z-index: 20;
     border-radius: 20px;
     margin-right: 30px;
+    box-sizing: border-box;
 }
 
 #listLayers.open {
     display: flex;
-
 }
 
-
+/* Barra de rolagem vertical (equivalente vertical da scrollbar de #frames) */
 #listLayers::-webkit-scrollbar {
-
     width: 6px;
+}
 
+#listLayers::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: transparent;
 }
 
 #listLayers::-webkit-scrollbar-thumb {
-
     background-color: #a95fee;
     border-radius: 10px;
-
 }
+
+#listLayers::-webkit-scrollbar-thumb:hover {
+    background: gray;
+}
+
+.itemCamada {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 10px;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.itemCamada:hover {
+    background-color: #2a2740;
+}
+
+.itemCamada.ativa {
+    background-color: #a95fee;
+}
+
+/* ===================== Dropdown: configurações da camada ===================== */
+#layerSettings {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    margin-bottom: 10px;
+    background-color: #181722d8;
+    width: 200px;
+    height: auto;
+    max-height: 22vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 12px;
+    gap: 12px;
+    z-index: 21;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+#layerSettings.open {
+    display: flex;
+}
+
+#layerSettings::-webkit-scrollbar {
+    width: 6px;
+}
+
+#layerSettings::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: transparent;
+}
+
+#layerSettings::-webkit-scrollbar-thumb {
+    background-color: #a95fee;
+    border-radius: 10px;
+}
+
+#layerSettings::-webkit-scrollbar-thumb:hover {
+    background: gray;
+}
+
+.layerSettingsRow {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 0 0 auto;
+}
+
+.layerSettingsRow.toggleRow {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.layerSettingsLabel {
+    color: #ffffff;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.layerNameInput {
+    background-color: #0f0e18;
+    border: 1px solid #362260;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 13px;
+    padding: 6px 8px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.layerNameInput:focus {
+    outline: none;
+    border-color: #a95fee;
+}
+
+.opacityControl {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Slider horizontal de opacidade */
+.layerOpacitySlider {
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1;
+    height: 4px;
+    border-radius: 4px;
+    background: #362260;
+    outline: none;
+    cursor: pointer;
+}
+
+.layerOpacitySlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #a95fee;
+    cursor: pointer;
+    border: none;
+}
+
+.layerOpacitySlider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #a95fee;
+    cursor: pointer;
+    border: none;
+}
+
+.layerOpacityValue {
+    color: #ffffff;
+    font-size: 12px;
+    width: 36px;
+    text-align: right;
+    flex: 0 0 auto;
+}
+
+/* Toggle (switch) de visibilidade */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 20px;
+    flex: 0 0 auto;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider-toggle {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #362260;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+
+.slider-toggle::before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+.switch input:checked + .slider-toggle {
+    background-color: #a95fee;
+}
+
+.switch input:checked + .slider-toggle::before {
+    transform: translateX(16px);
+}
+
+.layerSettingsDivider {
+    height: 1px;
+    background-color: #362260;
+    flex: 0 0 auto;
+}
+
+.layerActionBtn {
+    background: none;
+    border: 1px solid #362260;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 13px;
+    padding: 8px;
+    cursor: pointer;
+    flex: 0 0 auto;
+}
+
+.layerActionBtn:hover {
+    background-color: #2a2740;
+}
+
+.layerActionBtn.danger {
+    border-color: #c7184f;
+    color: #ff7aa3;
+}
+
+.layerActionBtn.danger:hover {
+    background-color: #c7184f33;
+}
+
+/* ===================== Overlay de confirmação de exclusão ===================== */
+.confirmOverlay {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    margin-bottom: 10px;
+    background-color: #181722f5;
+    width: 220px;
+    padding: 14px;
+    gap: 10px;
+    z-index: 22;
+    border-radius: 16px;
+    box-sizing: border-box;
+    border: 1px solid #c7184f;
+}
+
+.confirmOverlay.open {
+    display: flex;
+}
+
+.confirmText {
+    color: #ffffff;
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.confirmCheckboxRow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #ffffff;
+    font-size: 11px;
+    cursor: pointer;
+    opacity: 0.85;
+}
+
+.confirmActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.confirmBtn {
+    background: none;
+    border: 1px solid #362260;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.confirmBtn:hover {
+    background-color: #2a2740;
+}
+
+.confirmBtn.danger {
+    background-color: #c7184f;
+    border-color: #c7184f;
+}
+
+.confirmBtn.danger:hover {
+    background-color: #a8123f;
+}
+
+/* ===================== Popup de FPS (#timing) ===================== */
+.fpsPopup {
+    width: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.fpsControl {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#fpsSlider {
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1;
+    height: 4px;
+    border-radius: 4px;
+    background: #362260;
+    outline: none;
+    cursor: pointer;
+}
+
+#fpsSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #a95fee;
+    cursor: pointer;
+    border: none;
+}
+
+#fpsSlider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #a95fee;
+    cursor: pointer;
+    border: none;
+}
+
+/* ===================== Item "adicionar camada" no listLayers ===================== */
+.addLayerBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 7px 10px;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+    background: none;
+    border: 1px dashed #5a4a8a;
+    flex: 0 0 auto;
+}
+
+.addLayerBtn:hover {
+    background-color: #2a2740;
+    border-color: #a95fee;
+}
+
+.addLayerBtn .plusIcon {
+    font-size: 15px;
+    line-height: 1;
+}
+
+/* Camada de fundo: não-editável, item da lista com aparência "travada" */
+.itemCamada.fundo {
+    cursor: default;
+    opacity: 0.75;
+}
+
+.itemCamada.fundo:hover {
+    background-color: transparent;
+}
+
+.itemCamada .lockIcon {
+    margin-left: 6px;
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+/* ===================== Frames dinâmicos ===================== */
+.frame {
+    position: relative;
+}
+
+.frame.frameVazio {
+    background-color: #181722;
+    border: 1px dashed #5a4a8a;
+}
+
+.frameAddBtn {
+    background-color: transparent;
+    border: 1px dashed #5a4a8a;
+    border-radius: 5px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex: 0 0 auto;
+}
+
+.frameAddBtn:hover {
+    background-color: #2a2740;
+    border-color: #a95fee;
+}
+
+.frameAddBtn img {
+    width: 20px;
+    height: 20px;
+}
+
 #visivel {
     position: absolute;
 }
@@ -580,16 +1000,26 @@ canvas {
 
 }
 
-#canvas, #canvasfundo {
+#canvas,
+#canvasfundo,
+#canvasBelow,
+#canvasAbove {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-#canvasfundo { z-index: 1; }
+#canvasAbove,
+#canvasBelow,
+#canvasfundo {
+    pointer-events: none;
+}
 
-#canvas { z-index: 2; }
+#canvasfundo { z-index: 1; }    /* ✅ Fundo + Onion Skin */
+#canvasBelow { z-index: 2; }    /* ✅ Camadas abaixo (visíveis por trás) */
+#canvas { z-index: 3; }         /* ✅ Camada ativa (onde se desenha) */
+#canvasAbove { z-index: 4; }    /* ✅ Camadas acima (visíveis na frente) */
 
 .add{
     border-right: 2px solid #edecf7;
@@ -600,5 +1030,15 @@ canvas {
     background: none;
     border: none;
     margin-left: 5px;
+
+}
+
+.avatar{
+  
+  border-radius: 50%;
+  object-fit: cover; 
+  object-position: center;
+  border: 2px solid #67058D;
+  box-shadow: 0px 5px 15px rgba(166, 153, 255, 0.5);
 
 }

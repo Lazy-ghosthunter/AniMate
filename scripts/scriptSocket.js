@@ -1,5 +1,4 @@
 //Vai ser acionado após a página carregar
-let socket = null;
 try {
 	if (window.enableSockets === false) {
 		console.log('scriptSocket: sockets desabilitados (window.enableSockets=false)');
